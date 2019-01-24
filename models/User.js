@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema({
     premium:{
         type: Boolean,
         default: false,
-        required: true
+        required: false
     },
     created:{
         type: Date,

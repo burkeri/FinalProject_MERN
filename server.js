@@ -1,20 +1,20 @@
 // dependencies
 const express = require("express");
-
 const path = require("path");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 
+// start express app
 const app = express();
 
-// db
+// DB connection
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost/finalProj";
 mongoose.connect(MONGO_URI, { useNewUrlParser: true })
   .then(() => console.log("db connected..."))
   .catch(err => console.log(err));
 
 
-// midleware ------
+// middleware ------
 // serve static assets
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// port
+// server port
 const PORT = process.env.PORT || 3001;
 
 //routes

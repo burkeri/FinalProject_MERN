@@ -1,13 +1,14 @@
-const path = require('path');
-const router = require('express').Router();
-const apiRoutes = require('./api');
+// dependencies
+const path = require("path");
+const router = require("express").Router();
+const apiRoutes = require("./api");
 
-// API routes
+// api routes
 router.use('/api', apiRoutes);
 
-// If no API routes are hit, send the React app
-router.use((req, res) =>
-  res.sendFile(path.join(__dirname, "../client/build/index.html"))
-);
+// send all requests to react app
+router.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 
 module.exports = router;

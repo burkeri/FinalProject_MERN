@@ -1,11 +1,14 @@
+// dependencies
 const path = require("path");
 const router = require("express").Router();
+const userRoutes = require("./user");
 
-// TODO: Import API routes and router.use them
+// user routes
+router.use("/user", userRoutes);
 
-// For anything else, render the html page
-router.use(function(req, res) {
-  res.sendFile(path.join(__dirname, "../../client/build/index.html"));
+// send all requests to react app
+router.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
 module.exports = router;

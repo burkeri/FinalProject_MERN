@@ -3,7 +3,9 @@ const router = require("express").Router();
 const userController = require("../../controllers/userController");
 
 // register handle
-router.route("/user/register")
-    .post(userController.registerUser);
+// router.post("/user/register", (req, res) => {
+//     console.log(req.body);
+//     res.send("hello");
+// });
 
 module.exports = router;

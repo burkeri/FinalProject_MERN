@@ -8,7 +8,7 @@ router.route("/user/register")
     .post(userController.registerUser);
 
 // send all requests to react app
-router.get("*", function(req, res) {
+router.use((req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 

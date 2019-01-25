@@ -42,10 +42,10 @@ function Landing() {
             <Title>Landing Page</Title>
             <hr />
             <Button primary>
-              <Link href="/signUp">Sign Up</Link>
+              <Link href="/user/register">Sign Up</Link>
             </Button>
             <Button>
-              <Link href="/login">Login</Link>
+              <Link href="/user/login">Login</Link>
             </Button>
           </div>
         </Col>

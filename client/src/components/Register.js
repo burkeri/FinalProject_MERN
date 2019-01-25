@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import API from "../utils/API";
 
 export class Register extends Component {
   state = {};
@@ -13,13 +14,20 @@ export class Register extends Component {
 
   handleFormSumbit = event => {
     event.preventDefault();
-    console.log(this.state);
-   
+    const { name, username, email, password, dob } = this.state;
+    let newUser = {
+      name,
+      username,
+      email,
+      password,
+      dob
+    }
+    API.registerUser(newUser);
   };
 
   render() {
     return (
-      <Form >
+      <Form action="/user/register" method="POST">
         <FormGroup>
           <Label for="nameReg">Name</Label>
           <Input

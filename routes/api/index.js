@@ -4,7 +4,7 @@ const router = require("express").Router();
 const userRoutes = require("./user");
 
 // user routes
-router.use("/user", userRoutes);
+router.use("/user/register", userRoutes);
 
 // send all requests to react app
 router.get("*", function(req, res) {

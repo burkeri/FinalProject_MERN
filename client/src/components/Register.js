@@ -3,26 +3,87 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import API from "../utils/API";
 
 export class Register extends Component {
-  state = {};
+  state = {
+    redirect: false,
+    notValid: false,
+    validEmail:  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+    formError: [],
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+    password2: "",
+    dob: ""
+  };
 
   handleInputChange = event => {
     const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
+    this.setState({ [name]: value });
   };
+
+  validateForm = () => {
+    const { name, username, email, password, password2, dob, formError, validEmail } = this.state;
+    let newUser = {};
+
+    // all fields complete
+    if(!name || !username || !email || !password || !password2 || !dob ) {
+      formError.push("Please complete all fields.");
+    }
+
+    // name and username length check
+    if(name.length <= 2) {
+      formError.push("Name must be longer than 2 characters.");
+    }
+    else if(username.length <= 2) {
+      formError.push("Username must be longer than 2 characters.")
+    }
+    else {
+      newUser.name = name;
+      newUser.username = username;
+    }
+
+    // email validation
+    if(!validEmail.test(email)) {
+      formError.push("Please enter a valid email address.")
+    }
+    else {
+      newUser.email = email;
+    }
+
+    // password length and matching password
+    if (password <= 6) {
+      formError.push("Password must be longer than 6 characters.")
+    }
+    else if (password !== password2) {
+      formError.push("Passwords do not match.")
+    }
+    else {
+      newUser.password = password;
+    }
+
+    if (dob.length > 0) {
+      // set date of birth
+      newUser.dob = dob;
+    }
+
+    console.log(formError);
+    
+    if (Object.keys(newUser).length === 5) {
+      API.registerUser(newUser);
+    };
+    
+  }
+
+  clearForm = () => {
+    const formError = this.state.formError;
+    this.setState({ formError: [] });
+    console.log("cleared");
+    console.log(formError);
+  }
 
   handleFormSumbit = event => {
     event.preventDefault();
-    const { name, username, email, password, dob } = this.state;
-    let newUser = {
-      name,
-      username,
-      email,
-      password,
-      dob
-    }
-    API.registerUser(newUser);
+    this.validateForm();
   };
 
   render() {
@@ -96,6 +157,7 @@ export class Register extends Component {
         </FormGroup>
         <Button 
           type="submit"
+          disabled={this.state.notValid}
           onClick={this.handleFormSumbit}
           >
           Register

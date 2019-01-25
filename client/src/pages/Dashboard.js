@@ -11,7 +11,8 @@ import {
   CardTitle,
   CardText,
   CardImg,
-  CardImgOverlay
+  CardImgOverlay,
+  Button
 } from "reactstrap";
 
 class Dashboard extends Component {
@@ -71,14 +72,15 @@ class Dashboard extends Component {
               <CardImg
                 width="100%"
                 height="150px"
-                src="https://via.placeholder.com/150"
+                src=""
                 alt="Card BG cap"
               />
               <CardImgOverlay>
                 <CardTitle className="font-weight-bold">Another User</CardTitle>
                 <hr />
                 <CardText>
-                  Another User completed this goal... I feel great after doing this!
+                  Another User completed this goal... I feel great after doing
+                  this!
                 </CardText>
               </CardImgOverlay>
             </Card>
@@ -89,7 +91,11 @@ class Dashboard extends Component {
         <Row>
           <Col>
             <p className="text-center text-white">Goals:</p>
-            
+            <div className="text-center">
+              <Button color="danger" href="/">
+                Add Goal
+              </Button>
+            </div>
           </Col>
         </Row>
         {/* Goal list */}

@@ -21,7 +21,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    picture: String,
+    picture: {
+      type: String,
+      default: "https://via.placeholder.com/100"
+    },
     dob: {
       type: Date,
       required: true
@@ -29,7 +32,6 @@ const userSchema = new Schema({
     premium: {
         type: Boolean,
         default: false,
-        required: true
     },
     createdAt: {
         type: Date,

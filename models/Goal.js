@@ -3,8 +3,7 @@ const Schema = mongoose.Schema;
 
 // Create the schema
 const goalSchema = new Schema({
-    goalID: {type: Number, required: true, unique: true},
-    userID: {type: Number, required: true},
+    userID: {type: String, required: true},
     category: {type: String, required: true},
     icon: {type: String, required: true},
     name: {type: String, required: true},

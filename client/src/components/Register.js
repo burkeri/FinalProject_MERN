@@ -51,7 +51,7 @@ export class Register extends Component {
     }
 
     // password length and matching password
-    if (password <= 6) {
+    if (password.length < 6) {
       formError.push("Password must be longer than 6 characters.")
     }
     else if (password !== password2) {

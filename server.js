@@ -34,28 +34,28 @@ mongoose
   .then(() => {
     console.log("db connected...");
     // create a test user and save to DB
-      const testUser = new User({
-        name: "test",
-        username: "tester",
-        email: "test@email.com",
-        password: "test",
-        dob: "01/01/1111",
-        premium: "true"
-      });
-      testUser.save(err => err ? console.log(err) : console.log(`testUser saved.`));
+      // const testUser = new User({
+      //   name: "test",
+      //   username: "tester",
+      //   email: "test@email.com",
+      //   password: "test",
+      //   dob: "01/01/1111",
+      //   premium: "true"
+      // });
+      // testUser.save(err => err ? console.log(err) : console.log(`testUser saved.`));
     // create a test goal and save to the DB
-      const testGoal = new Goal({
-        userID: "tester",
-        category: "mind",
-        icon: "iconURL",
-        name: "test",
-        frequency: 3,
-        description: "Test goal... Not real.",
-        progress: 50,
-        totalWeeks: 2,
-        streak: 2
-      });
-      testGoal.save(err => err ? console.log(err) : console.log(`testGoal saved.`));
+      // const testGoal = new Goal({
+      //   userID: "tester",
+      //   category: "mind",
+      //   icon: "iconURL",
+      //   name: "test",
+      //   frequency: 3,
+      //   description: "Test goal... Not real.",
+      //   progress: 50,
+      //   totalWeeks: 2,
+      //   streak: 2
+      // });
+      // testGoal.save(err => err ? console.log(err) : console.log(`testGoal saved.`));
 
   })
   .catch(err => console.log(err));

@@ -1,5 +1,6 @@
 // dependencies
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
 // user schema
@@ -36,6 +37,11 @@ const userSchema = new Schema({
         default: Date.now,
     }
 });
+
+// hash
+// UserSchema.methods.generateHash = (password) => {
+//     return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null)
+// }
 
 // create model
 const User = mongoose.model("User", userSchema);

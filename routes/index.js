@@ -1,10 +1,11 @@
 // dependencies
 const path = require("path");
 const router = require("express").Router();
-const apiRoutes = require("./api");
+const userController = require("../controllers/userController");
 
-// api routes
-router.use('/api', apiRoutes);
+// user -register
+router.route("/user/register")
+    .post(userController.registerUser);
 
 // send all requests to react app
 router.use((req, res) => {

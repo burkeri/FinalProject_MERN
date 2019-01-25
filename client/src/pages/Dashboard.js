@@ -18,7 +18,6 @@ import {
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-
     this.toggle = this.toggle.bind(this);
     this.state = {
       dropdownOpen: false
@@ -92,7 +91,7 @@ class Dashboard extends Component {
           <Col>
             <p className="text-center text-white">Goals:</p>
             <div className="text-center">
-              <Button color="danger" href="/">
+              <Button color="danger" href="/user/addgoal">
                 Add Goal
               </Button>
             </div>

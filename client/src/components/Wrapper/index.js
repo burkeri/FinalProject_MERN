@@ -12,7 +12,7 @@ function goBack() {
 
 function Wrapper(props) {
   return (
-    <Container className="mt-2 mb-2">
+    <Container className="bg-light shadow mt-2 mb-2">
       <Row>
         <Col>
           <Button onClick={() => goBack()}>B</Button>
@@ -20,6 +20,7 @@ function Wrapper(props) {
       </Row>
       <br />
       <section>{props.children}</section>
+      <br />
     </Container>
   );
 }

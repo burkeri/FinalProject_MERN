@@ -3,7 +3,7 @@ import Wrapper from "../components/Wrapper";
 import { Button } from "reactstrap";
 
 function AddGoal(props) {
-    // console.log(props);
+    console.log(props);
     return (
       <Wrapper>
         <h1>What type of goal?</h1>

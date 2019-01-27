@@ -91,7 +91,7 @@ class Dashboard extends Component {
           <Col>
             <p className="text-center text-white">Goals:</p>
             <div className="text-center">
-              <Button color="danger" href="/user/addgoal">
+              <Button color="danger" href="/user/addgoalcreate">
                 Add Goal
               </Button>
             </div>

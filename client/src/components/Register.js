@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import API from "../utils/API";
+import axios from 'axios';
 
 export class Register extends Component {
   state = {
-    redirect: false,
-    notValid: false,
-    validEmail:  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-    formError: [],
+    // redirect: false,
+    // notValid: false,
+    // validEmail:  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+    // formError: [],
     name: "",
     username: "",
     email: "",
@@ -16,74 +16,87 @@ export class Register extends Component {
     dob: ""
   };
 
+  // validateForm = () => {
+  //   const { name, username, email, password, password2, dob, formError, validEmail } = this.state;
+  //   let newUser = {};
+
+  //   // all fields complete
+  //   if(!name || !username || !email || !password || !password2 || !dob ) {
+  //     formError.push("Please complete all fields.");
+  //   }
+
+  //   // name and username length check
+  //   if(name.length <= 2) {
+  //     formError.push("Name must be longer than 2 characters.");
+  //   }
+  //   else if(username.length <= 2) {
+  //     formError.push("Username must be longer than 2 characters.")
+  //   }
+  //   else {
+  //     newUser.name = name;
+  //     newUser.username = username;
+  //   }
+
+  //   // email validation
+  //   if(!validEmail.test(email)) {
+  //     formError.push("Please enter a valid email address.")
+  //   }
+  //   else {
+  //     newUser.email = email;
+  //   }
+
+  //   // password length and matching password
+  //   if (password.length < 6) {
+  //     formError.push("Password must be longer than 6 characters.")
+  //   }
+  //   else if (password !== password2) {
+  //     formError.push("Passwords do not match.")
+  //   }
+  //   else {
+  //     newUser.password = password;
+  //   }
+
+  //   if (dob.length > 0) {
+  //     // set date of birth
+  //     newUser.dob = dob;
+  //   }
+
+  //   console.log(formError);
+    
+  //   if (Object.keys(newUser).length === 5) {
+  //     API.registerUser(newUser);
+  //   };
+    
+  // }
+
+  // clearForm = () => {
+  //   const formError = this.state.formError;
+  //   this.setState({ formError: [] });
+  //   console.log("cleared");
+  //   console.log(formError);
+  // }
+
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
-  validateForm = () => {
-    const { name, username, email, password, password2, dob, formError, validEmail } = this.state;
-    let newUser = {};
-
-    // all fields complete
-    if(!name || !username || !email || !password || !password2 || !dob ) {
-      formError.push("Please complete all fields.");
-    }
-
-    // name and username length check
-    if(name.length <= 2) {
-      formError.push("Name must be longer than 2 characters.");
-    }
-    else if(username.length <= 2) {
-      formError.push("Username must be longer than 2 characters.")
-    }
-    else {
-      newUser.name = name;
-      newUser.username = username;
-    }
-
-    // email validation
-    if(!validEmail.test(email)) {
-      formError.push("Please enter a valid email address.")
-    }
-    else {
-      newUser.email = email;
-    }
-
-    // password length and matching password
-    if (password.length < 6) {
-      formError.push("Password must be longer than 6 characters.")
-    }
-    else if (password !== password2) {
-      formError.push("Passwords do not match.")
-    }
-    else {
-      newUser.password = password;
-    }
-
-    if (dob.length > 0) {
-      // set date of birth
-      newUser.dob = dob;
-    }
-
-    console.log(formError);
-    
-    if (Object.keys(newUser).length === 5) {
-      API.registerUser(newUser);
-    };
-    
-  }
-
-  clearForm = () => {
-    const formError = this.state.formError;
-    this.setState({ formError: [] });
-    console.log("cleared");
-    console.log(formError);
-  }
-
   handleFormSumbit = event => {
     event.preventDefault();
-    this.validateForm();
+    const newUser = {
+      name: this.state.name,
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password,
+      password2: this.state.password2,
+      dob: this.state.dob
+    }
+    axios.post("/user/register", newUser)
+      .then(({data}) => this.setState({
+        errors: data
+      }));
+      console.log("client: ");
+      console.log(newUser);
   };
 
   render() {

@@ -1,5 +1,20 @@
+// dependencies
+const validator = require('validator');
+
 // models
 const User = require("../models/User");
+
+function validateFrom(data) {
+    let errors = [];
+
+    if (validator.isEmpty(data.name)) {
+        errors.push({ msg: "This is a required field." });
+    }
+
+    return {
+        errors
+    }
+}
 
 module.exports = {
 
@@ -8,12 +23,20 @@ module.exports = {
         console.log("server: ");
         console.log(req.body);
 
-        const { email } = req.body;
+        const { errors } = validateFrom(req.body);
 
-        User.findOne({ name: "Tess"})
-            .then(user => {
-                console.log(user);
-            });
+        if(errors.length > 0) {
+            res.send(errors);
+        }
+
+        // const { email } = req.body;
+
+        // User.findOne({ email: email })
+        //     .then(user => {
+        //         console.log(user);
+        //         console.log(email);
+                
+        //     });
 
         // const testUser = new User({
         //     name: "Tess",

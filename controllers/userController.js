@@ -10,8 +10,8 @@ module.exports = {
     console.log("server: ");
     console.log(req.body);
     let { name, username, email, password, password2, dob } = req.body;
-    let newUser = {};
     let formErrors = [""];
+    let registered = [""];
     let validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
     // all required fields
@@ -86,7 +86,8 @@ module.exports = {
             newUser.password = hash;
             newUser.save()
                 .then(user => {
-                    res.redirect("/user/login");
+                    registered.push({ msg: "You are now registered! Please login." });
+                    res.send(registered);
                     console.log("\nregistered:\n" + newUser);
                 })
                 .catch(err => console.log(err));

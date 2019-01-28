@@ -10,7 +10,8 @@ export class Register extends Component {
     password: "",
     password2: "",
     dob: "",
-    formErrors: [""]
+    formErrors: [""],
+    registered: [""]
   };
 
   handleInputChange = event => {
@@ -30,14 +31,22 @@ export class Register extends Component {
       dob: this.state.dob
     };
     axios.post("/user/register", newUser).then(({ data }) =>
-      this.setState({
-        formErrors: data
-      })
-    );
+      { if (data[1].msg === "You are now registered! Please login.") {
+          this.setState({
+            registered: data
+          });
+      }
+      else {
+        this.setState({
+          formErrors: data
+        })
+      }
+    });
   };
 
   render() {
-    const { formErrors } = this.state;
+
+    const { formErrors, registered } = this.state;
 
     return (
       <Form action="/user/register" method="POST">
@@ -115,6 +124,16 @@ export class Register extends Component {
               role="alert"
             >
               {formError.msg}
+            </div>
+          ))}
+
+        {registered.length > 1 &&
+          registered.map(success => (
+            <div
+              className="alert alert-success alert-dismissible fade show"
+              role="alert"
+            >
+              {success.msg}
             </div>
           ))}
 

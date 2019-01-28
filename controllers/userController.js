@@ -24,7 +24,7 @@ module.exports = {
         console.log("server: ");
         console.log(req.body);
 
-        let errors = [];
+        let errors = [""];
 
         if (req.body.name === "test") {
             errors.push({msg: "TEST"}); 
@@ -36,7 +36,7 @@ module.exports = {
         //     res.status(400).json(errors);
         // }
         
-        if(errors.length > 0) {
+        if(errors.length > 1) {
             res.send(errors);
         }
 

@@ -20,6 +20,7 @@ export class Register extends Component {
 
   handleFormSumbit = event => {
     event.preventDefault();
+    this.setState({ errors: [""] });
     const newUser = {
       name: this.state.name,
       username: this.state.username,
@@ -35,6 +36,9 @@ export class Register extends Component {
   };
 
   render() {
+
+    const { errors } = this.state;
+
     return (
       <Form action="/user/register" method="POST">
         <FormGroup>
@@ -104,8 +108,12 @@ export class Register extends Component {
           />
         </FormGroup>
 
-        {this.state.errors.map((error) => <span>{error.msg}</span>)}
-
+        { (errors.length > 1) &&
+          errors.map((error) => 
+            <div className="alert alert-danger alert-dismissible fade show" role="alert">
+              {error.msg}
+            </div>
+        )}
 
         <Button 
           type="submit"

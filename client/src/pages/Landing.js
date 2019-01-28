@@ -48,7 +48,7 @@ function Landing() {
               <Link href="/user/login">Login</Link>
             </Button>
             <Button>
-              <Link href="/user/dashboard">Dashboard</Link>
+              <Link href="/dashboard">Dashboard</Link>
             </Button>
             <small>(Temp)</small>
           </div>

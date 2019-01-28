@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const goalSchema = new Schema({
     userID: {type: String, required: true},
     category: {type: String, required: true},
-    icon: {type: String, required: true},
+    icon: {type: String, default: ""},
     name: {type: String, required: true},
     frequency: {type: Number, required: true},
     description: String,

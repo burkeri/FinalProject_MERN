@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { Redirect } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import API from "../../utils/API";
 
 class GoalForm extends Component {
   state = {
@@ -7,23 +9,21 @@ class GoalForm extends Component {
     name: "",
     icon: "",
     frequency: 0,
-    formErrors: { category: "", name: "", frequency: 0 },
-    categoryValid: false,
-    nameValid: false,
-    frequencyValid: false,
-    formValid: false
   };
 
+  // updates the choice between mind/spirit/body
   handleChoice(choice) {
     // update the state
     this.setState({ category: choice });
   }
 
+  // updates the values in the form inputs
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
+  // runs the code after the submit button is clicked
   handleSubmit = event => {
     event.preventDefault();
     const { category, name, icon, frequency } = this.state;
@@ -32,9 +32,17 @@ class GoalForm extends Component {
       `Goal name: ${name} \nCategory: ${category} \nIcon: ${icon} \nFrequency: ${frequency}`
     );
 
-    // confirm data exists before creating goal
-    // check that Goal name doesn't already exist
+    // TODO: confirm data exists before creating goal
+    // TODO: check that Goal name doesn't already exist
     // create the goal
+    API.createGoal({
+      userID: "test",
+      category: category,
+      name: name,
+      icon: icon,
+      frequency: parseInt(frequency)
+    });
+
   };
 
   render() {
@@ -61,7 +69,7 @@ class GoalForm extends Component {
             </Button>
           </li>
         </ul>
-        <Form>
+        <Form action="/dashboard">
           <FormGroup>
             <Label for="name">Name:</Label>
             <Input
@@ -83,7 +91,7 @@ class GoalForm extends Component {
               type="select"
               name="frequency"
               id="frequency"
-              onChange={this.handleChange}
+              onChange={this.handleInputChange}
             >
               <option>1</option>
               <option>2</option>

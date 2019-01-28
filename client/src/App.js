@@ -30,26 +30,31 @@ class App extends Component {
       <Router>
         <div>
           <Switch>
-            <Route exact path="/user/login" component={Login} />
-            <Route exact path="/user/register" component={Register} />
-            <Route exact path="/user/profile" component={Profile} />
-            <Route exact path="/user/dashboard" component={Dashboard} />
-            {/* <Route
-              exact
-              path="/user/addgoal"
-              render={props => (
-                <AddGoal
-                  {...props}
-                  handleChoice={this.handleChoice}
-                />
-              )}
-            /> */}
+            <Route 
+              exact path="/user/login" 
+              component={Login} 
+            />
+            <Route 
+              exact path="/user/register" 
+              component={Register} 
+            />
+            <Route 
+              exact path="/user/profile" 
+              component={Profile} 
+            />
+            <Route 
+              exact path="/dashboard" 
+              component={Dashboard} 
+            />
             <Route
-              exact path="/user/addgoalcreate"
+              exact path="/addgoalcreate"
               component={AddGoalCreate}  
             />
             {/* Landing page and 404 */}
-            <Route exact path="/" component={Landing} />
+            <Route 
+              exact path="/" 
+              component={Landing} 
+            />
             <Route component={NoMatch} />
           </Switch>
         </div>

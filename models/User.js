@@ -24,7 +24,7 @@ const userSchema = new Schema({
   },
   picture: String,
   dob: {
-    type: Date,
+    type: String,
     required: true
   },
   premium: {

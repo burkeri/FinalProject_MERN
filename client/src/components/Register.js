@@ -10,7 +10,7 @@ export class Register extends Component {
     password: "",
     password2: "",
     dob: "",
-    errors: [""]
+    formErrors: [""]
   };
 
   handleInputChange = event => {
@@ -20,7 +20,7 @@ export class Register extends Component {
 
   handleFormSumbit = event => {
     event.preventDefault();
-    this.setState({ errors: [""] });
+    this.setState({ formErrors: [""] });
     const newUser = {
       name: this.state.name,
       username: this.state.username,
@@ -31,13 +31,13 @@ export class Register extends Component {
     }
     axios.post("/user/register", newUser)
       .then(({ data }) => this.setState({
-        errors: data
+        formErrors: data
       }));
   };
 
   render() {
 
-    const { errors } = this.state;
+    const { formErrors } = this.state;
 
     return (
       <Form action="/user/register" method="POST">
@@ -108,10 +108,10 @@ export class Register extends Component {
           />
         </FormGroup>
 
-        { (errors.length > 1) &&
-          errors.map((error) => 
+        { (formErrors.length > 1) &&
+          formErrors.map((formError) => 
             <div className="alert alert-danger alert-dismissible fade show" role="alert">
-              {error.msg}
+              {formError.msg}
             </div>
         )}
 

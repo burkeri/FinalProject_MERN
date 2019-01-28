@@ -1,55 +1,94 @@
-// dependencies
-const validator = require('validator');
-const isEmpty = require('lodash/isEmpty');
-
 // models
 const User = require("../models/User");
 
-function validateFrom(data) {
-    let errors = [];
-
-    if (data.name === "test") {
-        errors.push("TEST"); 
-    }
-
-    return {
-        errors
-    }
-}
-
 module.exports = {
+  // register/create new user ------
+  registerUser: function(req, res) {
+    console.log("server: ");
+    console.log(req.body);
+    let { name, username, email, password, password2, dob } = req.body;
+    let newUser = {};
+    let formErrors = [""];
+    let validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    // register/create new user ------
-    registerUser: function(req, res) {
-        console.log("server: ");
-        console.log(req.body);
-
-        let errors = [""];
-
-        if (req.body.name === "test") {
-            errors.push({msg: "TEST"}); 
-        }
-
-        // const { errors } = validateFrom(req.body);
-
-        // if (Object.keys(errors).length > 0) {
-        //     res.status(400).json(errors);
-        // }
-        
-        if(errors.length > 1) {
-            res.send(errors);
-        }
-
-        // const testUser = new User({
-        //     name: "Tess",
-        //     username: "test",
-        //     email: "tessT@email.com",
-        //     password: "test12",
-        //     dob: "1111-11-11",
-        //     premium: "false",
-        // });
-
-        // testUser.save(err => err ? console.log(err) : console.log("test user saved"));
-
+    // all required fields
+    if (!name || !username || !email || !password || !password2 || !dob) {
+      formErrors.push({ msg: "Please complete all fields." });
     }
+
+    // name longer than 2 characters
+    if (name.length <= 2) {
+      formErrors.push({ msg: "Name must be longer than 2 characters." });
+    }
+
+    // username longer than 2 characters
+    if (username.length <= 2) {
+      formErrors.push({ msg: "Username must be longer than 2 characters." });
+    }
+
+    // email validation
+    if (!validEmail.test(email)) {
+      formErrors.push({ msg: "Please enter a valid email address." });
+    }
+
+    // password length and matching password
+    if (password.length <= 6) {
+      formErrors.push({ msg: "Password must be longer than 6 characters." });
+    } else if (password !== password2) {
+      formErrors.push({ msg: "Passwords must match." });
+    }
+
+    // email account already taken
+    User.findOne({ email: email })
+      .then(user => {
+        if (user) {
+          console.log("\nexisting:");
+          console.log(user);
+          formErrors.push({ msg: "This email address is already in use." });
+        }
+      })
+      .then(() => {
+        if (formErrors.length > 1) {
+          res.send(formErrors);
+        }
+      });
+
+    // username already takes
+    User.findOne({ username: username })
+      .then(user => {
+        if (user) {
+          console.log("\nexisting:");
+          console.log(user);
+          formErrors.push({ msg: "This username is already in use." });
+        }
+      })
+      .then(() => {
+        if (formErrors.length > 1) {
+          res.send(formErrors);
+        }
+      });
+
+    if (formErrors.length === 1) {
+        const newUser = new User({
+            name,
+            email,
+            username,
+            password,
+            dob
+        });
+        console.log(newUser);
+    }
+
+
+    // const testUser = new User({
+    //     name: "Tess",
+    //     username: "test",
+    //     email: "tessT@email.com",
+    //     password: "test12",
+    //     dob: "1111-11-11",
+    //     premium: "false",
+    // });
+
+    // testUser.save(err => err ? console.log(err) : console.log("test user saved"));
+  }
 };

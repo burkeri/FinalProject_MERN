@@ -1,6 +1,7 @@
 // dependencies
 const path = require("path");
 const router = require("express").Router();
+const apiRoutes = require("./api");
 const passport = require("passport");
 const { ensureAuthenticated } = require("../config/auth");
 const userController = require("../controllers/userController");
@@ -31,6 +32,9 @@ router.get("/user/dashboard", ensureAuthenticated, (req, res) => {
   res.send(req.user.username);
 });
   
+
+// API data routes
+router.use("/api", apiRoutes);
 
 // send all requests to react app
 router.use((req, res) => {

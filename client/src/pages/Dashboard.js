@@ -11,17 +11,18 @@ import {
   CardTitle,
   CardText,
   CardImg,
-  CardImgOverlay
+  CardImgOverlay,
+  Button
 } from "reactstrap";
 import Axios from "axios";
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-
     this.toggle = this.toggle.bind(this);
     this.state = {
       dropdownOpen: false,
+      goals: [],
       username: ""
     };
   }
@@ -73,7 +74,7 @@ class Dashboard extends Component {
               <CardImg
                 width="100%"
                 height="150px"
-                src="https://via.placeholder.com/150"
+                src=""
                 alt="Card BG cap"
               />
               <CardImgOverlay>
@@ -92,6 +93,11 @@ class Dashboard extends Component {
         <Row>
           <Col>
             <p className="text-center text-white">Goals:</p>
+            <div className="text-center">
+              <Button color="danger" href="/addgoalcreate">
+                Add Goal
+              </Button>
+            </div>
           </Col>
         </Row>
         {/* Goal list */}

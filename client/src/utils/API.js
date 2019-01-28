@@ -1,4 +1,4 @@
-// dependencies
+// // dependencies
 import axios from "axios";
 
 export default {

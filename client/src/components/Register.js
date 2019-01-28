@@ -1,19 +1,17 @@
 import React, { Component } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import API from "../utils/API";
+import axios from "axios";
 
 export class Register extends Component {
   state = {
-    redirect: false,
-    notValid: false,
-    validEmail:  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-    formError: [],
     name: "",
     username: "",
     email: "",
     password: "",
     password2: "",
-    dob: ""
+    dob: "",
+    formErrors: [""],
+    registered: [""]
   };
 
   handleInputChange = event => {
@@ -21,72 +19,35 @@ export class Register extends Component {
     this.setState({ [name]: value });
   };
 
-  validateForm = () => {
-    const { name, username, email, password, password2, dob, formError, validEmail } = this.state;
-    let newUser = {};
-
-    // all fields complete
-    if(!name || !username || !email || !password || !password2 || !dob ) {
-      formError.push("Please complete all fields.");
-    }
-
-    // name and username length check
-    if(name.length <= 2) {
-      formError.push("Name must be longer than 2 characters.");
-    }
-    else if(username.length <= 2) {
-      formError.push("Username must be longer than 2 characters.")
-    }
-    else {
-      newUser.name = name;
-      newUser.username = username;
-    }
-
-    // email validation
-    if(!validEmail.test(email)) {
-      formError.push("Please enter a valid email address.")
-    }
-    else {
-      newUser.email = email;
-    }
-
-    // password length and matching password
-    if (password <= 6) {
-      formError.push("Password must be longer than 6 characters.")
-    }
-    else if (password !== password2) {
-      formError.push("Passwords do not match.")
-    }
-    else {
-      newUser.password = password;
-    }
-
-    if (dob.length > 0) {
-      // set date of birth
-      newUser.dob = dob;
-    }
-
-    console.log(formError);
-    
-    if (Object.keys(newUser).length === 5) {
-      API.registerUser(newUser);
-    };
-    
-  }
-
-  clearForm = () => {
-    const formError = this.state.formError;
-    this.setState({ formError: [] });
-    console.log("cleared");
-    console.log(formError);
-  }
-
   handleFormSumbit = event => {
     event.preventDefault();
-    this.validateForm();
+    this.setState({ formErrors: [""] });
+    const newUser = {
+      name: this.state.name,
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password,
+      password2: this.state.password2,
+      dob: this.state.dob
+    };
+    axios.post("/user/register", newUser).then(({ data }) =>
+      { if (data[1].msg === "You are now registered! Please login.") {
+          this.setState({
+            registered: data
+          });
+      }
+      else {
+        this.setState({
+          formErrors: data
+        })
+      }
+    });
   };
 
   render() {
+
+    const { formErrors, registered } = this.state;
+
     return (
       <Form action="/user/register" method="POST">
         <FormGroup>
@@ -155,11 +116,32 @@ export class Register extends Component {
             onChange={this.handleInputChange}
           />
         </FormGroup>
-        <Button 
+
+        {formErrors.length > 1 &&
+          formErrors.map(formError => (
+            <div
+              className="alert alert-danger alert-dismissible fade show"
+              role="alert"
+            >
+              {formError.msg}
+            </div>
+          ))}
+
+        {registered.length > 1 &&
+          registered.map(success => (
+            <div
+              className="alert alert-success alert-dismissible fade show"
+              role="alert"
+            >
+              {success.msg}
+            </div>
+          ))}
+
+        <Button
           type="submit"
           disabled={this.state.notValid}
           onClick={this.handleFormSumbit}
-          >
+        >
           Register
         </Button>
       </Form>

@@ -14,6 +14,7 @@ import {
   CardImgOverlay,
   Button
 } from "reactstrap";
+import Axios from "axios";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -21,7 +22,8 @@ class Dashboard extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       dropdownOpen: false,
-      goals: []
+      goals: [],
+      username: ""
     };
   }
 
@@ -48,7 +50,7 @@ class Dashboard extends Component {
                 <DropdownItem>Edit Goal</DropdownItem>
                 <DropdownItem>Stats</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem>Logout</DropdownItem>
+                <DropdownItem href="/user/logout">Logout</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </Col>

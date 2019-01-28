@@ -2,6 +2,8 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
+const passport = require("passport");
+require("./config/passport")(passport);
 const routes = require("./routes");
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost/finalProj";
 const User = require("./models/User");
@@ -21,6 +23,9 @@ if (process.env.NODE_ENV === "production") {
 // bodyparser
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+// passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 //routes
 app.use(routes);

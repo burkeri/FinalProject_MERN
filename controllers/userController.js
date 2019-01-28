@@ -1,3 +1,6 @@
+// dependencies
+const bcrypt = require("bcrypt");
+
 // models
 const User = require("../models/User");
 
@@ -69,16 +72,26 @@ module.exports = {
       });
 
     if (formErrors.length === 1) {
-        const newUser = new User({
-            name,
-            email,
-            username,
-            password,
-            dob
-        });
-        console.log(newUser);
+      const newUser = new User({
+        name,
+        email,
+        username,
+        password,
+        dob
+      });
+      // hash password
+      bcrypt.genSalt(10, (err, salt) =>
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if(err) throw err;
+            newUser.password = hash;
+            newUser.save()
+                .then(user => {
+                    res.redirect("/user/login");
+                    console.log("\nregistered:\n" + newUser);
+                })
+                .catch(err => console.log(err));
+        }));
     }
-
 
     // const testUser = new User({
     //     name: "Tess",

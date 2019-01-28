@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import axios from 'axios';
+import axios from "axios";
 
 export class Register extends Component {
   state = {
@@ -28,15 +28,15 @@ export class Register extends Component {
       password: this.state.password,
       password2: this.state.password2,
       dob: this.state.dob
-    }
-    axios.post("/user/register", newUser)
-      .then(({ data }) => this.setState({
+    };
+    axios.post("/user/register", newUser).then(({ data }) =>
+      this.setState({
         formErrors: data
-      }));
+      })
+    );
   };
 
   render() {
-
     const { formErrors } = this.state;
 
     return (
@@ -108,18 +108,21 @@ export class Register extends Component {
           />
         </FormGroup>
 
-        { (formErrors.length > 1) &&
-          formErrors.map((formError) => 
-            <div className="alert alert-danger alert-dismissible fade show" role="alert">
+        {formErrors.length > 1 &&
+          formErrors.map(formError => (
+            <div
+              className="alert alert-danger alert-dismissible fade show"
+              role="alert"
+            >
               {formError.msg}
             </div>
-        )}
+          ))}
 
-        <Button 
+        <Button
           type="submit"
           disabled={this.state.notValid}
           onClick={this.handleFormSumbit}
-          >
+        >
           Register
         </Button>
       </Form>

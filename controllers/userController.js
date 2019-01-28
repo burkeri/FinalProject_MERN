@@ -1,5 +1,6 @@
 // dependencies
 const validator = require('validator');
+const isEmpty = require('lodash/isEmpty');
 
 // models
 const User = require("../models/User");
@@ -7,8 +8,8 @@ const User = require("../models/User");
 function validateFrom(data) {
     let errors = [];
 
-    if (validator.isEmpty(data.name)) {
-        errors.push({ msg: "This is a required field." });
+    if (data.name === "test") {
+        errors.push("TEST"); 
     }
 
     return {
@@ -23,20 +24,21 @@ module.exports = {
         console.log("server: ");
         console.log(req.body);
 
-        const { errors } = validateFrom(req.body);
+        let errors = [];
 
+        if (req.body.name === "test") {
+            errors.push({msg: "TEST"}); 
+        }
+
+        // const { errors } = validateFrom(req.body);
+
+        // if (Object.keys(errors).length > 0) {
+        //     res.status(400).json(errors);
+        // }
+        
         if(errors.length > 0) {
             res.send(errors);
         }
-
-        // const { email } = req.body;
-
-        // User.findOne({ email: email })
-        //     .then(user => {
-        //         console.log(user);
-        //         console.log(email);
-                
-        //     });
 
         // const testUser = new User({
         //     name: "Tess",
@@ -48,13 +50,6 @@ module.exports = {
         // });
 
         // testUser.save(err => err ? console.log(err) : console.log("test user saved"));
-
-        
-        // take in req.body and make sure that you don't have
-        // multiple users by checking against the database, 
-        // if it does not exist,
-        // hash the password
-        // then save the new user to the database
 
     }
 };

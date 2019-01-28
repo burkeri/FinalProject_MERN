@@ -4,77 +4,14 @@ import axios from 'axios';
 
 export class Register extends Component {
   state = {
-    // redirect: false,
-    // notValid: false,
-    // validEmail:  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-    // formError: [],
     name: "",
     username: "",
     email: "",
     password: "",
     password2: "",
-    dob: ""
+    dob: "",
+    errors: [""]
   };
-
-  // validateForm = () => {
-  //   const { name, username, email, password, password2, dob, formError, validEmail } = this.state;
-  //   let newUser = {};
-
-  //   // all fields complete
-  //   if(!name || !username || !email || !password || !password2 || !dob ) {
-  //     formError.push("Please complete all fields.");
-  //   }
-
-  //   // name and username length check
-  //   if(name.length <= 2) {
-  //     formError.push("Name must be longer than 2 characters.");
-  //   }
-  //   else if(username.length <= 2) {
-  //     formError.push("Username must be longer than 2 characters.")
-  //   }
-  //   else {
-  //     newUser.name = name;
-  //     newUser.username = username;
-  //   }
-
-  //   // email validation
-  //   if(!validEmail.test(email)) {
-  //     formError.push("Please enter a valid email address.")
-  //   }
-  //   else {
-  //     newUser.email = email;
-  //   }
-
-  //   // password length and matching password
-  //   if (password.length < 6) {
-  //     formError.push("Password must be longer than 6 characters.")
-  //   }
-  //   else if (password !== password2) {
-  //     formError.push("Passwords do not match.")
-  //   }
-  //   else {
-  //     newUser.password = password;
-  //   }
-
-  //   if (dob.length > 0) {
-  //     // set date of birth
-  //     newUser.dob = dob;
-  //   }
-
-  //   console.log(formError);
-    
-  //   if (Object.keys(newUser).length === 5) {
-  //     API.registerUser(newUser);
-  //   };
-    
-  // }
-
-  // clearForm = () => {
-  //   const formError = this.state.formError;
-  //   this.setState({ formError: [] });
-  //   console.log("cleared");
-  //   console.log(formError);
-  // }
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -92,11 +29,9 @@ export class Register extends Component {
       dob: this.state.dob
     }
     axios.post("/user/register", newUser)
-      .then(({data}) => this.setState({
+      .then(({ data }) => this.setState({
         errors: data
       }));
-      console.log("client: ");
-      console.log(newUser);
   };
 
   render() {
@@ -168,6 +103,10 @@ export class Register extends Component {
             onChange={this.handleInputChange}
           />
         </FormGroup>
+
+        {this.state.errors.map((error) => <span>{error.msg}</span>)}
+
+
         <Button 
           type="submit"
           disabled={this.state.notValid}

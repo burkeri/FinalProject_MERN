@@ -4,7 +4,7 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 export class Login extends Component {
   render() {
     return (
-      <Form>
+      <Form action="/user/login" method="POST">
         <FormGroup>
           <Label for="usernameLogin">Username</Label>
           <Input

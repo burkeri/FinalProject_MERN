@@ -7,8 +7,6 @@ const User = require("../models/User");
 module.exports = {
   // register/create new user ------
   registerUser: function(req, res) {
-    console.log("server: ");
-    console.log(req.body);
     let { name, username, email, password, password2, dob } = req.body;
     let formErrors = [""];
     let registered = [""];
@@ -82,27 +80,22 @@ module.exports = {
       // hash password
       bcrypt.genSalt(10, (err, salt) =>
         bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if(err) throw err;
-            newUser.password = hash;
-            newUser.save()
-                .then(user => {
-                    registered.push({ msg: "You are now registered! Please login." });
-                    res.send(registered);
-                    console.log("\nregistered:\n" + newUser);
-                })
-                .catch(err => console.log(err));
-        }));
+          if (err) throw err;
+          newUser.password = hash;
+          newUser
+            .save()
+            .then(user => {
+              registered.push({ msg: "You are now registered! Please login." });
+              res.send(registered);
+            })
+            .catch(err => console.log(err));
+        })
+      );
     }
+  },
 
-    // const testUser = new User({
-    //     name: "Tess",
-    //     username: "test",
-    //     email: "tessT@email.com",
-    //     password: "test12",
-    //     dob: "1111-11-11",
-    //     premium: "false",
-    // });
+  // handle login ------
+  handleLogin: function() {
 
-    // testUser.save(err => err ? console.log(err) : console.log("test user saved"));
   }
 };

@@ -47,7 +47,7 @@ class Dashboard extends Component {
                 <DropdownItem>Edit Goal</DropdownItem>
                 <DropdownItem>Stats</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem>Logout</DropdownItem>
+                <DropdownItem href="/user/logout">Logout</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </Col>

@@ -43,7 +43,7 @@ class App extends Component {
               component={Profile} 
             />
             <Route 
-              exact path="/dashboard" 
+              path="/dashboard" 
               component={Dashboard} 
             />
             <Route

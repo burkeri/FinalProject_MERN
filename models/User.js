@@ -37,6 +37,8 @@ const userSchema = new Schema({
   }
 });
 
+// User.plugin(passportLocalMongoose);
+
 // create model
 const User = mongoose.model("User", userSchema);
 

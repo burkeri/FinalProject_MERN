@@ -3,35 +3,46 @@ const path = require("path");
 const router = require("express").Router();
 const apiRoutes = require("./api");
 const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
 const { ensureAuthenticated } = require("../config/auth");
 const userController = require("../controllers/userController");
 
 // user -register
-router.route("/user/register")
-  .post(userController.registerUser);
+router.route("/user/register").post(userController.registerUser);
 
 // user -login
-router.post("/user/login", (req, res, next) => {
-    passport.authenticate("local", {
-      successRedirect: "/user/dashboard",
-      successMessage: console.log("success"),
-      failureRedirect: "/user/login",
-      failWithError: console.log("failed")
-    })(req, res, next);
-  });
+router.post(
+  '/user/login', 
+  passport.authenticate('local'),
+    function(req, res) { 
+      res.redirect('/dashboard/' + req.user.username);
+      
+      console.log("logged in: " + req.user.username);
+    });
+
+
+// router.post(
+//   "/user/login",
+//   passport.authenticate("local", {
+//     successRedirect: "/dashboard",
+//     failureRedirect: "/user/login",
+//     failureMessage: console.log("failed")
+//   })
+// );
+
+
 
 // user -logout
-router.get('/logout', (req, res) => {
+router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect('/');
-  console.log('logged out');
+  res.redirect("/");
+  console.log("logged out");
 });
 
 // dashboard
-router.get("/user/dashboard", ensureAuthenticated, (req, res) => {
-  res.send(req.user.username);
-});
-  
+// router.get("/user/dashboard", ensureAuthenticated, (req, res) => {
+//   res.send(req.user.username);
+// });
 
 // API data routes
 router.use("/api", apiRoutes);

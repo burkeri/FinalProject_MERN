@@ -16,7 +16,6 @@ router.post(
   passport.authenticate('local'),
     function(req, res) { 
       res.redirect('/dashboard/' + req.user.username);
-      
       console.log("logged in: " + req.user.username);
     });
 
@@ -30,8 +29,6 @@ router.post(
 //   })
 // );
 
-
-
 // user -logout
 router.get("/logout", (req, res) => {
   req.logout();
@@ -40,9 +37,11 @@ router.get("/logout", (req, res) => {
 });
 
 // dashboard
-// router.get("/user/dashboard", ensureAuthenticated, (req, res) => {
-//   res.send(req.user.username);
-// });
+router.get("/dashboard/", ensureAuthenticated, (req, res) => {
+  res.send(req.user.username);
+  console.log("dashboard: " + req.user.username);
+  
+});
 
 // API data routes
 router.use("/api", apiRoutes);

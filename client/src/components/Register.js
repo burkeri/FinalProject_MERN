@@ -139,7 +139,6 @@ export class Register extends Component {
 
         <Button
           type="submit"
-          disabled={this.state.notValid}
           onClick={this.handleFormSumbit}
         >
           Register

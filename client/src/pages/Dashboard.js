@@ -14,7 +14,7 @@ import {
   CardImg,
   CardImgOverlay,
   Button,
-  ListGroup, 
+  ListGroup,
   ListGroupItem
 } from "reactstrap";
 
@@ -36,13 +36,12 @@ class Dashboard extends Component {
   getGoals = () => {
     API.getGoals()
       .then(res => {
-        console.log(typeof res.data);
-        this.setState({ 
+        this.setState({
           goals: res.data
         });
       })
       .catch(err => console.log(err));
-  }
+  };
 
   toggle() {
     this.setState(prevState => ({
@@ -51,6 +50,8 @@ class Dashboard extends Component {
   }
 
   render() {
+    const { goals } = this.state;
+
     return (
       <Container className="bg-dark p-2">
         {/* Row for the dropdown menu */}
@@ -88,12 +89,7 @@ class Dashboard extends Component {
         <Row>
           <Col>
             <Card inverse>
-              <CardImg
-                width="100%"
-                height="150px"
-                src=""
-                alt="Card BG cap"
-              />
+              <CardImg width="100%" height="150px" src="" alt="Card BG cap" />
               <CardImgOverlay>
                 <CardTitle className="font-weight-bold">Another User</CardTitle>
                 <hr />
@@ -122,6 +118,17 @@ class Dashboard extends Component {
           <Col>
             <ListGroup>
               {/* {this.state.goals} */}
+              {goals.length > 0 &&
+                goals.map(goal => (
+                  <Card>
+                    <CardTitle>{goal.name}</CardTitle>
+                    <CardText>
+                      {goal.category}
+                      {goal.frequency}
+                      {goal.progress}
+                    </CardText>
+                  </Card>
+                ))}
             </ListGroup>
           </Col>
         </Row>

@@ -14,8 +14,7 @@ import {
   CardImg,
   CardImgOverlay,
   Button,
-  ListGroup, 
-  ListGroupItem
+  ListGroup
 } from "reactstrap";
 
 class Dashboard extends Component {

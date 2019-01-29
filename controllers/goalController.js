@@ -9,14 +9,16 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
+  
   create: (req, res) => {
     const newGoal = new Goal(req.body);
-    // console.log(newGoal);
+    console.log("server: ");
+    console.log(newGoal);
     
     // enter data into the database
     newGoal.save(err => {
       if (err) return res.status(500).send(err);
-      return res.status(200);
+      return res.json(newGoal);
     });
   }
 };

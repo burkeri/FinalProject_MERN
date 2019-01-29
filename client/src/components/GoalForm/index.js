@@ -8,7 +8,7 @@ class GoalForm extends Component {
     category: "",
     name: "",
     icon: "",
-    frequency: 0,
+    frequency: 0
   };
 
   // updates the choice between mind/spirit/body
@@ -32,16 +32,19 @@ class GoalForm extends Component {
       `Goal name: ${name} \nCategory: ${category} \nIcon: ${icon} \nFrequency: ${frequency}`
     );
 
-    // TODO: confirm data exists before creating goal
-    // TODO: check that Goal name doesn't already exist
-    // create the goal
-    API.createGoal({
+    const newGoal = {
       userID: "test",
       category: category,
       name: name,
       icon: icon,
       frequency: parseInt(frequency)
-    });
+    }
+
+    API.createGoal(newGoal);
+
+    // TODO: confirm data exists before creating goal
+    // TODO: check that Goal name doesn't already exist
+    // create the goal
   };
 
   render() {
@@ -58,12 +61,18 @@ class GoalForm extends Component {
             </Button>
           </li>
           <li>
-            <Button onClick={() => this.handleChoice("Mind")} className="mb-2">
+            <Button 
+              onClick={() => this.handleChoice("Mind")} 
+              className="mb-2"
+            >
               Mind
             </Button>
           </li>
           <li>
-            <Button onClick={() => this.handleChoice("Body")} className="mb-2">
+            <Button 
+              onClick={() => this.handleChoice("Body")} 
+              className="mb-2"
+            >
               Body
             </Button>
           </li>
@@ -102,7 +111,9 @@ class GoalForm extends Component {
             </Input>
             <FormText color="muted">(per week)</FormText>
           </FormGroup>
-          <Button onClick={this.handleSubmit} href="/dashboard">Submit</Button>
+          <Button onClick={this.handleSubmit} href="/dashboard">
+            Submit
+          </Button>
         </Form>
       </div>
     );

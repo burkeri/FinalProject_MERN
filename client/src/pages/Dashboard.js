@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import API from "../utils/API";
 import {
   Container,
   Row,
@@ -12,9 +13,10 @@ import {
   CardText,
   CardImg,
   CardImgOverlay,
-  Button
+  Button,
+  ListGroup, 
+  ListGroupItem
 } from "reactstrap";
-import Axios from "axios";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -25,6 +27,21 @@ class Dashboard extends Component {
       goals: [],
       username: ""
     };
+  }
+
+  componentDidMount() {
+    this.getGoals();
+  }
+
+  getGoals = () => {
+    API.getGoals()
+      .then(res => {
+        console.log(typeof res.data);
+        this.setState({ 
+          goals: res.data
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   toggle() {
@@ -101,7 +118,13 @@ class Dashboard extends Component {
           </Col>
         </Row>
         {/* Goal list */}
-        <Row>{/* content */}</Row>
+        <Row>
+          <Col>
+            <ListGroup>
+              {/* {this.state.goals} */}
+            </ListGroup>
+          </Col>
+        </Row>
       </Container>
     );
   }

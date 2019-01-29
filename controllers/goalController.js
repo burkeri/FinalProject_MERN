@@ -1,6 +1,14 @@
 const Goal = require("../models/Goal");
 
 module.exports = {
+  findAll: (req, res) => {
+    Goal.find({})
+      .then(dbGoals => {
+        // console.log(dbGoals);
+        res.json(dbGoals);
+      })
+      .catch(err => res.status(422).json(err));
+  },
   create: (req, res) => {
     const newGoal = new Goal(req.body);
     // console.log(newGoal);

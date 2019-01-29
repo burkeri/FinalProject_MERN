@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 require("./config/passport")(passport);
 const routes = require("./routes");
-const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost/finalProj";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/finalProj";
 const User = require("./models/User");
 const Goal = require("./models/Goal");
 
@@ -33,7 +33,7 @@ app.use(routes);
 // DB connection
 mongoose
   .connect(
-    MONGO_URI,
+    MONGODB_URI,
     { useCreateIndex: true, useNewUrlParser: true }
   )
   .then(() => {

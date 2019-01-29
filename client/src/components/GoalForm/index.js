@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import API from "../../utils/API";
 
@@ -25,7 +25,7 @@ class GoalForm extends Component {
 
   // runs the code after the submit button is clicked
   handleSubmit = event => {
-    event.preventDefault();
+    // event.preventDefault();
     const { category, name, icon, frequency } = this.state;
 
     console.log(
@@ -42,7 +42,6 @@ class GoalForm extends Component {
       icon: icon,
       frequency: parseInt(frequency)
     });
-
   };
 
   render() {
@@ -103,7 +102,7 @@ class GoalForm extends Component {
             </Input>
             <FormText color="muted">(per week)</FormText>
           </FormGroup>
-          <Button onClick={this.handleSubmit}>Submit</Button>
+          <Button onClick={this.handleSubmit} href="/dashboard">Submit</Button>
         </Form>
       </div>
     );

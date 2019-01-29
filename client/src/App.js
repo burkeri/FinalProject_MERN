@@ -11,19 +11,6 @@ import Dashboard from "./pages/Dashboard";
 import AddGoalCreate from "./pages/AddGoalCreate";
 
 class App extends Component {
-  // constructor() {
-  //   super();
-
-  //   // this.handleChoice = this.handleChoice.bind(this);
-  //   // this.createGoal = this.createGoal.bind(this);
-
-  //   this.state = {
-  //     category: "",
-  //     name: "",
-  //     icon: "",
-  //     frequency: 0
-  //   };
-  // }
 
   render() {
     return (

@@ -6,4 +6,10 @@ router.route('/')
   .get(goalController.findAll)
   .post(goalController.create);
 
+// Matches with "/api/goal/:id"
+router.route("/:id")
+  .get(goalController.findById)
+  .put(goalController.update)
+  .delete(goalController.remove);
+
 module.exports = router;

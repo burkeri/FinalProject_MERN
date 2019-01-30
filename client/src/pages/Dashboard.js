@@ -53,14 +53,14 @@ class Dashboard extends Component {
 
   handleDeleteBook = (id) => {
     console.log(`Goal ID to delete: ${id}`);
-    // API.deleteGoal()
-    //   .then(res => {
-    //     this.setState({
-    //       goals: res.data
-    //     });
-    //     getGoals();
-    //   })
-    //   .catch(err => console.log(err));
+    API.deleteGoal(id)
+      .then(res => this.getGoals())
+      .catch(err => console.log(err));
+  }
+
+  handleUpdateGoal = (id) => {
+    console.log(`Goal ID to update: ${id}`);
+    //
   }
 
   render() {
@@ -147,6 +147,12 @@ class Dashboard extends Component {
                       <br />
                       Progress: {(goal.progress / goal.frequency)} %
                     </ListGroupItemText>
+                    <div className="text-center mb-2">
+                      <Button
+                        color="success"
+                        onClick={() => this.handleUpdateGoal(goal._id)}
+                      >Finish</Button>
+                    </div>
                   </ListGroupItem>
                 )}
               </ListGroup>

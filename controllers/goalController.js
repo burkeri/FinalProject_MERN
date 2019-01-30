@@ -10,15 +10,34 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   
+  findById: (req, res) => {
+    //
+  },
+
   create: (req, res) => {
     const newGoal = new Goal(req.body);
-    console.log("server: ");
     console.log(newGoal);
     
     // enter data into the database
     newGoal.save(err => {
       if (err) return res.status(500).send(err);
       return res.json(newGoal);
+    });
+  },
+
+  update: (req, res) => {
+    console.log(`ID to update: ${req.params.id}`);
+    Goal.findByIdAndUpdate({_id: req.params.id}, req.body, (err, dbGoal) => {
+      if (err) return res.status(500).send(err);
+      return res.json(dbGoal);
+    });
+  },
+
+  remove: (req, res) => {
+    console.log(`ID to remove: ${req.params.id}`);
+    Goal.findByIdAndDelete(req.params.id, (err, dbGoal) => {
+      if (err) return res.status(500).send(err);
+      return res.json(dbGoal);
     });
   }
 };

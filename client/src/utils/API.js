@@ -11,8 +11,8 @@ export default {
     return axios.post("/api/goal", goalData);
   },
   // update a goal w/ the matching ID
-  updateGoal: id => {
-    return axios.put("/api/goal/" + id);
+  updateGoal: (id, prog) => {
+    return axios.put("/api/goal/" + id + '/' + prog);
   },
   // delete a goal with the matching ID
   deleteGoal: id => {

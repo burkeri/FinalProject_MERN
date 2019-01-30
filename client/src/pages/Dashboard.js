@@ -133,7 +133,7 @@ class Dashboard extends Component {
         {/* Goal list */}
         <Row>
           <Col>
-            {goals.length ? (
+
               <ListGroup>
                 {goals.map(goal => 
                   <ListGroupItem key={goal._id}>
@@ -159,7 +159,7 @@ class Dashboard extends Component {
                   </ListGroupItem>
                 )}
               </ListGroup>
-            ) : (<h2 className="text-white">No goals...</h2>)}
+
           </Col>
         </Row>
       </Container>

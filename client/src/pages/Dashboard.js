@@ -14,8 +14,10 @@ import {
   CardImg,
   CardImgOverlay,
   Button,
-  ListGroup
-
+  ListGroup,
+  ListGroupItem,
+  ListGroupItemHeading, 
+  ListGroupItemText
 } from "reactstrap";
 
 class Dashboard extends Component {
@@ -25,12 +27,18 @@ class Dashboard extends Component {
     this.state = {
       dropdownOpen: false,
       goals: [],
-      username: ""
+      username: "Test Username"
     };
   }
 
   componentDidMount() {
     this.getGoals();
+  }
+
+  toggle() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
   }
 
   getGoals = () => {
@@ -43,10 +51,16 @@ class Dashboard extends Component {
       .catch(err => console.log(err));
   };
 
-  toggle() {
-    this.setState(prevState => ({
-      dropdownOpen: !prevState.dropdownOpen
-    }));
+  handleDeleteBook = (id) => {
+    console.log(`Goal ID to delete: ${id}`);
+    // API.deleteGoal()
+    //   .then(res => {
+    //     this.setState({
+    //       goals: res.data
+    //     });
+    //     getGoals();
+    //   })
+    //   .catch(err => console.log(err));
   }
 
   render() {
@@ -81,7 +95,7 @@ class Dashboard extends Component {
               className="img-fluid img-thumbnail mx-auto d-block"
               alt="User profile"
             />
-            <p className="text-center text-white">Username</p>
+            <p className="text-center text-white">{this.state.username}</p>
           </Col>
         </Row>
 
@@ -106,7 +120,7 @@ class Dashboard extends Component {
         <Row>
           <Col>
             <p className="text-center text-white">Goals:</p>
-            <div className="text-center">
+            <div className="text-center mb-2">
               <Button color="danger" href="/addgoalcreate">
                 Add Goal
               </Button>
@@ -116,20 +130,27 @@ class Dashboard extends Component {
         {/* Goal list */}
         <Row>
           <Col>
-            <ListGroup>
-              {/* {this.state.goals} */}
-              {goals.length > 0 &&
-                goals.map(goal => (
-                  <Card>
-                    <CardTitle>{goal.name}</CardTitle>
-                    <CardText>
-                      {goal.category}
-                      {goal.frequency}
-                      {goal.progress}
-                    </CardText>
-                  </Card>
-                ))}
-            </ListGroup>
+            {goals.length ? (
+              <ListGroup>
+                {goals.map(goal => 
+                  <ListGroupItem key={goal._id}>
+                    <ListGroupItemHeading>
+                      {goal.name}
+                      <Button 
+                        color="danger" 
+                        className="float-right"
+                        onClick={() => this.handleDeleteBook(goal._id)}
+                      >X</Button>
+                    </ListGroupItemHeading>
+                    <ListGroupItemText>
+                      Frequency: {goal.frequency} times per week
+                      <br />
+                      Progress: {(goal.progress / goal.frequency)} %
+                    </ListGroupItemText>
+                  </ListGroupItem>
+                )}
+              </ListGroup>
+            ) : (<h2 className="text-white">No goals...</h2>)}
           </Col>
         </Row>
       </Container>

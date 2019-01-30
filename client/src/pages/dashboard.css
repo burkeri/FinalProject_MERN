@@ -1,0 +1,46 @@
+.p-2 {
+    width: 100vw;
+}
+
+.header {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    z-index: -2;
+}
+#welcomeUser {
+    font-family: "Quicksand";
+    color: black;
+    margin: 5% 10% 3% 10%;
+    font-size: 500%;
+}
+
+#profilePic {
+    text-align: center;
+}
+
+#profileIcon{
+    font-size: 1000%;
+}
+
+/* .ticker {
+    margin-top: 35%;
+} */
+
+@media screen and (max-width: 992px) {
+    #welcomeUser {
+        font-size: 400%;
+    }
+    #profileIcon{
+        font-size: 900%;
+    }
+}
+
+@media screen and (max-width: 456px) {
+    #welcomeUser {
+        font-size: 300%;
+        margin: 5% 5% 10% 5%;
+
+    }
+}

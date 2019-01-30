@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import API from "../utils/API";
+import "./dashboard.css";
+import MaterialIcon from 'material-icons-react';
 import {
   Container,
   Row,
@@ -27,7 +29,7 @@ class Dashboard extends Component {
     this.state = {
       dropdownOpen: false,
       goals: [],
-      username: "Test Username"
+      username: "Hello, mangoman"
     };
   }
 
@@ -67,93 +69,104 @@ class Dashboard extends Component {
     const { goals } = this.state;
 
     return (
-      <Container className="bg-dark p-2">
-        {/* Row for the dropdown menu */}
-        <Row>
-          <Col xs={{ size: "auto", offset: 10 }}>
-            <Dropdown
-              isOpen={this.state.dropdownOpen}
-              toggle={this.toggle}
-              className="mt-2"
-            >
-              <DropdownToggle className="bg-danger">=</DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem header>App Name</DropdownItem>
-                <DropdownItem>Edit Goal</DropdownItem>
-                <DropdownItem>Stats</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem href="/user/logout">Logout</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </Col>
-        </Row>
-        {/* Main Image and Name */}
+      <div>
         <Row>
           <Col>
-            <img
-              src="https://via.placeholder.com/100"
-              className="img-fluid img-thumbnail mx-auto d-block"
-              alt="User profile"
-            />
-            <p className="text-center text-white">{this.state.username}</p>
-          </Col>
-        </Row>
 
-        {/* Social Ticker */}
-        <Row>
-          <Col>
-            <Card inverse>
-              <CardImg width="100%" height="150px" src="" alt="Card BG cap" />
-              <CardImgOverlay>
-                <CardTitle className="font-weight-bold">Another User</CardTitle>
-                <hr />
-                <CardText>
-                  Another User completed this goal... I feel great after doing
-                  this!
-                </CardText>
-              </CardImgOverlay>
-            </Card>
-          </Col>
-        </Row>
+          {/* Row for the dropdown menu
+          <Row>
+            <Col xs={{ size: "auto", offset: 10 }}>
+              <Dropdown
+                isOpen={this.state.dropdownOpen}
+                toggle={this.toggle}
+                className="mt-2"
+              >
+                <DropdownToggle className="bg-danger">=</DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem header>App Name</DropdownItem>
+                  <DropdownItem>Edit Goal</DropdownItem>
+                  <DropdownItem>Stats</DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem href="/user/logout">Logout</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </Col>
+          </Row> */}
 
-        {/* Goal header and button */}
-        <Row>
-          <Col>
-            <p className="text-center text-white">Goals:</p>
-            <div className="text-center mb-2">
-              <Button color="danger" href="/addgoalcreate">
-                Add Goal
-              </Button>
-            </div>
+
+          {/* Main Image and Name */}
+          <Row className="header">
+            <Col>
+              <h1 className="text-center" id="welcomeUser">{this.state.username}</h1>
+              <div id="profilePic">
+                <MaterialIcon icon="account_circle" id="profileIcon"/>
+              </div>
+            </Col>
+          </Row>
+
+          {/* <div id="test"></div> */}
+
+
+          {/* Social Ticker */}
+          <Row className="ticker">
+            <Col>
+              <Card inverse>
+                <CardImg width="100%" height="150px" src="" alt="Card BG cap" />
+                <CardImgOverlay>
+                  <CardTitle className="font-weight-bold">Another User</CardTitle>
+                  <hr />
+                  <CardText>
+                    Another User completed this goal... I feel great after doing
+                    this!
+                  </CardText>
+                </CardImgOverlay>
+              </Card>
+            </Col>
+          </Row>
+
+          {/* Goal header and button */}
+          <Row>
+            <Col>
+              <p className="text-center text-white">Goals:</p>
+              <div className="text-center mb-2">
+                <Button color="danger" href="/addgoalcreate">
+                  Add Goal
+                </Button>
+              </div>
+            </Col>
+          </Row>
+          {/* Goal list */}
+          <Row>
+            <Col>
+              {goals.length ? (
+                <ListGroup>
+                  {goals.map(goal => 
+                    <ListGroupItem key={goal._id}>
+                      <ListGroupItemHeading>
+                        {goal.name}
+                        <Button 
+                          color="danger" 
+                          className="float-right"
+                          onClick={() => this.handleDeleteBook(goal._id)}
+                        >X</Button>
+                      </ListGroupItemHeading>
+                      <ListGroupItemText>
+                        Frequency: {goal.frequency} times per week
+                        <br />
+                        Progress: {(goal.progress / goal.frequency)} %
+                      </ListGroupItemText>
+                    </ListGroupItem>
+                  )}
+                </ListGroup>
+              ) : (<h2 className="text-white">No goals...</h2>)}
+            </Col>
+          </Row>
+
+
           </Col>
         </Row>
-        {/* Goal list */}
-        <Row>
-          <Col>
-            {goals.length ? (
-              <ListGroup>
-                {goals.map(goal => 
-                  <ListGroupItem key={goal._id}>
-                    <ListGroupItemHeading>
-                      {goal.name}
-                      <Button 
-                        color="danger" 
-                        className="float-right"
-                        onClick={() => this.handleDeleteBook(goal._id)}
-                      >X</Button>
-                    </ListGroupItemHeading>
-                    <ListGroupItemText>
-                      Frequency: {goal.frequency} times per week
-                      <br />
-                      Progress: {(goal.progress / goal.frequency)} %
-                    </ListGroupItemText>
-                  </ListGroupItem>
-                )}
-              </ListGroup>
-            ) : (<h2 className="text-white">No goals...</h2>)}
-          </Col>
-        </Row>
-      </Container>
+        
+      </div>
     );
   }
 }

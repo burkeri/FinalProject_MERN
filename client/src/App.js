@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css";
 
 // components
 import NoMatch from "./pages/NoMatch";
@@ -15,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div className="allBackground">
           <Switch>
             <Route 
               exact path="/user/login" 

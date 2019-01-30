@@ -58,9 +58,12 @@ class Dashboard extends Component {
       .catch(err => console.log(err));
   }
 
-  handleUpdateGoal = (id) => {
+  handleUpdateGoal = (id, prog) => {
     console.log(`Goal ID to update: ${id}`);
-    //
+    console.log(`Goal's progress: ${prog}`);
+    API.updateGoal(id, prog + 1)
+    .then(res => this.getGoals())
+    .catch(err => console.log(err));
   }
 
   render() {
@@ -145,12 +148,12 @@ class Dashboard extends Component {
                     <ListGroupItemText>
                       Frequency: {goal.frequency} times per week
                       <br />
-                      Progress: {(goal.progress / goal.frequency)} %
+                      Progress: {(goal.progress / goal.frequency) * 100} %
                     </ListGroupItemText>
                     <div className="text-center mb-2">
                       <Button
                         color="success"
-                        onClick={() => this.handleUpdateGoal(goal._id)}
+                        onClick={() => this.handleUpdateGoal(goal._id, goal.progress)}
                       >Finish</Button>
                     </div>
                   </ListGroupItem>

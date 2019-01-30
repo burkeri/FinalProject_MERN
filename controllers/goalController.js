@@ -16,18 +16,20 @@ module.exports = {
 
   create: (req, res) => {
     const newGoal = new Goal(req.body);
-    console.log(newGoal);
+    // console.log(newGoal);
     
     // enter data into the database
     newGoal.save(err => {
       if (err) return res.status(500).send(err);
+      console.log(`Goal created.`);
       return res.json(newGoal);
     });
   },
 
   update: (req, res) => {
     console.log(`ID to update: ${req.params.id}`);
-    Goal.findByIdAndUpdate({_id: req.params.id}, req.body, (err, dbGoal) => {
+    console.log(`Progress to update: ${req.params.prog}`);
+    Goal.findByIdAndUpdate({_id: req.params.id}, {progress: req.params.prog}, (err, dbGoal) => {
       if (err) return res.status(500).send(err);
       return res.json(dbGoal);
     });

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-// import { Redirect } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import IconPicker from "../IconPicker";
 import API from "../../utils/API";
 
 class GoalForm extends Component {
@@ -41,10 +41,6 @@ class GoalForm extends Component {
     }
 
     API.createGoal(newGoal);
-
-    // TODO: confirm data exists before creating goal
-    // TODO: check that Goal name doesn't already exist
-    // create the goal
   };
 
   render() {
@@ -91,7 +87,7 @@ class GoalForm extends Component {
           </FormGroup>
           <FormGroup>
             <Label for="icon">Icon:</Label>
-            <Input type="file" name="file" id="file" />
+            <IconPicker />
           </FormGroup>
           <FormGroup>
             <Label for="frequency">Frequency:</Label>
@@ -101,6 +97,7 @@ class GoalForm extends Component {
               id="frequency"
               onChange={this.handleInputChange}
             >
+              <option>0</option>
               <option>1</option>
               <option>2</option>
               <option>3</option>

@@ -37,11 +37,11 @@ router.get("/logout", (req, res) => {
 });
 
 // dashboard
-router.get("/dashboard/", ensureAuthenticated, (req, res) => {
-  res.send(req.user.username);
-  console.log("dashboard: " + req.user.username);
+// router.get("/dashboard/", ensureAuthenticated, (req, res) => {
+//   res.send(req.user.username);
+//   console.log("dashboard: " + req.user.username);
   
-});
+// });
 
 // API data routes
 router.use("/api", apiRoutes);

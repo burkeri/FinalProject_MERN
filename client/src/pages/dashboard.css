@@ -1,20 +1,7 @@
-/* .p-2 {
-    width: 100vw;
-}
-
-.header {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
-    z-index: 2;
-}
-*/
-
 .allBackground {
     background-image: linear-gradient(#E29587, #D66D75);
     max-width: 100% !important;
-    height: 100vh;
+    height: 100%;
     margin: 0;
 }
 
@@ -27,7 +14,6 @@
     margin: 5% auto 3% auto;
     font-size: 500%;
 }
-
 
 #profilePic {
     text-align: center;
@@ -48,12 +34,60 @@
     opacity: .75;
     /* box-shadow: 0 5px 20px #dfdfdf;  */
     /* box-shadow: 0 5px 20px #8d8d8d;  */
-    box-shadow: 0 5px 20px #B05F65;
+    /* box-shadow: 0 5px 20px #B05F65; */
     box-shadow: 0 5px 20px #8C4E52; 
 }
 
 #text {
     font-size: 20px;
+}
+
+#goalHeader {
+    padding: 5%;
+    font-size: 300%;
+    color: white;
+}
+
+#addGoal {
+    /* background-color: #c73234;
+    background-color: #FDC900; */
+    background-color: #FD9800;
+    width: 90%;
+    opacity: .70;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 8px 20px #8C4E52; 
+    transition: box-shadow 0.25s cubic-bezier(0.4, 0, 1, 1);
+}
+
+#addGoal:hover {
+    box-shadow: 0 8px 40px #8C4E52; 
+}
+
+#goalItem {
+    width: 90%;
+    margin: auto;
+    opacity: .75;
+    box-shadow: 0 5px 20px #8C4E52; 
+    margin-bottom: 5%;
+    border-radius: 10px;
+    transition: box-shadow 0.25s cubic-bezier(0.4, 0, 1, 1);
+}
+
+#goalIcon {
+    color: #FD9800;
+    font-size: 100%;
+    background: transparent;
+    border: none;
+}
+
+#finishGoal {
+    float: right;
+    /* background-color: #5E00FD;
+    background-color: #FDC900; */
+    background-color: #FD9800;
+    border: none;
+    box-shadow: 0 5px 20px #bdbdbdf6; 
 }
 
 @media screen and (max-width: 992px) {
@@ -69,6 +103,9 @@
     #ticker {
         width: 100%;
         margin: 5% auto 5% auto;
+    }
+    #goalHeader {
+        padding: 10%;
     }
 }
 

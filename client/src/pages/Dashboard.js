@@ -10,13 +10,15 @@ import {
   CardBody,
   CardTitle,
   CardText,
-  CardImg,
-  CardImgOverlay,
+  // CardTitle,
+  // CardImg,
+  // CardImgOverlay,
   Button,
   ListGroup,
   ListGroupItem,
-  ListGroupItemHeading,
-  ListGroupItemText
+  ListGroupItemHeading, 
+  ListGroupItemText,
+  Progress
 } from "reactstrap";
 
 class Dashboard extends Component {
@@ -68,7 +70,10 @@ class Dashboard extends Component {
   render() {
     return (
       <Container className="allBackground">
-        {/* Row for the dropdown menu
+
+        {/* <Row>
+          <Col>
+          Row for the dropdown menu
           <Row>
             <Col xs={{ size: "auto", offset: 10 }}>
               <Dropdown
@@ -132,7 +137,7 @@ class Dashboard extends Component {
             </div>
           </Col>
         </Row>
-
+      
         {/* Goal list */}
         <Row>
           <Col>
@@ -154,7 +159,9 @@ class Dashboard extends Component {
                   <ListGroupItemText>
                     Frequency: {goal.frequency} times per week
                     <br />
-                    Progress: {(goal.progress / goal.frequency) * 100} %
+                    <span>Progress:</span>
+                    <div className="text-center">{goal.progress} of {goal.frequency}</div>
+                    <Progress value={goal.progress} max={goal.frequency} />                  
                   </ListGroupItemText>
                   <Button
                       id="finishGoal"

@@ -51,14 +51,17 @@ class Dashboard extends Component {
 
   handleDeleteBook = (id) => {
     console.log(`Goal ID to delete: ${id}`);
-    // API.deleteGoal()
-    //   .then(res => {
-    //     this.setState({
-    //       goals: res.data
-    //     });
-    //     getGoals();
-    //   })
-    //   .catch(err => console.log(err));
+    API.deleteGoal(id)
+      .then(res => this.getGoals())
+      .catch(err => console.log(err));
+  }
+
+  handleUpdateGoal = (id, prog) => {
+    console.log(`Goal ID to update: ${id}`);
+    console.log(`Goal's progress: ${prog}`);
+    API.updateGoal(id, prog + 1)
+    .then(res => this.getGoals())
+    .catch(err => console.log(err));
   }
 
   render() {
@@ -157,6 +160,46 @@ class Dashboard extends Component {
             </Col>
           </Row>
 
+        {/* Goal header and button */}
+        <Row>
+          <Col>
+            <p className="text-center text-white">Goals:</p>
+            <div className="text-center mb-2">
+              <Button color="danger" href="/addgoalcreate">
+                Add Goal
+              </Button>
+            </div>
+          </Col>
+        </Row>
+        {/* Goal list */}
+        <Row>
+          <Col>
+
+              <ListGroup>
+                {goals.map(goal => 
+                  <ListGroupItem key={goal._id}>
+                    <ListGroupItemHeading>
+                      {goal.name}
+                      <Button 
+                        color="danger" 
+                        className="float-right"
+                        onClick={() => this.handleDeleteBook(goal._id)}
+                      >X</Button>
+                    </ListGroupItemHeading>
+                    <ListGroupItemText>
+                      Frequency: {goal.frequency} times per week
+                      <br />
+                      Progress: {(goal.progress / goal.frequency) * 100} %
+                    </ListGroupItemText>
+                    <div className="text-center mb-2">
+                      <Button
+                        color="success"
+                        onClick={() => this.handleUpdateGoal(goal._id, goal.progress)}
+                      >Finish</Button>
+                    </div>
+                  </ListGroupItem>
+                )}
+              </ListGroup>
 
           </Col>
         </Row>

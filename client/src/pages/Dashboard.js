@@ -6,10 +6,6 @@ import {
   Container,
   Row,
   Col,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   Card,
   CardTitle,
   CardText,
@@ -69,7 +65,7 @@ class Dashboard extends Component {
     const { goals } = this.state;
 
     return (
-      <div>
+      <Container>
         <Row>
           <Col>
 
@@ -104,22 +100,21 @@ class Dashboard extends Component {
             </Col>
           </Row>
 
-          {/* <div id="test"></div> */}
-
-
           {/* Social Ticker */}
-          <Row className="ticker">
+          <Row >
             <Col>
-              <Card inverse>
-                <CardImg width="100%" height="150px" src="" alt="Card BG cap" />
-                <CardImgOverlay>
-                  <CardTitle className="font-weight-bold">Another User</CardTitle>
-                  <hr />
+              <Card id="ticker">
+                  {/* <CardTitle className="font-weight-bold">Another User</CardTitle> */}
                   <CardText>
-                    Another User completed this goal... I feel great after doing
-                    this!
+                    <h3 id="text">
+                    If you want to accomplish the goals of your 
+                    life, you have to begin with the spirit.
+                    <br></br>
+                    <hr></hr>
+                    <br></br>
+                    Oprah Winfrey 
+                    </h3>
                   </CardText>
-                </CardImgOverlay>
               </Card>
             </Col>
           </Row>
@@ -166,7 +161,7 @@ class Dashboard extends Component {
           </Col>
         </Row>
         
-      </div>
+      </Container>
     );
   }
 }

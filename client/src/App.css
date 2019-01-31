@@ -1,10 +1,15 @@
 
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
 
-.allBackground {
-    background-color: #f6f6f6;
-    color: black;
-    font-family: "Quicksand";
+html.wf-materialicons-n4-active wf-active {
+    width: 100%;
+    height: 100vh;
+    margin: none;
 }
 
-
+.allBackground {
+    background-image: linear-gradient(#E29587, #D66D75);
+    /* background-image: linear-gradient(#FFC371, #FF5F6D); */
+    /* background-image: linear-gradient(#ffdde1, #ee9ca7); */
+    /* background-image: linear-gradient(#ddd6f3, #faaca8); */
+}

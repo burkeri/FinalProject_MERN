@@ -11,6 +11,13 @@
 }
 */
 
+.allBackground {
+    background-image: linear-gradient(#E29587, #D66D75);
+    max-width: 100% !important;
+    height: 100vh;
+    margin: 0;
+}
+
 .container {
     font-family: "Quicksand";
 }

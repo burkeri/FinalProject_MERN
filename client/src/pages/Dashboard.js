@@ -65,7 +65,7 @@ class Dashboard extends Component {
     const { goals } = this.state;
 
     return (
-      <Container>
+      <Container className="allBackground">
         <Row>
           <Col>
 
@@ -107,8 +107,8 @@ class Dashboard extends Component {
                   {/* <CardTitle className="font-weight-bold">Another User</CardTitle> */}
                   <CardText>
                     <h3 id="text">
-                    If you want to accomplish the goals of your 
-                    life, you have to begin with the spirit.
+                    "If you want to accomplish the goals of your 
+                    life, you have to begin with the spirit."
                     <br></br>
                     <hr></hr>
                     <br></br>

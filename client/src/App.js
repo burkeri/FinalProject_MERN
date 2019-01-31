@@ -16,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="allBackground">
+        <div>
           <Switch>
             <Route 
               exact path="/user/login" 

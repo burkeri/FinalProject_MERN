@@ -50,7 +50,7 @@ class Dashboard extends Component {
   };
 
   handleDeleteBook = (id) => {
-    console.log(`Goal ID to delete: ${id}`);
+    // console.log(`Goal ID to delete: ${id}`);
     API.deleteGoal(id)
       .then(res => this.getGoals())
       .catch(err => console.log(err));
@@ -65,7 +65,6 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { goals } = this.state;
 
     return (
       <Container className="allBackground">
@@ -174,17 +173,24 @@ class Dashboard extends Component {
         {/* Goal list */}
         <Row>
           <Col>
-
               <ListGroup>
-                {goals.map(goal => 
+                {this.state.goals.map(goal => 
                   <ListGroupItem key={goal._id}>
                     <ListGroupItemHeading>
-                      {goal.name}
                       <Button 
+                        outline
+                        size="lg"
+
+                        >
+                        <i className={goal.icon} />
+                      </Button>
+                      {goal.name}
+                      <Button
+                        close 
                         color="danger" 
                         className="float-right"
                         onClick={() => this.handleDeleteBook(goal._id)}
-                      >X</Button>
+                      />
                     </ListGroupItemHeading>
                     <ListGroupItemText>
                       Frequency: {goal.frequency} times per week
@@ -200,7 +206,6 @@ class Dashboard extends Component {
                   </ListGroupItem>
                 )}
               </ListGroup>
-
           </Col>
         </Row>
         

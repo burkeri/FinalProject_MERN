@@ -8,9 +8,8 @@ class AddGoalCreate extends Component {
 
     return (
       <Wrapper>
-        <h1>Add Goal Create</h1>
-        <GoalForm 
-        />
+        <h1>Create a Goal:</h1>
+        <GoalForm />
       </Wrapper>
     );
   }

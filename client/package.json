@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
+    "@fonticonpicker/react-fonticonpicker": "^1.2.0",
     "axios": "^0.18.0",
     "bootstrap": "^4.2.1",
     "material-icons-react": "^1.0.4",

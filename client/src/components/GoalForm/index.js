@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-// import { Redirect } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import API from "../../utils/API";
+import FontIconPicker from '@fonticonpicker/react-fonticonpicker';
+import '@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.base-theme.react.css';
+import '@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.material-theme.react.css';
 
 class GoalForm extends Component {
   state = {
     category: "",
     name: "",
-    icon: "",
+    icon: "fipicon-angle-left",
     frequency: 0
   };
 
@@ -22,6 +24,12 @@ class GoalForm extends Component {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
+  
+  handleIconChange = (icon) => {
+    // console.log(`Current icon: ${this.state.icon}`);
+    // console.log(`Selected icon: ${icon}`);
+    this.setState({ icon: icon});
+  }
 
   // runs the code after the submit button is clicked
   handleSubmit = event => {
@@ -41,13 +49,10 @@ class GoalForm extends Component {
     }
 
     API.createGoal(newGoal);
-
-    // TODO: confirm data exists before creating goal
-    // TODO: check that Goal name doesn't already exist
-    // create the goal
   };
 
   render() {
+
     return (
       <div>
         <p>What type of goal?</p>
@@ -91,7 +96,15 @@ class GoalForm extends Component {
           </FormGroup>
           <FormGroup>
             <Label for="icon">Icon:</Label>
-            <Input type="file" name="file" id="file" />
+            <FontIconPicker
+              icons={['fipicon-angle-left', 'fipicon-angle-right', 'fipicon-angle-up', 'fipicon-angle-down']}
+              theme='bluegrey'
+              renderUsing='class'
+              value={this.state.icon}
+              onChange={this.handleIconChange}
+              closeOnSelect={true}
+              isMulti={false}
+            />
           </FormGroup>
           <FormGroup>
             <Label for="frequency">Frequency:</Label>
@@ -101,6 +114,7 @@ class GoalForm extends Component {
               id="frequency"
               onChange={this.handleInputChange}
             >
+              <option></option>
               <option>1</option>
               <option>2</option>
               <option>3</option>

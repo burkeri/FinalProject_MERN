@@ -69,7 +69,7 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <Container className="allBackground">
+      <Container className="dashBackground">
 
         {/* <Row>
           <Col>

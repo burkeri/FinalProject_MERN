@@ -1,0 +1,149 @@
+/* body,html {
+    height: 100%;
+} */
+
+.landingBackground {
+    background-image: linear-gradient(#BDFFF3, #4AC29A);
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    max-width: 100% !important;
+}
+
+#title {
+    font-size: 500%;
+    color: whitesmoke;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 26%;
+}
+
+#logoIcon {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1000%;
+    color: whitesmoke;
+    margin-top: 10%;
+}
+
+#signIn, #signUp {
+    display: block;
+    margin: 5%;
+    width: 50%;
+    color: black;
+    border: none;
+    background-color: #fff;
+    box-shadow: 0 8px 20px rgb(56, 158, 124); 
+}
+
+#signIn {
+    opacity: .6;
+    margin: auto;
+    margin-top: 40%;
+    margin-bottom: 5%;
+}
+
+#signUp {
+    opacity: .8;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 1027px) {
+    #title {
+        margin-top: 27%;
+    }
+    #signIn {
+        margin-top: 42%;
+        margin-bottom: 4%;
+    }
+}
+
+@media screen and (max-width: 890px) {
+    #title {
+        margin-top: 32%;
+    }
+    #signIn, #signUp {
+        width: 65%;
+    }
+    #signIn {
+        margin-top: 50%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #logoIcon {
+        margin-top: 12%;
+    }
+    #title {
+        margin-top: 38%;
+    }
+    #signIn, #signUp {
+        width: 65%;
+    }
+    #signIn {
+        margin-top: 60%;
+    }
+}
+
+@media screen and (max-width: 655px) {
+    #logoIcon {
+        margin-top: 12%;
+    }
+    #title {
+        margin-top: 43%;
+    }
+    #signIn, #signUp {
+        width: 65%;
+    }
+    #signIn {
+        margin-top: 70%;
+    }
+}
+
+@media screen and (max-width: 586px) {
+    #logoIcon {
+        margin-top: 15%;
+    }
+    #title {
+        margin-top: 49%;
+    }
+    #signIn, #signUp {
+        width: 70%;
+    }
+    #signIn {
+        margin-top: 80%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #logoIcon {
+        margin-top: 20%;
+    }
+    #title {
+        margin-top: 58%;
+    }
+    #signIn, #signUp {
+        width: 80%;
+    }
+    #signIn {
+        margin-top: 93%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    #logoIcon {
+        margin-top: 20%;
+    }
+    #title {
+        margin-top: 70%;
+    }
+    #signIn, #signUp {
+        width: 90%;
+    }
+    #signIn {
+        margin-top: 120%;
+    }
+}

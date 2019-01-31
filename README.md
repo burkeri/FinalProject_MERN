@@ -14,17 +14,27 @@ The app requires the user to create an account to be able to use the application
 (login/ signup pic here)
 
 ### 2. The dashboard ###
-Upon signup or login, the user is brought to a dashboard page. This is the hub of the app and where everything stems from. Users will be able to create and manage goals from here.
+Upon signup or login, the user is brought to a dashboard page. This is the hub of the app and where everything stems from. The user will be greeted to their profile icon, name and random inspirational quote. He/she will also be able to create and manage goals from here.
 
 (dashboard pic here)
 
+#### Each goal shows: ####
+
+(goal zoom in picture)
+
+1. An icon visualizing the goal
+2. The name of goal
+3. The (weekly) frequency of that goal
+4. The current progress of that goal (visually represented as text and a progress bar)
+5. A delete button to remove the goal
+
 ### 3. Goal creation ###
-Text here
+Upon clicking the "Add goal" button, the user is taken to a simple form to fill out the details of the goal in mind. We don't want to bog down the user with too many details, so the user is asked to fill out the bare minimum for convenience/ simplicity. Details will be added later.
 
 (goal creation pic)
 
 ### 4. Finishing a goal ###
-Text here
+Once the user wants to finish a goal, it is as simple as pressing the "Finish" button of the goal. This will update the progress of the goal and the user can see the progress bar increasing.
 
 (finish goal gif)
 
@@ -34,7 +44,8 @@ The list includes:
 - MongoDB w/ Mongoose ORM
 - Express.js routing
 - React.js w/ React Router
-- Reactstrap components
+- Reactstrap component library
+- React fonticonpicker component library
 - Node.js
 - Passport.js 
 - Bootstrap v4

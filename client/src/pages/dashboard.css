@@ -1,0 +1,89 @@
+/* .p-2 {
+    width: 100vw;
+}
+
+.header {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    z-index: 2;
+}
+*/
+
+.allBackground {
+    background-image: linear-gradient(#E29587, #D66D75);
+    max-width: 100% !important;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    font-family: "Quicksand";
+}
+
+#welcomeUser {
+    color: white;
+    margin: 5% auto 3% auto;
+    font-size: 500%;
+}
+
+
+#profilePic {
+    text-align: center;
+}
+
+#profileIcon{
+    font-size: 1000%;
+}
+
+#ticker {
+    text-align: center;
+    width: 75%;
+    height: 100%;
+    padding: 5% 3% 0% 3%;
+    margin: 0 auto 0 auto;
+    border-radius: 20px;
+    border: none;
+    opacity: .75;
+    /* box-shadow: 0 5px 20px #dfdfdf;  */
+    /* box-shadow: 0 5px 20px #8d8d8d;  */
+    box-shadow: 0 5px 20px #B05F65;
+    box-shadow: 0 5px 20px #8C4E52; 
+}
+
+#text {
+    font-size: 20px;
+}
+
+@media screen and (max-width: 992px) {
+    #welcomeUser {
+        font-size: 400%;
+    }
+    #profileIcon{
+        font-size: 900%;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    #ticker {
+        width: 100%;
+        margin: 5% auto 5% auto;
+    }
+}
+
+@media screen and (max-width: 456px) {
+    #welcomeUser {
+        font-size: 300%;
+        margin: 10% auto 10% auto;
+    }
+    #ticker {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    #ticker {
+        width: 90%;
+    }
+}

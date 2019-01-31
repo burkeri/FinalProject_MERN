@@ -9,15 +9,15 @@ class GoalForm extends Component {
   state = {
     category: "",
     name: "",
-    icon: "fipicon-angle-left",
+    icon: "",
     frequency: 0
   };
 
   // updates the choice between mind/spirit/body
-  handleChoice(choice) {
+  handleChoice = (choice) => {
     // update the state
     this.setState({ category: choice });
-  }
+  };
 
   // updates the values in the form inputs
   handleInputChange = event => {
@@ -28,7 +28,7 @@ class GoalForm extends Component {
   handleIconChange = (icon) => {
     // console.log(`Current icon: ${this.state.icon}`);
     // console.log(`Selected icon: ${icon}`);
-    this.setState({ icon: icon});
+    this.setState({ icon: icon });
   }
 
   // runs the code after the submit button is clicked
@@ -52,7 +52,34 @@ class GoalForm extends Component {
   };
 
   render() {
-
+    const iconPack = [
+      'far fa-angry', 
+      'fas fa-archive', 
+      'fas fa-ban', 
+      'fas fa-baseball-ball', 
+      'fas fa-bed', 
+      'fas fa-beer', 
+      'fas fa-bell', 
+      'fas fa-bible', 
+      'fas fa-bicycle', 
+      'fas fa-bone', 
+      'fas fa-book', 
+      'fas fa-brain', 
+      'fas fa-bread-slice',
+      'fas fa-broom', 
+      'fas fa-brush', 
+      'fas fa-bus',
+      'fas fa-calculator',
+      'fas fa-calendar-alt',
+      'fas fa-camera-retro',
+      'fas fa-capsules',
+      'fas fa-car',
+      'fas fa-dumbbell', 
+      'fab fa-facebook', 
+      'fas fa-heart', 
+      'fas fa-weight', 
+      'fas fa-weight-hanging',
+    ];
     return (
       <div>
         <p>What type of goal?</p>
@@ -97,12 +124,12 @@ class GoalForm extends Component {
           <FormGroup>
             <Label for="icon">Icon:</Label>
             <FontIconPicker
-              icons={['fipicon-angle-left', 'fipicon-angle-right', 'fipicon-angle-up', 'fipicon-angle-down']}
-              theme='bluegrey'
+              icons={iconPack}
+              theme='red'
               renderUsing='class'
-              value={this.state.icon}
               onChange={this.handleIconChange}
-              closeOnSelect={true}
+              value={this.state.icon}
+              closeOnSelect={false}
               isMulti={false}
             />
           </FormGroup>
@@ -114,7 +141,7 @@ class GoalForm extends Component {
               id="frequency"
               onChange={this.handleInputChange}
             >
-              <option></option>
+              <option>(times per week)</option>
               <option>1</option>
               <option>2</option>
               <option>3</option>

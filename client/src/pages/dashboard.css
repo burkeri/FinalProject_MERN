@@ -32,9 +32,6 @@
     border-radius: 20px;
     border: none;
     opacity: .75;
-    /* box-shadow: 0 5px 20px #dfdfdf;  */
-    /* box-shadow: 0 5px 20px #8d8d8d;  */
-    /* box-shadow: 0 5px 20px #B05F65; */
     box-shadow: 0 5px 20px #8C4E52; 
 }
 
@@ -49,8 +46,6 @@
 }
 
 #addGoal {
-    /* background-color: #c73234;
-    background-color: #FDC900; */
     background-color: #FD9800;
     width: 90%;
     opacity: .70;
@@ -81,10 +76,12 @@
     border: none;
 }
 
+.progress-bar {
+    background-color: #D66D75 !important;
+}
+
 #finishGoal {
     float: right;
-    /* background-color: #5E00FD;
-    background-color: #FDC900; */
     background-color: #FD9800;
     border: none;
     box-shadow: 0 5px 20px #bdbdbdf6; 

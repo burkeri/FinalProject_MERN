@@ -7,15 +7,16 @@ import {
   Row,
   Col,
   Card,
-  CardTitle,
   CardText,
-  CardImg,
-  CardImgOverlay,
+  // CardTitle,
+  // CardImg,
+  // CardImgOverlay,
   Button,
   ListGroup,
   ListGroupItem,
   ListGroupItemHeading, 
-  ListGroupItemText
+  ListGroupItemText,
+  Progress
 } from "reactstrap";
 
 class Dashboard extends Component {
@@ -68,10 +69,9 @@ class Dashboard extends Component {
 
     return (
       <Container className="allBackground">
-        <Row>
+        {/* <Row>
           <Col>
-
-          {/* Row for the dropdown menu
+          Row for the dropdown menu
           <Row>
             <Col xs={{ size: "auto", offset: 10 }}>
               <Dropdown
@@ -90,7 +90,6 @@ class Dashboard extends Component {
               </Dropdown>
             </Col>
           </Row> */}
-
 
           {/* Main Image and Name */}
           <Row className="header">
@@ -121,45 +120,7 @@ class Dashboard extends Component {
             </Col>
           </Row>
 
-          {/* Goal header and button */}
-          <Row>
-            <Col>
-              <p className="text-center text-white">Goals:</p>
-              <div className="text-center mb-2">
-                <Button color="danger" href="/addgoalcreate">
-                  Add Goal
-                </Button>
-              </div>
-            </Col>
-          </Row>
-          {/* Goal list */}
-          <Row>
-            <Col>
-              {goals.length ? (
-                <ListGroup>
-                  {goals.map(goal => 
-                    <ListGroupItem key={goal._id}>
-                      <ListGroupItemHeading>
-                        {goal.name}
-                        <Button 
-                          color="danger" 
-                          className="float-right"
-                          onClick={() => this.handleDeleteBook(goal._id)}
-                        >X</Button>
-                      </ListGroupItemHeading>
-                      <ListGroupItemText>
-                        Frequency: {goal.frequency} times per week
-                        <br />
-                        Progress: {(goal.progress / goal.frequency)} %
-                      </ListGroupItemText>
-                    </ListGroupItem>
-                  )}
-                </ListGroup>
-              ) : (<h2 className="text-white">No goals...</h2>)}
-            </Col>
-          </Row>
-
-        {/* Goal header and button */}
+        {/* Goal header and Add Goal button */}
         <Row>
           <Col>
             <p className="text-center text-white">Goals:</p>
@@ -170,7 +131,7 @@ class Dashboard extends Component {
             </div>
           </Col>
         </Row>
-        {/* Goal list */}
+        {/* Goals list */}
         <Row>
           <Col>
               <ListGroup>
@@ -180,7 +141,6 @@ class Dashboard extends Component {
                       <Button 
                         outline
                         size="lg"
-
                         >
                         <i className={goal.icon} />
                       </Button>
@@ -193,9 +153,11 @@ class Dashboard extends Component {
                       />
                     </ListGroupItemHeading>
                     <ListGroupItemText>
-                      Frequency: {goal.frequency} times per week
+                      <span>Frequency: {goal.frequency} times per week</span>
                       <br />
-                      Progress: {(goal.progress / goal.frequency) * 100} %
+                      <span>Progress:</span>
+                      <div className="text-center">{goal.progress} of {goal.frequency}</div>
+                      <Progress value={goal.progress} max={goal.frequency} />
                     </ListGroupItemText>
                     <div className="text-center mb-2">
                       <Button

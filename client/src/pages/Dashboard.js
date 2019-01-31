@@ -161,7 +161,7 @@ class Dashboard extends Component {
                     <br />
                     <span>Progress:</span>
                     <div className="text-center">{goal.progress} of {goal.frequency}</div>
-                    <Progress value={goal.progress} max={goal.frequency} />                  
+                    <Progress id="progressBar" value={goal.progress} max={goal.frequency} />                  
                   </ListGroupItemText>
                   <Button
                       id="finishGoal"

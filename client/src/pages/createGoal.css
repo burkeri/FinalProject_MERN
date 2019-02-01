@@ -1,0 +1,12 @@
+#CGFbackground{
+    background-image: linear-gradient(#E29587, #D66D75);
+    max-width: 100% !important;
+    height: 100vh;
+    margin: 0;
+}
+
+#formCont {
+    text-align: center;
+    color: white;
+    margin: 0 auto;
+}

@@ -4,6 +4,7 @@ import API from "../../utils/API";
 import FontIconPicker from '@fonticonpicker/react-fonticonpicker';
 import '@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.base-theme.react.css';
 import '@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.material-theme.react.css';
+import "./createGoalForm.css";
 
 class GoalForm extends Component {
   state = {
@@ -81,34 +82,29 @@ class GoalForm extends Component {
       'fas fa-weight-hanging',
     ];
     return (
-      <div>
+      <div id="createForm">
         <p>What type of goal?</p>
-        <ul>
-          <li>
-            <Button
-              onClick={() => this.handleChoice("Spirit")}
-              className="mb-2"
-            >
-              Spirit
-            </Button>
-          </li>
-          <li>
-            <Button 
-              onClick={() => this.handleChoice("Mind")} 
-              className="mb-2"
-            >
-              Mind
-            </Button>
-          </li>
-          <li>
-            <Button 
-              onClick={() => this.handleChoice("Body")} 
-              className="mb-2"
-            >
-              Body
-            </Button>
-          </li>
-        </ul>
+          <Button
+            id="catBtn"
+            onClick={() => this.handleChoice("Spirit")}
+            className="mb-2"
+          >
+            Spirit
+          </Button>
+          <Button 
+            id="catBtn"
+            onClick={() => this.handleChoice("Mind")} 
+            className="mb-2"
+          >
+            Mind
+          </Button>
+          <Button
+            id="catBtn" 
+            onClick={() => this.handleChoice("Body")} 
+            className="mb-2"
+          >
+            Body
+          </Button>
         <Form action="/dashboard">
           <FormGroup>
             <Label for="name">Name:</Label>
@@ -152,7 +148,7 @@ class GoalForm extends Component {
             </Input>
             <FormText color="muted">(per week)</FormText>
           </FormGroup>
-          <Button onClick={this.handleSubmit} href="/dashboard">
+          <Button id="createBtn" onClick={this.handleSubmit} href="/dashboard">
             Submit
           </Button>
         </Form>

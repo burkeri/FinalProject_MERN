@@ -1,0 +1,43 @@
+#loginBackground {
+    background-image: linear-gradient(#BDFFF3, #4AC29A);
+    max-width: 100% !important;
+    height: 100vh;
+}
+
+#formContainer {
+    background-color: rgb(255, 255, 255, .6);
+    padding: 5%;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 10%;
+}
+
+#usernameLogin, #passwordLogin {
+    background-color: #4AC29A;
+    opacity: .75;
+    border: none;
+    color: white;
+}
+
+#formButton {
+    background-color: #4AC29A;
+    border: none; 
+}
+
+@media screen and (max-width: 947px) {
+    #formContainer {
+        margin-top: 15%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #formContainer {
+        margin-top: 20%;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    #formContainer {
+        margin-top: 30%;
+    }
+}

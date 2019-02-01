@@ -15,7 +15,7 @@ router.post(
   '/user/login', 
   passport.authenticate('local'),
     function(req, res) { 
-      res.redirect('/dashboard/' + req.user.username);
+      res.redirect('/dashboard');
       console.log("logged in: " + req.user.username);
     });
 

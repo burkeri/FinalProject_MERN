@@ -50,7 +50,7 @@ export class Register extends Component {
     const { formErrors, registered } = this.state;
 
     return (
-      <Container id="registerBackground">
+      <Container>
         <Row>
           <Col md="6" xs="10" id="formContainer">
             <Form action="/user/register" method="POST">

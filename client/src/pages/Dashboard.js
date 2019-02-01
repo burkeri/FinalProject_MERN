@@ -8,11 +8,7 @@ import {
   Col,
   Card,
   CardBody,
-  CardTitle,
   CardText,
-  // CardTitle,
-  // CardImg,
-  // CardImgOverlay,
   Button,
   ListGroup,
   ListGroupItem,
@@ -140,7 +136,7 @@ class Dashboard extends Component {
         {/* Goal list */}
         <Row>
           <Col>
-            {/* <ListGroup>
+            <ListGroup>
               {this.state.goals.map(goal => (
                 <ListGroupItem key={goal._id} id="goalItem">
                   <ListGroupItemHeading>
@@ -172,7 +168,7 @@ class Dashboard extends Component {
                     </Button>
                 </ListGroupItem>
               ))}
-            </ListGroup> */}
+            </ListGroup>
           </Col>
         </Row>
       </Container>

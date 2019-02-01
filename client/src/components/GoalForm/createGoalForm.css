@@ -1,0 +1,22 @@
+#createForm {
+    background-color: rgb(255, 255, 255, .6);
+    padding: 10%;
+    border-radius: 20px;
+    font-size: 30px;
+    color: black;
+}
+
+#catBtn {
+    background-color: #D66D75;
+    border: none;
+    margin: 2%;
+}
+
+#createBtn {
+    background-color: #D66D75;
+    border: none;
+}
+
+#name, #frequency {
+    border: none;
+}

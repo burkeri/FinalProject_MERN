@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Col, Row, Button } from "reactstrap";
 // import { Col, Row } from "../components/Grid";
-import styled from "styled-components";
+// import styled from "styled-components";
 import MaterialIcon from "material-icons-react";
 import "./landing.css";
 

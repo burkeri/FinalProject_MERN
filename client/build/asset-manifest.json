@@ -1,13 +1,16 @@
 {
-  "main.js": "/static/js/main.89a7a989.chunk.js",
-  "main.js.map": "/static/js/main.89a7a989.chunk.js.map",
-  "static/css/1.52426ae0.chunk.css": "/static/css/1.52426ae0.chunk.css",
-  "static/js/1.508a6be9.chunk.js": "/static/js/1.508a6be9.chunk.js",
-  "static/js/1.508a6be9.chunk.js.map": "/static/js/1.508a6be9.chunk.js.map",
+  "main.css": "/static/css/main.5eed41a6.chunk.css",
+  "main.js": "/static/js/main.2e9b401e.chunk.js",
+  "main.js.map": "/static/js/main.2e9b401e.chunk.js.map",
+  "static/css/1.5e50b390.chunk.css": "/static/css/1.5e50b390.chunk.css",
+  "static/js/1.bb28ba56.chunk.js": "/static/js/1.bb28ba56.chunk.js",
+  "static/js/1.bb28ba56.chunk.js.map": "/static/js/1.bb28ba56.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.229c360f.js",
   "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/css/1.52426ae0.chunk.css.map": "/static/css/1.52426ae0.chunk.css.map",
+  "static/css/main.5eed41a6.chunk.css.map": "/static/css/main.5eed41a6.chunk.css.map",
+  "static/media/fonticonpicker.base-theme.react.css": "/static/media/fontIconPicker.a86caa7e.ttf",
+  "static/css/1.5e50b390.chunk.css.map": "/static/css/1.5e50b390.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.1be1b3dcbf799ecab8fae5a2ea99b5f2.js": "/precache-manifest.1be1b3dcbf799ecab8fae5a2ea99b5f2.js",
+  "precache-manifest.905d3a8723893e6d6cb6d63e63744f83.js": "/precache-manifest.905d3a8723893e6d6cb6d63e63744f83.js",
   "service-worker.js": "/service-worker.js"
 }

@@ -113,12 +113,11 @@ class Dashboard extends Component {
                 <CardText>
                   <h3 id="text">
                     "If you want to accomplish the goals of your life, you have to
-                    begin with the spirit."
-                    <br />
-                    <hr />
-                    <br />
-                    Oprah Winfrey
-                  </h3>
+                    begin with the spirit."</h3>
+                  <br></br>
+                  <hr></hr>
+                  <br></br>
+                  <h3>Oprah Winfrey</h3>
                 </CardText>
               </CardBody>
             </Card>
@@ -141,7 +140,7 @@ class Dashboard extends Component {
         {/* Goal list */}
         <Row>
           <Col>
-            <ListGroup>
+            {/* <ListGroup>
               {this.state.goals.map(goal => (
                 <ListGroupItem key={goal._id} id="goalItem">
                   <ListGroupItemHeading>
@@ -171,10 +170,9 @@ class Dashboard extends Component {
                     >
                       Finish
                     </Button>
-
                 </ListGroupItem>
               ))}
-            </ListGroup>
+            </ListGroup> */}
           </Col>
         </Row>
       </Container>

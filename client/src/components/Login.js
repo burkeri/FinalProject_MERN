@@ -7,7 +7,7 @@ export class Login extends Component {
     return (
       <Container id="loginBackground">
         <Row>
-          <Col>
+          <Col md="6" xs="10" id="formContainer">
             <Form action="/user/login" method="POST">
               <FormGroup>
                 <Label for="usernameLogin">Username</Label>
@@ -19,7 +19,7 @@ export class Login extends Component {
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="passowrdLogin">Password</Label>
+                <Label for="passwordLogin">Password</Label>
                 <Input
                   className="form-control"
                   type="password"
@@ -27,7 +27,7 @@ export class Login extends Component {
                   id="passwordLogin"
                 />
               </FormGroup>
-              <Button type="submit">Login</Button>
+              <Button id="formButton" type="submit">Login</Button>
             </Form>
           </Col>
         </Row>

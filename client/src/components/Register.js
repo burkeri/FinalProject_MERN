@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import axios from "axios";
+import "./register.css";
 
 export class Register extends Component {
   state = {
@@ -49,101 +50,108 @@ export class Register extends Component {
     const { formErrors, registered } = this.state;
 
     return (
-      <Form action="/user/register" method="POST">
-        <FormGroup>
-          <Label for="nameReg">Name</Label>
-          <Input
-            className="form-control"
-            type="text"
-            name="name"
-            id="nameReg"
-            value={this.state.name}
-            onChange={this.handleInputChange}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="usernameReg">Username</Label>
-          <Input
-            className="form-control"
-            type="text"
-            name="username"
-            id="usernameReg"
-            value={this.state.username}
-            onChange={this.handleInputChange}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="emailReg">Email</Label>
-          <Input
-            className="form-control"
-            type="email"
-            name="email"
-            id="emailReg"
-            value={this.state.email}
-            onChange={this.handleInputChange}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="dobReg">Date of Birth</Label>
-          <Input
-            className="form-control"
-            type="date"
-            name="dob"
-            id="dobReg"
-            value={this.state.dob}
-            onChange={this.handleInputChange}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="passwordReg">Password</Label>
-          <Input
-            className="form-control"
-            type="password"
-            name="password"
-            id="passwordReg"
-            value={this.state.password}
-            onChange={this.handleInputChange}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="confirmPasswordReg">Confirm Password</Label>
-          <Input
-            className="form-control"
-            type="password"
-            name="password2"
-            id="confirmPasswordReg"
-            value={this.state.password2}
-            onChange={this.handleInputChange}
-          />
-        </FormGroup>
+      <Container id="registerBackground">
+        <Row>
+          <Col md="6" xs="10" id="formContainer">
+            <Form action="/user/register" method="POST">
+              <FormGroup>
+                <Label for="nameReg">Name</Label>
+                <Input
+                  className="form-control"
+                  type="text"
+                  name="name"
+                  id="nameReg"
+                  value={this.state.name}
+                  onChange={this.handleInputChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="usernameReg">Username</Label>
+                <Input
+                  className="form-control"
+                  type="text"
+                  name="username"
+                  id="usernameReg"
+                  value={this.state.username}
+                  onChange={this.handleInputChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="emailReg">Email</Label>
+                <Input
+                  className="form-control"
+                  type="email"
+                  name="email"
+                  id="emailReg"
+                  value={this.state.email}
+                  onChange={this.handleInputChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="dobReg">Date of Birth</Label>
+                <Input
+                  className="form-control"
+                  type="date"
+                  name="dob"
+                  id="dobReg"
+                  value={this.state.dob}
+                  onChange={this.handleInputChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="passwordReg">Password</Label>
+                <Input
+                  className="form-control"
+                  type="password"
+                  name="password"
+                  id="passwordReg"
+                  value={this.state.password}
+                  onChange={this.handleInputChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="confirmPasswordReg">Confirm Password</Label>
+                <Input
+                  className="form-control"
+                  type="password"
+                  name="password2"
+                  id="confirmPasswordReg"
+                  value={this.state.password2}
+                  onChange={this.handleInputChange}
+                />
+              </FormGroup>
 
-        {formErrors.length > 1 &&
-          formErrors.map(formError => (
-            <div
-              className="alert alert-danger alert-dismissible fade show"
-              role="alert"
-            >
-              {formError.msg}
-            </div>
-          ))}
+              {formErrors.length > 1 &&
+                formErrors.map(formError => (
+                  <div
+                    className="alert alert-danger alert-dismissible fade show"
+                    role="alert"
+                  >
+                    {formError.msg}
+                  </div>
+                ))}
 
-        {registered.length > 1 &&
-          registered.map(success => (
-            <div
-              className="alert alert-success alert-dismissible fade show"
-              role="alert"
-            >
-              {success.msg}
-            </div>
-          ))}
+              {registered.length > 1 &&
+                registered.map(success => (
+                  <div
+                    className="alert alert-success alert-dismissible fade show"
+                    role="alert"
+                  >
+                    {success.msg}
+                  </div>
+                ))}
 
-        <Button
-          type="submit"
-          onClick={this.handleFormSumbit}
-        >
-          Register
-        </Button>
-      </Form>
+              <Button
+                id="formButton"
+                type="submit"
+                onClick={this.handleFormSumbit}
+              >
+                Register
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

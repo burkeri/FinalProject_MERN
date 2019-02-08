@@ -1,11 +1,21 @@
-import React from 'react';
+import React, {Component} from "react";
 // import API from '../utils/API';
 
-function Details (props) {
-  console.log(props);
-  return (
-    <h1>Details</h1>
-  );
+class Details extends Component {
+
+    componentDidMount() {
+        console.log(this.props);
+    }
+
+
+    render() {
+        return (
+            <div>
+                <h1>Details</h1>
+                <p>Choice: {this.props.userChoiceID}</p>
+            </div>
+        );
+    }
 }
 
 export default Details;

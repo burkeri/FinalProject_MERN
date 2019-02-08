@@ -16,30 +16,30 @@ import Details from "./pages/Details";
 import AddGoalCreate from "./pages/AddGoalCreate";
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-        // this.getGoals = this.getGoals.bind(this);
-        // this.handleUserChoice = this.handleUserChoice.bind(this);
-        this.state = {
-            userChoiceID: '',
-            username: 'Mangoman42',
-            goals: []
-        };
-    }
+    state = {
+        userChoiceID: "",
+        username: "Mangoman42",
+        goals: []
+    };
 
     componentDidMount() {
         this.getGoals();
+        console.log(this.state);
+        console.log(this.props);
     }
 
     getGoals = () => {
         API.getGoals()
             .then(res => {
-                this.setState({
-                    goals: res.data
-                }, () => {
-                    console.log(this.state.goals);
-                    console.log(`Goals state updated.`);
-                });
+                this.setState(
+                    {
+                        goals: res.data
+                    },
+                    () => {
+                        console.log(this.state.goals);
+                        console.log(`Goals state updated.`);
+                    }
+                );
             })
             .catch(err => console.log(err));
     };
@@ -51,35 +51,47 @@ class App extends Component {
     };
 
     render() {
+
         return (
             <Router>
                 <div>
                     <Switch>
-                        <Route exact path="/user/login" component={Login} />
+                        <Route 
+                            exact path="/user/login" 
+                            component={Login} 
+                        />
                         <Route
-                            exact
-                            path="/user/register"
+                            exact path="/user/register"
                             component={Register}
                         />
-                        <Route exact path="/user/profile" component={Profile} />
                         <Route 
-                            path="/dashboard"
-                            render={() => 
-                                <Dashboard 
+                            exact path="/user/profile"
+                            component={Profile} 
+                        />
+                        <Route
+                            exact path="/addgoalcreate"
+                            component={AddGoalCreate}
+                        />
+                        <Route
+                            exact path="/dashboard"
+                            render={() => (
+                                <Dashboard
                                     onClick={this.handleUserChoice}
                                     username={this.state.username}
-                                    goals={this.state.goals} 
+                                    goals={this.state.goals}
                                     getGoals={this.getGoals}
                                     handleUserChoice={this.handleUserChoice}
                                 />
-                            }
+                            )}
                         />
-                        <Route
-                            exact
-                            path="/addgoalcreate"
-                            component={AddGoalCreate}
+                        <Route 
+                            exact path="/details" 
+                            render={() => (
+                                <Details
+                                    userChoiceID={this.state.userChoiceID}
+                                />
+                            )}
                         />
-                        <Route exact path="/details" component={Details} />
                         {/* Landing page and 404 */}
                         <Route exact path="/" component={Landing} />
                         <Route component={NoMatch} />

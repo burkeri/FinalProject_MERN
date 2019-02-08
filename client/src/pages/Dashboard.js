@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import API from "../utils/API";
 // style
 import "./dashboard.css";
@@ -30,8 +31,8 @@ class Dashboard extends Component {
     }*/
 
     componentDidMount() {
-        console.log(`Passed props:`);
-        console.log(this.props);
+        // console.log(`Passed props:`);
+        // console.log(this.props);
     }
 
     handleDeleteBook = id => {
@@ -118,9 +119,9 @@ class Dashboard extends Component {
                         <p className="text-center">Goals:</p>
                         <hr />
                         <div className="text-center mb-2">
-                            <Button id="addGoal" href="/addgoalcreate">
-                                Add Goal
-                            </Button>
+                            <Link to="/addgoalcreate">
+                                <Button id="addGoal">Add Goal</Button>
+                            </Link>
                         </div>
                     </Col>
                 </Row>
@@ -132,12 +133,18 @@ class Dashboard extends Component {
                             {this.props.goals.map(goal => (
                                 <ListGroupItem key={goal._id} id="goalItem">
                                     <ListGroupItemHeading>
-                                        <Button
-                                            id="goalIcon"
-                                            onClick={() => this.props.handleUserChoice(goal._id)}
-                                        >
-                                            <i className={goal.icon} />
-                                        </Button>
+                                        <Link to="/details">
+                                            <Button
+                                                id="goalIcon"
+                                                onClick={() =>
+                                                    this.props.handleUserChoice(
+                                                        goal._id
+                                                    )
+                                                }
+                                            >
+                                                <i className={goal.icon} />
+                                            </Button>
+                                        </Link>
                                         {goal.name}
                                         <Button
                                             close
@@ -149,7 +156,10 @@ class Dashboard extends Component {
                                         />
                                     </ListGroupItemHeading>
                                     <div>
-                                        <p>Frequency: {goal.frequency} times per week</p>
+                                        <p>
+                                            Frequency: {goal.frequency} times
+                                            per week
+                                        </p>
                                         <span>Progress:</span>
                                         <div className="text-center">
                                             {goal.progress} of {goal.frequency}

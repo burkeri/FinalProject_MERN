@@ -42,10 +42,10 @@ class Dashboard extends Component {
             .catch(err => console.log(err));
     };
 
-    handleUpdateGoal = (id, prog) => {
-        console.log(`Goal ID to update: ${id}`);
-        console.log(`Goal's progress: ${prog}`);
-        API.updateGoal(id, prog + 1)
+    handleUpdateProgress = (id, prog) => {
+        // console.log(`Goal ID to update: ${id}`);
+        // console.log(`Goal's progress: ${prog}`);
+        API.updateProgress(id, prog + 1)
             .then(this.props.getGoals)
             .catch(err => console.log(err));
     };
@@ -174,7 +174,7 @@ class Dashboard extends Component {
                                     <Button
                                         id="finishGoal"
                                         onClick={() =>
-                                            this.handleUpdateGoal(
+                                            this.handleUpdateProgress(
                                                 goal._id,
                                                 goal.progress
                                             )

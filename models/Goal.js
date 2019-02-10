@@ -24,7 +24,8 @@ const goalSchema = new Schema({
       required: true 
     },
   description: {
-      type: String
+      type: String,
+      default: "Description Here..."
     },
   progress: { 
       type: Number, 

@@ -84,6 +84,7 @@ class App extends Component {
                                     userChoiceID={this.state.userChoiceID}
                                     username={this.state.username}
                                     userChoiceGoal={this.state.userChoiceGoal}
+                                    getGoals={this.getGoals}
                                 />
                             )}
                         />

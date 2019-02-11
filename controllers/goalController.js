@@ -31,16 +31,12 @@ module.exports = {
   update: (req, res) => {
     // console.log(req.body);
     Goal.findByIdAndUpdate(
-        { _id: req.params.id }, 
-        {
-            userID: req.body.userID,
-            category: req.body.category,
-            name: req.body.name,
-            icon: req.body.icon,
-            description: req.body.description
-        }, 
+        {_id: req.params.id}, 
+        req.body,
+        { new: true }, 
         (err, dbGoal) => {
         if (err) return res.status(500).send(err);
+        console.log(`Goal updated.`);
         console.log(dbGoal);
         return res.json(dbGoal);
         }

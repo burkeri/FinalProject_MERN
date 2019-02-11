@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import API from "../../utils/API";
 import FontIconPicker from "@fonticonpicker/react-fonticonpicker";
@@ -18,8 +19,8 @@ class GoalForm extends Component {
     };
 
     componentWillMount() {
-        console.log(`Goal form props:`);
-        console.log(this.props);
+        // console.log(`Goal form props:`);
+        // console.log(this.props);
         console.log(`Goal form state:`);
         console.log(this.state);
     }
@@ -45,10 +46,18 @@ class GoalForm extends Component {
     // runs the code after the submit button is clicked
     handleSubmit = event => {
         // event.preventDefault();
-        const { category, name, icon, frequency, description, username} = this.state;
+        const {
+            userChoiceID,
+            category,
+            name,
+            icon,
+            frequency,
+            description,
+            username
+        } = this.state;
 
         console.log(
-            `Goal name: ${name} \nCategory: ${category} \nIcon: ${icon} \nFrequency: ${frequency}`
+            `User ID: ${username} \nGoal name: ${name} \nCategory: ${category} \nIcon: ${icon} \nFrequency: ${frequency} \nDescription: ${description}`
         );
 
         const newGoal = {
@@ -60,7 +69,9 @@ class GoalForm extends Component {
             description: description
         };
 
-        (this.state.userChoiceID) ? API.updateGoal(newGoal) : API.createGoal(newGoal)
+        this.state.userChoiceID.length > 0
+            ? API.updateGoal(userChoiceID, newGoal)
+            : API.createGoal(newGoal);
     };
 
     render() {
@@ -150,9 +161,10 @@ class GoalForm extends Component {
                             type="select"
                             name="frequency"
                             id="frequency"
+                            value={this.state.frequency}
                             onChange={this.handleInputChange}
                         >
-                            <option>(times per week)</option>
+                            <option>Select</option>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -166,22 +178,24 @@ class GoalForm extends Component {
                     {/* Conditional Description textarea shows only if there's a userChoiceID */}
                     {this.state.userChoiceID.length > 0 && (
                         <FormGroup>
-                            <Label for="descText">Details/ Description:</Label>
+                            <Label for="description">Details/ Description:</Label>
                             <Input
                                 type="textarea"
                                 name="description"
-                                id="descText"
+                                id="description"
+                                value={this.state.description}
                                 onChange={this.handleInputChange}
                             />
                         </FormGroup>
                     )}
-                    <Button
-                        id="createBtn"
-                        onClick={this.handleSubmit}
-                        href="/dashboard"
-                    >
-                        Submit
-                    </Button>
+                    <Link to="/dashboard">
+                        <Button 
+                            id="createBtn" 
+                            onClick={this.handleSubmit}
+                        >
+                            Submit
+                        </Button>
+                    </Link>
                 </Form>
             </div>
         );

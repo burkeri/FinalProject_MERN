@@ -13,6 +13,7 @@ class AddGoalCreate extends Component {
                         userChoiceID={this.props.userChoiceID}
                         username={this.props.username}
                         userChoiceGoal={this.props.userChoiceGoal}
+                        getGoals={this.props.getGoals}
                     />
                 </Col>
             </Container>

@@ -19,7 +19,8 @@ class Details extends Component {
                     <GoalForm 
                         userChoiceID={this.props.userChoiceID}
                         username={this.props.username}
-                        userChoiceGoal={this.props.userChoiceGoal} 
+                        userChoiceGoal={this.props.userChoiceGoal}
+                        getGoals={this.props.getGoals}
                     />
                 </Col>
             </Container>

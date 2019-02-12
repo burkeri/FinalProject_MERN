@@ -30,11 +30,6 @@ class Dashboard extends Component {
       }));
     }*/
 
-    componentDidMount() {
-        // console.log(`Passed props:`);
-        // console.log(this.props);
-    }
-
     handleDeleteBook = id => {
         // console.log(`Goal ID to delete: ${id}`);
         API.deleteGoal(id)
@@ -156,11 +151,9 @@ class Dashboard extends Component {
                                         />
                                     </ListGroupItemHeading>
                                     <div>
-                                        <p>
-                                            Frequency: {goal.frequency} times
-                                            per week
-                                        </p>
-                                        <span>Progress:</span>
+                                        <p>Frequency: {goal.frequency} times per week</p>
+                                        <p>Description: {goal.description}</p>
+                                        <p>Progress:</p>
                                         <div className="text-center">
                                             {goal.progress} of {goal.frequency}
                                         </div>

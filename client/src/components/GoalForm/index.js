@@ -70,8 +70,8 @@ class GoalForm extends Component {
         };
 
         this.state.userChoiceID.length > 0
-            ? API.updateGoal(userChoiceID, newGoal)
-            : API.createGoal(newGoal);
+            ? API.updateGoal(userChoiceID, newGoal).then(this.props.getGoals()).catch(err => console.log(err))
+            : API.createGoal(newGoal).then(this.props.getGoals()).catch(err => console.log(err))
     };
 
     render() {

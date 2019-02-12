@@ -2,9 +2,9 @@
 import axios from "axios";
 
 export default {
-    // get all the goals
-    getGoals: () => {
-        return axios.get("api/goal");
+    // get all the goals of the user
+    getGoals: username => {
+        return axios.get("api/goal/" + username);
     },
 
     // save a goal to the database

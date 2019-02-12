@@ -2,7 +2,7 @@ const Goal = require("../models/Goal");
 
 module.exports = {
   findAll: (req, res) => {
-    Goal.find({})
+    Goal.find({ userID: req.params.username })
       .then(dbGoals => {
         res.json(dbGoals);
       })

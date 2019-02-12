@@ -1,10 +1,12 @@
 // dependencies
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
 // models
 const User = require("../models/User");
 
 module.exports = {
+
   // register/create new user ------
   registerUser: function(req, res) {
     let { name, username, email, password, password2, dob } = req.body;
@@ -95,7 +97,16 @@ module.exports = {
   },
 
   // handle login ------
-  handleLogin: function() {
+  // handleLogin: () => {
+  //   passport.authenticate('local', {
+  //     successRedirect: "/dashboard",
+  //     failureRedirect: "/"
+  //   });
+  // },
 
+  // handle logout ------
+  handleLogout: function(req, res,) {
+    console.log("TEST");
   }
+
 };

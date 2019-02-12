@@ -1,11 +1,7 @@
 // dependencies
 const path = require("path");
 const router = require("express").Router();
-const userRoutes = require("./user");
 const goalRoutes = require("./goal");
-
-// user routes
-// router.use("/user/register", userRoutes);
 
 // goal routes
 router.use("/goal", goalRoutes);

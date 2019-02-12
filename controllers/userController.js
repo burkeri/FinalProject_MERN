@@ -97,12 +97,24 @@ module.exports = {
   },
 
   // handle login ------
-  // handleLogin: () => {
-  //   passport.authenticate('local', {
-  //     successRedirect: "/dashboard",
-  //     failureRedirect: "/"
-  //   });
-  // },
+  handleLogin: function(req, res, next) {
+    passport.authenticate("local", function(err, user, info) {
+      let loginErrors = [];
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        loginErrors.push(info.message);
+        res.redirect("/");
+      }
+      req.logIn(user, function(err) {
+        if (err) {
+          return next(err);
+        }
+        return res.redirect("/dashboard");
+      });
+    })(req, res, next);
+  },
 
   // handle logout ------
   handleLogout: function(req, res,) {

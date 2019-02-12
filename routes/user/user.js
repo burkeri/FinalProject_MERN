@@ -7,14 +7,10 @@ const userController = require("../../controllers/userController");
 router.route("/regsiter").post(userController.registerUser);
 
 // user - login
-router.post("/login", 
-    passport.authenticate("local", {
-        successRedirect: "/dashboard",
-        failureRedirect: "/user/login"
-    }));
+router.route("/login").post(userController.handleLogin);
 
 // user - logout
-router.route("/logout").post(userController.handleLogout);
+// router.use("/logout").getuserController.handleLogout);
 
 // dashboard
 // router.get("/dashboard/", ensureAuthenticated, (req, res) => {

@@ -13,22 +13,35 @@ import {
     CardBody,
     CardText,
     Button,
+    Input,
     ListGroup,
     ListGroupItem,
     ListGroupItemHeading,
-    Progress
+    Progress,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    ModalFooter
 } from "reactstrap";
 
 class Dashboard extends Component {
-    /*state = {
-        dropdownOpen: false,
+    state = {
+        modal: false,
+        unmountOnClose: false
+        // dropdownOpen: false,
     };
 
-    toggle() {
-      this.setState(prevState => ({
-        dropdownOpen: !prevState.dropdownOpen
-      }));
-    }*/
+    toggleModal = () => {
+        this.setState(prevState => ({
+            modal: !prevState.modal
+        }));
+    }
+
+    // toggle() {
+    //   this.setState(prevState => ({
+    //     dropdownOpen: !prevState.dropdownOpen
+    //   }));
+    // }
 
     handleDeleteBook = id => {
         // console.log(`Goal ID to delete: ${id}`);
@@ -102,6 +115,7 @@ class Dashboard extends Component {
                                     <hr />
                                     <br />
                                     <h3>Oprah Winfrey</h3> */}
+                                    <Button>Social!</Button>
                                 </CardText>
                             </CardBody>
                         </Card>
@@ -151,7 +165,10 @@ class Dashboard extends Component {
                                         />
                                     </ListGroupItemHeading>
                                     <div>
-                                        <p>Frequency: {goal.frequency} times per week</p>
+                                        <p>
+                                            Frequency: {goal.frequency} times
+                                            per week
+                                        </p>
                                         <p>Description: {goal.description}</p>
                                         <p>Progress:</p>
                                         <div className="text-center">
@@ -164,14 +181,10 @@ class Dashboard extends Component {
                                         />
                                     </div>
                                     <br />
+                                    {/* onClick={() => this.handleUpdateProgress(goal._id, goal.progress)} */}
                                     <Button
                                         id="finishGoal"
-                                        onClick={() =>
-                                            this.handleUpdateProgress(
-                                                goal._id,
-                                                goal.progress
-                                            )
-                                        }
+                                        onClick={this.toggleModal}
                                     >
                                         Finish
                                     </Button>
@@ -180,6 +193,26 @@ class Dashboard extends Component {
                         </ListGroup>
                     </Col>
                 </Row>
+
+                {/* Modal content */}
+                <Modal
+                    isOpen={this.state.modal}
+                    toggleModal={this.toggleModal}
+                >
+                    <ModalHeader toggleModal={this.toggleModal}>Great job! You made progress!</ModalHeader>
+                    <ModalBody>
+                        <p>Why not make a note of the occasion? (optional)</p>
+                        <Input type="textarea" placeholder="How you feel afterwards? Etc..." rows={4} />
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button id="finishGoal" onClick={this.toggleModal}>
+                            Finish
+                        </Button>{" "}
+                        <Button color="warning" onClick={this.toggleModal}>
+                            Cancel
+                        </Button>
+                    </ModalFooter>
+                </Modal>
             </Container>
         );
     }

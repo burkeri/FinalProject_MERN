@@ -9,8 +9,10 @@ router.route('/')
 // Matches with "/api/goal/:id"
 router.route("/:id")
   .get(goalController.findById)
+  .put(goalController.update)
   .delete(goalController.remove);
 
+// Matches with "/api/goal/:id/:prog"
 router.route("/:id/:prog")
-  .put(goalController.update);
+  .put(goalController.updateProgress);
 module.exports = router;

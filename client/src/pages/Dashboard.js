@@ -30,11 +30,6 @@ class Dashboard extends Component {
       }));
     }*/
 
-    componentDidMount() {
-        // console.log(`Passed props:`);
-        // console.log(this.props);
-    }
-
     handleDeleteBook = id => {
         // console.log(`Goal ID to delete: ${id}`);
         API.deleteGoal(id)
@@ -42,10 +37,10 @@ class Dashboard extends Component {
             .catch(err => console.log(err));
     };
 
-    handleUpdateGoal = (id, prog) => {
-        console.log(`Goal ID to update: ${id}`);
-        console.log(`Goal's progress: ${prog}`);
-        API.updateGoal(id, prog + 1)
+    handleUpdateProgress = (id, prog) => {
+        // console.log(`Goal ID to update: ${id}`);
+        // console.log(`Goal's progress: ${prog}`);
+        API.updateProgress(id, prog + 1)
             .then(this.props.getGoals)
             .catch(err => console.log(err));
     };
@@ -156,11 +151,9 @@ class Dashboard extends Component {
                                         />
                                     </ListGroupItemHeading>
                                     <div>
-                                        <p>
-                                            Frequency: {goal.frequency} times
-                                            per week
-                                        </p>
-                                        <span>Progress:</span>
+                                        <p>Frequency: {goal.frequency} times per week</p>
+                                        <p>Description: {goal.description}</p>
+                                        <p>Progress:</p>
                                         <div className="text-center">
                                             {goal.progress} of {goal.frequency}
                                         </div>
@@ -174,7 +167,7 @@ class Dashboard extends Component {
                                     <Button
                                         id="finishGoal"
                                         onClick={() =>
-                                            this.handleUpdateGoal(
+                                            this.handleUpdateProgress(
                                                 goal._id,
                                                 goal.progress
                                             )

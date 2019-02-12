@@ -29,13 +29,13 @@ class App extends Component {
     };
 
     componentDidMount() {
-        this.getGoals();
+        this.getGoals(this.state.username);
         // console.log(this.state);
         // console.log(this.props);
     }
 
-    getGoals = () => {
-        API.getGoals()
+    getGoals = (username) => {
+        API.getGoals(username)
             .then(res => {
                 this.setState(
                     {

@@ -6,10 +6,6 @@ import "./createGoal.css";
 
 class Details extends Component {
 
-    // componentWillUpdate() {
-    //     console.log(this.props);
-    // }
-
     render() {
         return (
             <Container id="CGFbackground">

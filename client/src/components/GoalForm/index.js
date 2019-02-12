@@ -56,9 +56,9 @@ class GoalForm extends Component {
             username
         } = this.state;
 
-        console.log(
-            `User ID: ${username} \nGoal name: ${name} \nCategory: ${category} \nIcon: ${icon} \nFrequency: ${frequency} \nDescription: ${description}`
-        );
+        // console.log(
+        //     `User ID: ${username} \nGoal name: ${name} \nCategory: ${category} \nIcon: ${icon} \nFrequency: ${frequency} \nDescription: ${description}`
+        // );
 
         const newGoal = {
             userID: username,
@@ -70,8 +70,8 @@ class GoalForm extends Component {
         };
 
         this.state.userChoiceID.length > 0
-            ? API.updateGoal(userChoiceID, newGoal).then(this.props.getGoals()).catch(err => console.log(err))
-            : API.createGoal(newGoal).then(this.props.getGoals()).catch(err => console.log(err))
+            ? API.updateGoal(userChoiceID, newGoal).then(this.props.getGoals(this.props.username)).catch(err => console.log(err))
+            : API.createGoal(newGoal).then(this.props.getGoals(this.props.username)).catch(err => console.log(err))
     };
 
     render() {

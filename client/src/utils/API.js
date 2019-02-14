@@ -12,9 +12,9 @@ export default {
         return axios.post("/api/goal", goalData);
     },
     // update a goal's progress w/ the matching ID
-    updateProgress: (id, prog) => {
-        return axios.put("/api/goal/" + id + "/" + prog);
-    },
+    // updateProgress: (id, prog) => {
+    //     return axios.put("/api/goal/" + id + "/" + prog);
+    // },
     // update a goal w/ the matching ID
     updateGoal: (id, goalData) => {
         return axios.put("api/goal/" + id, goalData);

@@ -21,10 +21,10 @@ module.exports = {
     const newGoal = new Goal(req.body);
 
     // enter data into the database
-    newGoal.save(err => {
+    newGoal.save((err, dbGoal) => {
       if (err) return res.status(500).send(err);
       console.log(`Goal created.`);
-      return res.json(newGoal);
+      return res.json(dbGoal);
     });
   },
 
@@ -44,7 +44,11 @@ module.exports = {
             if (req.body.note) dbGoal.notes.push({ body: req.body.note });
 
             // Save the updated goal to the DB
-            dbGoal.save();
+            dbGoal.save((err, updatedGoal) => {
+                if (err) return res.status(500).send(err);
+                console.log(`Goal updated.`);
+                return res.json(updatedGoal);
+            });
         })
         // Catch any errors in finding the goal
         .catch(err => res.status(422).json(err));

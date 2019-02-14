@@ -15,5 +15,5 @@ router
     .delete(goalController.remove);
 
 // Matches with "/api/goal/:id/:prog"
-router.route("/:id/:prog").put(goalController.updateProgress);
+// router.route("/:id/:prog").put(goalController.updateProgress);
 module.exports = router;

@@ -45,7 +45,6 @@ class GoalForm extends Component {
 
     // runs the code after the submit button is clicked
     handleSubmit = event => {
-        // event.preventDefault();
         const {
             userChoiceID,
             category,
@@ -56,11 +55,7 @@ class GoalForm extends Component {
             username
         } = this.state;
 
-        // console.log(
-        //     `User ID: ${username} \nGoal name: ${name} \nCategory: ${category} \nIcon: ${icon} \nFrequency: ${frequency} \nDescription: ${description}`
-        // );
-
-        const newGoal = {
+        const goalData = {
             userID: username,
             category: category,
             name: name,
@@ -70,8 +65,8 @@ class GoalForm extends Component {
         };
 
         this.state.userChoiceID.length > 0
-            ? API.updateGoal(userChoiceID, newGoal).then(this.props.getGoals(this.props.username)).catch(err => console.log(err))
-            : API.createGoal(newGoal).then(this.props.getGoals(this.props.username)).catch(err => console.log(err))
+            ? API.updateGoal(userChoiceID, goalData).then(() => this.props.getGoals(this.props.username)).catch(err => console.log(err))
+            : API.createGoal(goalData).then(() => this.props.getGoals(this.props.username)).catch(err => console.log(err))
     };
 
     render() {

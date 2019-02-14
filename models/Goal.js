@@ -1,7 +1,19 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// Create the schema
+// Create a schema for the notes that will go into each goal
+const noteSchema = new Schema({
+    body: {
+        type: String,
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    } 
+});
+
+// Create the schema for goals
 const goalSchema = new Schema({
     userID: {
         type: String,
@@ -28,7 +40,7 @@ const goalSchema = new Schema({
         default: "Description Here..."
     },
     notes: {
-        type: [String]
+        type: [noteSchema]
     },
     progress: {
         type: Number,

@@ -1,6 +1,6 @@
 // dependencies
 const express = require("express");
-const path = require("path");
+const session = require("express-session");
 const mongoose = require("mongoose");
 const passport = require("passport");
 require("./config/passport")(passport);
@@ -21,6 +21,12 @@ if (process.env.NODE_ENV === "production") {
 // bodyparser
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(session({ 
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true } 
+}));
 // passport
 app.use(passport.initialize());
 app.use(passport.session());

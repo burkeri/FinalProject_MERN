@@ -17,9 +17,5 @@ export default {
   // delete a goal with the matching ID
   deleteGoal: id => {
     return axios.delete("/api/goal/" + id);
-  },
-  // logout user
-  logoutUser: () => {
-    
   }
 };

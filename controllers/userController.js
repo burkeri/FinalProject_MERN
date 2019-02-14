@@ -104,14 +104,23 @@ module.exports = {
         return next(err);
       }
       if (!user) {
-        loginErrors.push(info.message);
-        res.redirect("/");
+        // loginErrors.push(info.message);
+        // req.session.messages = info.message;
+        console.log("\n\n message:" + info.message + "\n\n" );
+        console.log("\n\n session:" + req.session + "\n\n" );
+        res.redirect("/user/login");
       }
       req.logIn(user, function(err) {
         if (err) {
           return next(err);
         }
-        return res.redirect("/dashboard");
+        let loggedInUser = req.user;
+        console.log("\n\n user: " + JSON.stringify(req.user) + "\n\n" );
+        // return res.redirect("/dashboard");
+        // return res.redirect("/dashboard").send(loggedInUser);
+        // res.send(loggedInUser);
+        console.log(req.session.passport.user);
+        res.redirect("/dashboard");
       });
     })(req, res, next);
   },

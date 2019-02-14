@@ -25,7 +25,7 @@ class App extends Component {
     componentDidMount() {
         this.getGoals();
         console.log(this.state);
-        console.log(this.props);
+        console.log(this.props);  
     }
 
     getGoals = () => {
@@ -73,7 +73,7 @@ class App extends Component {
                             component={AddGoalCreate}
                         />
                         <Route
-                            exact path="/dashboard"
+                            path="/dashboard"
                             render={() => (
                                 <Dashboard
                                     onClick={this.handleUserChoice}

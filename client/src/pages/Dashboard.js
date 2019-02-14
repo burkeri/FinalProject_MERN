@@ -37,6 +37,7 @@ class Dashboard extends Component {
   componentDidMount() {
     // console.log(`Passed props:`);
     // console.log(this.props);
+    
   }
 
   handleDeleteBook = id => {

@@ -1,10 +1,12 @@
 // dependencies
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
 // models
 const User = require("../models/User");
 
 module.exports = {
+
   // register/create new user ------
   registerUser: function(req, res) {
     let { name, username, email, password, password2, dob } = req.body;
@@ -95,7 +97,32 @@ module.exports = {
   },
 
   // handle login ------
-  handleLogin: function() {
+  handleLogin: function(req, res, next) {
+    passport.authenticate("local", function(err, user, info) {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        req.session.messages = info.message;
+        // console.log("\n\n message:" + info.message + "\n\n" );
+        // console.log("\n\n session:" + JSON.stringify(req.session.info.message )+ "\n\n" );
+        res.redirect("/user/login");
+        console.log(req.session);
+      }
+      req.logIn(user, function(err) {
+        if (err) {
+          return next(err);
+        }
+        res.redirect("/dashboard");
+        console.log("\nsession:");
+        console.log(req.session);
+      });
+    })(req, res, next);
+  },
 
+  // handle logout ------
+  handleLogout: function(req, res,) {
+    console.log("TEST");
   }
+
 };

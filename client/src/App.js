@@ -28,7 +28,7 @@ class App extends Component {
         goals: []
     };
 
-    componentDidMount() {
+    componentDidMount() {  
         this.getGoals(this.state.username);
         // console.log(this.state);
         // console.log(this.props);
@@ -89,7 +89,7 @@ class App extends Component {
                             )}
                         />
                         <Route
-                            exact path="/dashboard"
+                            path="/dashboard"
                             render={() => (
                                 <Dashboard
                                     onClick={this.handleUserChoice}

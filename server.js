@@ -1,13 +1,11 @@
 // dependencies
 const express = require("express");
-const path = require("path");
+const session = require("express-session");
 const mongoose = require("mongoose");
 const passport = require("passport");
 require("./config/passport")(passport);
 const routes = require("./routes");
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/finalProj";
-const User = require("./models/User");
-const Goal = require("./models/Goal");
 
 // server port
 const PORT = process.env.PORT || 3001;
@@ -23,6 +21,12 @@ if (process.env.NODE_ENV === "production") {
 // bodyparser
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(session({ 
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true } 
+}));
 // passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -38,30 +42,6 @@ mongoose
   )
   .then(() => {
     console.log("db connected...");
-    // create a test user and save to DB
-      // const testUser = new User({
-      //   name: "test",
-      //   username: "tester",
-      //   email: "test@email.com",
-      //   password: "test",
-      //   dob: "01/01/1111",
-      //   premium: "true"
-      // });
-      // testUser.save(err => err ? console.log(err) : console.log(`testUser saved.`));
-    // create a test goal and save to the DB
-      // const testGoal = new Goal({
-      //   userID: "tester",
-      //   category: "mind",
-      //   icon: "iconURL",
-      //   name: "test",
-      //   frequency: 3,
-      //   description: "Test goal... Not real.",
-      //   progress: 50,
-      //   totalWeeks: 2,
-      //   streak: 2
-      // });
-      // testGoal.save(err => err ? console.log(err) : console.log(`testGoal saved.`));
-
   })
   .catch(err => console.log(err));
 

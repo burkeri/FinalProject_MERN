@@ -10,7 +10,7 @@ module.exports = {
   },
   
   findById: (req, res) => {
-    Goal.findOne({_id: req.params.id})
+    Goal.findOne(req.params.id)
         .then(dbGoal => {
             res.json(dbGoal);
         })
@@ -29,18 +29,37 @@ module.exports = {
   },
 
   update: (req, res) => {
-    // console.log(req.body);
-    Goal.findByIdAndUpdate(
-        {_id: req.params.id}, 
-        req.body,
-        { new: true }, 
-        (err, dbGoal) => {
-        if (err) return res.status(500).send(err);
-        console.log(`Goal updated.`);
-        console.log(dbGoal);
-        return res.json(dbGoal);
-        }
-    );
+
+    Goal.findOne({ _id: req.params.id})
+        .then(dbGoal => {
+
+            // Update the goal depending on the input data
+            if(req.body.userID) dbGoal.userID = req.body.userID;
+            if(req.body.category) dbGoal.category = req.body.category;
+            if(req.body.name) dbGoal.name = req.body.name;
+            if(req.body.icon) dbGoal.icon = req.body.icon;
+            if(req.body.frequency) dbGoal.frequency = req.body.frequency;
+            if(req.body.description) dbGoal.description = req.body.description;
+            if (req.body.progress) dbGoal.progress = req.body.progress;
+            if (req.body.note) dbGoal.notes.push({ body: req.body.note });
+
+            // Save the updated goal to the DB
+            dbGoal.save();
+        })
+        // Catch any errors in finding the goal
+        .catch(err => res.status(422).json(err));
+
+    // Goal.findByIdAndUpdate(
+    //     {_id: req.params.id}, 
+    //     req.body,
+    //     { new: true }, 
+    //     (err, dbGoal) => {
+    //     if (err) return res.status(500).send(err);
+    //     console.log(`Goal updated.`);
+    //     console.log(dbGoal);
+    //     return res.json(dbGoal);
+    //     }
+    // );
   },
 
   updateProgress: (req, res) => {

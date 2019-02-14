@@ -12,6 +12,8 @@ import {
     Card,
     CardBody,
     CardText,
+    Form,
+    Label,
     Button,
     Input,
     ListGroup,
@@ -27,33 +29,79 @@ import {
 class Dashboard extends Component {
     state = {
         modal: false,
-        unmountOnClose: false
-        // dropdownOpen: false,
+        goalID: "",
+        goalProg: 0,
+        goalNote: ""
     };
 
+    // Opens the modal
     toggleModal = () => {
         this.setState(prevState => ({
             modal: !prevState.modal
         }));
-    }
+    };
 
-    // toggle() {
-    //   this.setState(prevState => ({
-    //     dropdownOpen: !prevState.dropdownOpen
-    //   }));
-    // }
+    // Will reset the user goal choice state and close the modal
+    closeModal = () => {
+        this.setState(
+            {
+                goalID: "",
+                goalProg: 0,
+                goalNote: ""
+            },
+            () => {
+                console.log(`Dashboard State updated:`);
+                console.log(this.state);
+                this.toggleModal();
+            }
+        );
+    };
 
-    handleDeleteBook = id => {
-        // console.log(`Goal ID to delete: ${id}`);
-        API.deleteGoal(id)
-            .then(this.props.getGoals)
+    // Updates the values in the form inputs
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
+    };
+
+    // Updates the state of the user's goal choice to update
+    // and brings up the modal to add a note or just finish
+    handleUpdateChoice = (id, prog) => {
+        this.setState(
+            {
+                goalID: id,
+                goalProg: prog
+            },
+            () => {
+                console.log(`Dashboard State updated:`);
+                console.log(this.state);
+                this.toggleModal();
+            }
+        );
+    };
+
+    // Updates the progress and adds a note to the DB
+    // Then refresh the goals
+    handleUpdateProgress = event => {
+        const { goalID, goalProg, goalNote } = this.state;
+
+        const goalData = {
+            progress: goalProg + 1,
+            note: goalNote
+        };
+        // console.log(goalID);
+        // console.log(goalData);
+
+        API.updateGoal(goalID, goalData)
+            // Update the goals state in App and close the modal
+            .then(this.props.getGoals())
+            .then(this.toggleModal())
             .catch(err => console.log(err));
     };
 
-    handleUpdateProgress = (id, prog) => {
-        // console.log(`Goal ID to update: ${id}`);
-        // console.log(`Goal's progress: ${prog}`);
-        API.updateProgress(id, prog + 1)
+    // Deletes the chosen goal from the DB and refreshes the goals
+    handleDeleteBook = id => {
+        // console.log(`Goal ID to delete: ${id}`);
+        API.deleteGoal(id)
             .then(this.props.getGoals)
             .catch(err => console.log(err));
     };
@@ -179,12 +227,27 @@ class Dashboard extends Component {
                                             value={goal.progress}
                                             max={goal.frequency}
                                         />
+                                        <br />
+                                        {goal.notes.length > 0 && (
+                                            <div>
+                                                <p>Notes:</p>
+                                                <ul>
+                                                    {goal.notes.map(note => 
+                                                        <li>{note.createdAt}: {note.body}</li>
+                                                    )}
+                                                </ul>
+                                            </div>
+                                        )}
                                     </div>
                                     <br />
-                                    {/* onClick={() => this.handleUpdateProgress(goal._id, goal.progress)} */}
                                     <Button
                                         id="finishGoal"
-                                        onClick={this.toggleModal}
+                                        onClick={() =>
+                                            this.handleUpdateChoice(
+                                                goal._id,
+                                                goal.progress
+                                            )
+                                        }
                                     >
                                         Finish
                                     </Button>
@@ -195,20 +258,32 @@ class Dashboard extends Component {
                 </Row>
 
                 {/* Modal content */}
-                <Modal
-                    isOpen={this.state.modal}
-                    toggleModal={this.toggleModal}
-                >
-                    <ModalHeader toggleModal={this.toggleModal}>Great job! You made progress!</ModalHeader>
+                <Modal isOpen={this.state.modal}>
+                    <ModalHeader>Great job! You made progress!</ModalHeader>
                     <ModalBody>
-                        <p>Why not make a note of the occasion? (optional)</p>
-                        <Input type="textarea" placeholder="How you feel afterwards? Etc..." rows={4} />
+                        <Form>
+                            <Label for="goalNote">
+                                Why not make a note of the occasion? (optional)
+                            </Label>
+                            <Input
+                                id="goalNote"
+                                name="goalNote"
+                                type="textarea"
+                                placeholder="How you feel afterwards? Etc..."
+                                value={this.state.goalNote}
+                                onChange={this.handleInputChange}
+                                rows={4}
+                            />
+                        </Form>
                     </ModalBody>
                     <ModalFooter>
-                        <Button id="finishGoal" onClick={this.toggleModal}>
+                        <Button
+                            id="finishGoal"
+                            onClick={this.handleUpdateProgress}
+                        >
                             Finish
                         </Button>{" "}
-                        <Button color="warning" onClick={this.toggleModal}>
+                        <Button color="warning" onClick={this.closeModal}>
                             Cancel
                         </Button>
                     </ModalFooter>

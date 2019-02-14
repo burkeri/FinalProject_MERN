@@ -18,26 +18,32 @@ import AddGoalCreate from "./pages/AddGoalCreate";
 class App extends Component {
     state = {
         userChoiceID: "",
+        userChoiceGoal: {
+            name: "",
+            icon: "",
+            frequency: "",
+            description: ""
+        },
         username: "Mangoman42",
         goals: []
     };
 
-    componentDidMount() {
-        this.getGoals();
-        console.log(this.state);
-        console.log(this.props);  
+    componentDidMount() {  
+        this.getGoals(this.state.username);
+        // console.log(this.state);
+        // console.log(this.props);
     }
 
-    getGoals = () => {
-        API.getGoals()
+    getGoals = (username) => {
+        API.getGoals(username)
             .then(res => {
                 this.setState(
                     {
                         goals: res.data
                     },
                     () => {
+                        console.log(`Goals state:`);
                         console.log(this.state.goals);
-                        console.log(`Goals state updated.`);
                     }
                 );
             })
@@ -45,8 +51,11 @@ class App extends Component {
     };
 
     handleUserChoice = id => {
-        this.setState({ userChoiceID: id }, () => {
-            console.log(`State changed to: ${this.state.userChoiceID}`);
+        const goalIndex = this.state.goals.map(goal => goal._id).indexOf(id);
+        // console.log(`Chosen goal's index: ${goalIndex}`);
+        this.setState({ 
+            userChoiceID: id,
+            userChoiceGoal: this.state.goals[goalIndex]
         });
     };
 
@@ -70,7 +79,14 @@ class App extends Component {
                         />
                         <Route
                             exact path="/addgoalcreate"
-                            component={AddGoalCreate}
+                            render={() => (
+                                <AddGoalCreate
+                                    userChoiceID={this.state.userChoiceID}
+                                    username={this.state.username}
+                                    userChoiceGoal={this.state.userChoiceGoal}
+                                    getGoals={this.getGoals}
+                                />
+                            )}
                         />
                         <Route
                             path="/dashboard"
@@ -89,6 +105,9 @@ class App extends Component {
                             render={() => (
                                 <Details
                                     userChoiceID={this.state.userChoiceID}
+                                    username={this.state.username}
+                                    userChoiceGoal={this.state.userChoiceGoal}
+                                    getGoals={this.getGoals}
                                 />
                             )}
                         />

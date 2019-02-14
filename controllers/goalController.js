@@ -2,22 +2,24 @@ const Goal = require("../models/Goal");
 
 module.exports = {
   findAll: (req, res) => {
-    Goal.find({})
+    Goal.find({ userID: req.params.username })
       .then(dbGoals => {
-        // console.log(dbGoals);
         res.json(dbGoals);
       })
       .catch(err => res.status(422).json(err));
   },
   
   findById: (req, res) => {
-    //
+    Goal.findOne({_id: req.params.id})
+        .then(dbGoal => {
+            res.json(dbGoal);
+        })
+        .catch(err => res.status(422).json(err));
   },
 
   create: (req, res) => {
     const newGoal = new Goal(req.body);
-    // console.log(newGoal);
-    
+
     // enter data into the database
     newGoal.save(err => {
       if (err) return res.status(500).send(err);
@@ -27,8 +29,24 @@ module.exports = {
   },
 
   update: (req, res) => {
-    console.log(`ID to update: ${req.params.id}`);
-    console.log(`Progress to update: ${req.params.prog}`);
+    // console.log(req.body);
+    Goal.findByIdAndUpdate(
+        {_id: req.params.id}, 
+        req.body,
+        { new: true }, 
+        (err, dbGoal) => {
+        if (err) return res.status(500).send(err);
+        console.log(`Goal updated.`);
+        console.log(dbGoal);
+        return res.json(dbGoal);
+        }
+    );
+  },
+
+  updateProgress: (req, res) => {
+    // console.log(`ID to update: ${req.params.id}`);
+    // console.log(`Progress to update: ${req.params.prog}`);
+
     Goal.findByIdAndUpdate({_id: req.params.id}, {progress: req.params.prog}, (err, dbGoal) => {
       if (err) return res.status(500).send(err);
       return res.json(dbGoal);
@@ -36,7 +54,8 @@ module.exports = {
   },
 
   remove: (req, res) => {
-    console.log(`ID to remove: ${req.params.id}`);
+    // console.log(`ID to remove: ${req.params.id}`);
+
     Goal.findByIdAndDelete(req.params.id, (err, dbGoal) => {
       if (err) return res.status(500).send(err);
       return res.json(dbGoal);

@@ -34,26 +34,20 @@ class Dashboard extends Component {
     }));
   }
 
-  componentDidMount() {
-    // console.log(`Passed props:`);
-    // console.log(this.props);
-    
-  }
+    handleDeleteBook = id => {
+        // console.log(`Goal ID to delete: ${id}`);
+        API.deleteGoal(id)
+            .then(this.props.getGoals)
+            .catch(err => console.log(err));
+    };
 
-  handleDeleteBook = id => {
-    // console.log(`Goal ID to delete: ${id}`);
-    API.deleteGoal(id)
-      .then(this.props.getGoals)
-      .catch(err => console.log(err));
-  };
-
-  handleUpdateGoal = (id, prog) => {
-    console.log(`Goal ID to update: ${id}`);
-    console.log(`Goal's progress: ${prog}`);
-    API.updateGoal(id, prog + 1)
-      .then(this.props.getGoals)
-      .catch(err => console.log(err));
-  };
+    handleUpdateProgress = (id, prog) => {
+        // console.log(`Goal ID to update: ${id}`);
+        // console.log(`Goal's progress: ${prog}`);
+        API.updateProgress(id, prog + 1)
+            .then(this.props.getGoals)
+            .catch(err => console.log(err));
+    };
 
   render() {
     return (
@@ -119,58 +113,68 @@ class Dashboard extends Component {
           </Col>
         </Row>
 
-        {/* Goal list */}
-        <Row>
-          <Col>
-            <ListGroup>
-              {this.props.goals.map(goal => (
-                <ListGroupItem key={goal._id} id="goalItem">
-                  <ListGroupItemHeading>
-                    <Link to="/details">
-                      <Button
-                        id="goalIcon"
-                        onClick={() => this.props.handleUserChoice(goal._id)}
-                      >
-                        <i className={goal.icon} />
-                      </Button>
-                    </Link>
-                    {goal.name}
-                    <Button
-                      close
-                      color="danger"
-                      className="float-right"
-                      onClick={() => this.handleDeleteBook(goal._id)}
-                    />
-                  </ListGroupItemHeading>
-                  <div>
-                    <p>Frequency: {goal.frequency} times per week</p>
-                    <span>Progress:</span>
-                    <div className="text-center">
-                      {goal.progress} of {goal.frequency}
-                    </div>
-                    <Progress
-                      id="progressBar"
-                      value={goal.progress}
-                      max={goal.frequency}
-                    />
-                  </div>
-                  <br />
-                  <Button
-                    id="finishGoal"
-                    onClick={() =>
-                      this.handleUpdateGoal(goal._id, goal.progress)
-                    }
-                  >
-                    Finish
-                  </Button>
-                </ListGroupItem>
-              ))}
-            </ListGroup>
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
+                {/* Goal list */}
+                <Row>
+                    <Col>
+                        <ListGroup>
+                            {this.props.goals.map(goal => (
+                                <ListGroupItem key={goal._id} id="goalItem">
+                                    <ListGroupItemHeading>
+                                        <Link to="/details">
+                                            <Button
+                                                id="goalIcon"
+                                                onClick={() =>
+                                                    this.props.handleUserChoice(
+                                                        goal._id
+                                                    )
+                                                }
+                                            >
+                                                <i className={goal.icon} />
+                                            </Button>
+                                        </Link>
+                                        {goal.name}
+                                        <Button
+                                            close
+                                            color="danger"
+                                            className="float-right"
+                                            onClick={() =>
+                                                this.handleDeleteBook(goal._id)
+                                            }
+                                        />
+                                    </ListGroupItemHeading>
+                                    <div>
+                                        <p>Frequency: {goal.frequency} times per week</p>
+                                        <p>Description: {goal.description}</p>
+                                        <p>Progress:</p>
+                                        <div className="text-center">
+                                            {goal.progress} of {goal.frequency}
+                                        </div>
+                                        <Progress
+                                            id="progressBar"
+                                            value={goal.progress}
+                                            max={goal.frequency}
+                                        />
+                                    </div>
+                                    <br />
+                                    <Button
+                                        id="finishGoal"
+                                        onClick={() =>
+                                            this.handleUpdateProgress(
+                                                goal._id,
+                                                goal.progress
+                                            )
+                                        }
+                                    >
+                                        Finish
+                                    </Button>
+                                </ListGroupItem>
+                            ))}
+                        </ListGroup>
+                    </Col>
+                </Row>
+            </Container>
+        );
+    }
 }
 
 export default Dashboard;

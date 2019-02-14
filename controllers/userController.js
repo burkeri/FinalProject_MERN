@@ -99,28 +99,23 @@ module.exports = {
   // handle login ------
   handleLogin: function(req, res, next) {
     passport.authenticate("local", function(err, user, info) {
-      let loginErrors = [];
       if (err) {
         return next(err);
       }
       if (!user) {
-        // loginErrors.push(info.message);
-        // req.session.messages = info.message;
-        console.log("\n\n message:" + info.message + "\n\n" );
-        console.log("\n\n session:" + req.session + "\n\n" );
+        req.session.messages = info.message;
+        // console.log("\n\n message:" + info.message + "\n\n" );
+        // console.log("\n\n session:" + JSON.stringify(req.session.info.message )+ "\n\n" );
         res.redirect("/user/login");
+        console.log(req.session);
       }
       req.logIn(user, function(err) {
         if (err) {
           return next(err);
         }
-        let loggedInUser = req.user;
-        console.log("\n\n user: " + JSON.stringify(req.user) + "\n\n" );
-        // return res.redirect("/dashboard");
-        // return res.redirect("/dashboard").send(loggedInUser);
-        // res.send(loggedInUser);
-        console.log(req.session.passport.user);
         res.redirect("/dashboard");
+        console.log("\nsession:");
+        console.log(req.session);
       });
     })(req, res, next);
   },

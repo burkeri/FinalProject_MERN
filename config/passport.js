@@ -30,8 +30,21 @@ module.exports = function(passport) {
     })
   );
 
+  // original ------
+
+  // passport.serializeUser((user, done) => {
+  //   done(null, user.id);
+  // });
+
+  // passport.deserializeUser((id, done) => {
+  //   User.findById(id, function(err, user) {
+  //     done(err, user);
+  //   });
+  // });
+
+  // return full user instead of just id
   passport.serializeUser((user, done) => {
-    done(null, user.id);
+    done(null, user);
   });
 
   passport.deserializeUser((id, done) => {
@@ -39,4 +52,5 @@ module.exports = function(passport) {
       done(err, user);
     });
   });
+
 };

@@ -6,7 +6,6 @@ const passport = require("passport");
 const User = require("../models/User");
 
 module.exports = {
-
   // register/create new user ------
   registerUser: function(req, res) {
     let { name, username, email, password, password2, dob } = req.body;
@@ -104,25 +103,26 @@ module.exports = {
       }
       if (!user) {
         req.session.messages = info.message;
-        // console.log("\n\n message:" + info.message + "\n\n" );
-        // console.log("\n\n session:" + JSON.stringify(req.session.info.message )+ "\n\n" );
         res.redirect("/user/login");
+
+        // TESTING LOGS
+        console.log("\nsession:\n");
         console.log(req.session);
+
+
       }
       req.logIn(user, function(err) {
         if (err) {
           return next(err);
         }
         res.redirect("/dashboard");
-        console.log("\nsession:");
+
+        // TESTING LOGS
+        console.log("\nsession - logged in user:\n");
         console.log(req.session);
+
+
       });
     })(req, res, next);
-  },
-
-  // handle logout ------
-  handleLogout: function(req, res,) {
-    console.log("TEST");
   }
-
 };

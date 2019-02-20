@@ -2,6 +2,7 @@
 const express = require("express");
 const session = require("express-session");
 const mongoose = require("mongoose");
+const MongoStore = require('connect-mongo')(session);
 const passport = require("passport");
 require("./config/passport")(passport);
 const routes = require("./routes");
@@ -21,11 +22,17 @@ if (process.env.NODE_ENV === "production") {
 // bodyparser
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+// session
 app.use(session({ 
   secret: 'keyboard cat',
+  store: new MongoStore(
+    { 
+      mongooseConnection: mongoose.connection,
+      test: "test"
+    }),
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true } 
+  cookie: { secure: false }
 }));
 // passport
 app.use(passport.initialize());

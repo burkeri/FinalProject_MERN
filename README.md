@@ -1,4 +1,4 @@
-# LifeSet Goal tracker (v1)
+# LifeSet Goal tracker (v1) (https://still-ridge-75169.herokuapp.com/)
 ![Landing page](./assets/images/landing.JPG)
 
 ## LifeSet is an app... ## 

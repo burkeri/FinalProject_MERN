@@ -66,18 +66,7 @@ module.exports = {
     // );
   },
 
-  updateProgress: (req, res) => {
-    // console.log(`ID to update: ${req.params.id}`);
-    // console.log(`Progress to update: ${req.params.prog}`);
-
-    Goal.findByIdAndUpdate({_id: req.params.id}, {progress: req.params.prog}, (err, dbGoal) => {
-      if (err) return res.status(500).send(err);
-      return res.json(dbGoal);
-    });
-  },
-
   remove: (req, res) => {
-    // console.log(`ID to remove: ${req.params.id}`);
 
     Goal.findByIdAndDelete(req.params.id, (err, dbGoal) => {
       if (err) return res.status(500).send(err);

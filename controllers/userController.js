@@ -121,7 +121,6 @@ module.exports = {
         console.log("\nsession - logged in user:\n");
         console.log(req.session);
 
-
       });
     })(req, res, next);
   }

@@ -56,3 +56,7 @@ mongoose
 app.listen(PORT, function() {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
+
+var db;
+
+

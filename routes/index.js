@@ -10,15 +10,6 @@ router.use("/api", apiRoutes);
 // user routes
 router.use("/", userRoutes);
 
-var db;
-
-// TEST
-router.get("/dashboard", function (req, res){
-  var session = db.collection("sessions").find();
-  console.log("\n\nSESSION FROM DB:\n");
-  console.log(session);
-});
-
 // send all requests to react app
 router.use((req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));

@@ -104,23 +104,12 @@ module.exports = {
       if (!user) {
         req.session.messages = info.message;
         res.redirect("/user/login");
-
-        // TESTING LOGS
-        console.log("\nsession:\n");
-        console.log(req.session);
-
-
       }
       req.logIn(user, function(err) {
         if (err) {
           return next(err);
         }
         res.redirect("/dashboard");
-
-        // TESTING LOGS
-        console.log("\nsession - logged in user:\n");
-        console.log(req.session);
-
       });
     })(req, res, next);
   }

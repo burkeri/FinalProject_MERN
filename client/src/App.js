@@ -15,6 +15,8 @@ import Dashboard from "./pages/Dashboard";
 import Details from "./pages/Details";
 import AddGoalCreate from "./pages/AddGoalCreate";
 
+import test from "./pages/test.js";
+
 class App extends Component {
     state = {
         userChoiceID: "",
@@ -109,6 +111,13 @@ class App extends Component {
                                 />
                             )}
                         />
+
+                        {/* test component*/}
+                        <Route
+                            exact path="/test"
+                            component={test}
+                        />
+
                         {/* Landing page and 404 */}
                         <Route exact path="/" component={Landing} />
                         <Route component={NoMatch} />

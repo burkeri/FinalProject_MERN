@@ -7,9 +7,6 @@ const MongoStore = require("connect-mongo")(session);
 const passport = require("passport");
 require("./config/passport")(passport);
 const routes = require("./routes");
-const multer = require("multer");
-const cloudinary = require("cloudinary");
-const fileUploadMiddleware = require("./file-upload-middleware");
 
 // MongoDB setup
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/finalProj";
@@ -19,16 +16,6 @@ const PORT = process.env.PORT || 3001;
 
 // start express app
 const app = express();
-
-// Cloudinary and multer setup
-cloudinary.config({
-  cloud_name: "winterfreshness",
-  api_key: "966246874184822",
-  api_secret: "gkjsFLkyUfebwq7AVIu8yFKA104"
-});
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
 
 // Middleware ------------------
 // serve static assets
@@ -61,15 +48,6 @@ app.use(passport.session());
 
 // set express to use routes
 app.use(routes);
-app.post("/files", upload.single("file"), fileUploadMiddleware);
-
-app.post("/api/changeProfilePicture", (req, res) => {
-  console.log("/api/changeProfilePicture");
-  console.log(req.body);
-  // you can do whatever you want with this data
-  // change profile pic, save to DB, or send it to another API
-  res.end();
-});
 
 // DB connection
 mongoose

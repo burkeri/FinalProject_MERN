@@ -6,9 +6,9 @@ function fileUploadMiddleware(req, res) {
 
   cloudinary.uploader
     .upload_stream(result => {
-      console.log(`${req.headers.origin}/api/createpost`);
+      console.log(`${req.headers.origin}/api/post/create`);
       axios({
-        url: `${req.headers.origin}api/createpost`, //API endpoint that needs file URL from CDN
+        url: `${req.headers.origin}api/post/create`, //API endpoint that needs file URL from CDN
         method: "post",
         data: {
           url: result.secure_url,

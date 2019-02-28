@@ -26,14 +26,6 @@ router.use("/", userRoutes);
 // route to upload the picture to Cloudinary
 router.post("/files", upload.single("file"), fileUploadMiddleware);
 
-router.post("/api/createpost", (req, res) => {
-  console.log("/api/createpost");
-  console.log(req.body);
-  // you can do whatever you want with this data
-  // change profile pic, save to DB, or send it to another API
-  res.end();
-});
-
 // send all requests to react app
 router.use((req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import API from "../utils/API";
+import MaterialIcon from "material-icons-react";
+
 // style
 import "./dashboard.css";
 // reactstrap components
-import MaterialIcon from "material-icons-react";
 import {
   Container,
   Row,
@@ -163,7 +164,7 @@ class Dashboard extends Component {
                                     <hr />
                                     <br />
                                     <h3>Oprah Winfrey</h3> */}
-                  <Link to="/createpost">
+                  <Link to="/socialfeed">
                     <Button>Social!</Button>
                   </Link>
                 </CardText>

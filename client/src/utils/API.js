@@ -17,5 +17,9 @@ export default {
   // delete a goal with the matching ID
   deleteGoal: id => {
     return axios.delete("/api/goal/" + id);
+  },
+  createPost: postData => {
+    console.log(`Hit the API!`);
+    return axios.post("/files", postData);
   }
 };

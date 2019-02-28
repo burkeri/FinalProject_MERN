@@ -14,6 +14,7 @@ import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import Details from "./pages/Details";
 import AddGoalCreate from "./pages/AddGoalCreate";
+import SocialFeed from "./pages/SocialFeed";
 import CreatePost from "./pages/CreatePost";
 
 class App extends Component {
@@ -66,6 +67,7 @@ class App extends Component {
             <Route exact path="/user/login" component={Login} />
             <Route exact path="/user/register" component={Register} />
             <Route exact path="/user/profile" component={Profile} />
+            <Route path="/socialfeed" component={SocialFeed} />
             <Route path="/createpost" component={CreatePost} />
             <Route
               path="/addgoalcreate"

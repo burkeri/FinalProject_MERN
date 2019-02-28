@@ -24,7 +24,9 @@ class ReactUploadImage extends React.Component {
       .then(response => {
         alert("The file is successfully uploaded");
       })
-      .catch(error => {});
+      .catch(error => {
+        console.log(error);
+      });
   }
   onChange(e) {
     this.setState({ file: e.target.files[0] });

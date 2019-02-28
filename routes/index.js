@@ -4,19 +4,18 @@ const router = require("express").Router();
 const apiRoutes = require("./api");
 const userRoutes = require("./user");
 const multer = require("multer");
+const cloudinary = require("cloudinary");
+const fileUploadMiddleware = require("../file-upload-middleware");
 
-// multer setup
-const storage = multer.diskStorage({
-  destination: "./client/public/uploads",
-  filename: function(req, file, cb) {
-    cb(null, "IMAGE-" + Date.now() + path.extname(file.originalname));
-  }
+// Cloudinary and multer setup
+cloudinary.config({
+  cloud_name: "winterfreshness",
+  api_key: "966246874184822",
+  api_secret: "gkjsFLkyUfebwq7AVIu8yFKA104"
 });
 
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 1000000 }
-});
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 // API data routes
 router.use("/api", apiRoutes);
@@ -24,12 +23,15 @@ router.use("/api", apiRoutes);
 // user routes
 router.use("/", userRoutes);
 
-// upload pic route
-router.post("/upload", upload.single("myImage"), (req, res, err) => {
-  console.log("Request ---", req.body);
-  console.log("Request file ---", req.file); //Here you get file.
-  /*Now do where ever you want to do*/
-  if (!err) return res.send(200).end();
+// route to upload the picture to Cloudinary
+router.post("/files", upload.single("file"), fileUploadMiddleware);
+
+router.post("/api/createpost", (req, res) => {
+  console.log("/api/createpost");
+  console.log(req.body);
+  // you can do whatever you want with this data
+  // change profile pic, save to DB, or send it to another API
+  res.end();
 });
 
 // send all requests to react app

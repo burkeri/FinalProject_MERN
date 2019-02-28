@@ -104,13 +104,26 @@ module.exports = {
       if (!user) {
         req.session.messages = info.message;
         res.redirect("/user/login");
+
+        // TEST
+        console.log(`\n${req.session.messages}\n`);
+        
       }
       req.logIn(user, function(err) {
         if (err) {
           return next(err);
         }
         res.redirect("/dashboard");
+
+        // TEST
+        console.log(`\n${req.user.username}\n`);
+        
       });
     })(req, res, next);
+  },
+
+  // get current user
+  currentUser: (req, res) => {
+    res.json(req.user);
   }
 };

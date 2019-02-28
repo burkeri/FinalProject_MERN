@@ -15,7 +15,7 @@ import Dashboard from "./pages/Dashboard";
 import Details from "./pages/Details";
 import AddGoalCreate from "./pages/AddGoalCreate";
 
-import test from "./pages/test.js";
+import Test from "./pages/Test.js";
 
 class App extends Component {
     state = {
@@ -27,11 +27,17 @@ class App extends Component {
             description: ""
         },
         username: "Mangoman42",
-        goals: []
+        goals: [],
+        testObj: {}
     };
 
     componentDidMount() {  
         this.getGoals(this.state.username);
+        this.getCurrentUser();
+    }
+
+    getCurrentUser = () => {
+        API.getCurrentUser();
     }
     
     getGoals = (username) => {
@@ -115,7 +121,10 @@ class App extends Component {
                         {/* test component*/}
                         <Route
                             exact path="/test"
-                            component={test}
+                            render={() => (
+                                <Test/>
+                            )}
+
                         />
 
                         {/* Landing page and 404 */}

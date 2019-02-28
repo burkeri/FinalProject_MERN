@@ -22,5 +22,14 @@ export default {
     // delete a goal with the matching ID
     deleteGoal: id => {
         return axios.delete("/api/goal/" + id);
+    },
+
+    getCurrentUser: () => {
+        axios.get("/dashboard")
+            .then(res => {
+
+                console.log(res.data);
+                
+            })
     }
 };

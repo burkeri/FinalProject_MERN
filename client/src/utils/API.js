@@ -21,5 +21,15 @@ export default {
   createPost: postData => {
     console.log(`Hit the API!`);
     return axios.post("/files", postData);
+  },
+  currentUsername: () => {
+    return axios
+      .get("/dashboard")
+      .then(res => {
+        return res.data.username;
+      })
+      .then(username => {
+        return username;
+      });
   }
 };

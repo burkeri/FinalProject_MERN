@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3001;
 // start express app
 const app = express();
 
-// Middleware ------------------
+// middleware ------
 // serve static assets
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -30,14 +30,15 @@ app.use(express.json());
 // session
 app.use(
   session({
-    secret: "keyboard cat",
-    store: new MongoStore({
-      mongooseConnection: mongoose.connection,
-      test: "test"
-    }),
-    resave: false,
+    secret: "secretstring",
     saveUninitialized: true,
-    cookie: { secure: false }
+    resave: true,
+    cookie: {
+      maxAge: 365 * 24 * 60 * 60 * 1000
+    },
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection
+    })
   })
 );
 
@@ -46,7 +47,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 // -----------------------------
 
-// set express to use routes
+//routes
 app.use(routes);
 
 // DB connection

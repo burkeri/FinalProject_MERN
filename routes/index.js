@@ -16,6 +16,7 @@ cloudinary.config({
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
+const sessionRoutes = require("./session");
 
 // API data routes
 router.use("/api", apiRoutes);
@@ -25,6 +26,9 @@ router.use("/", userRoutes);
 
 // route to upload the picture to Cloudinary
 router.post("/files", upload.single("file"), fileUploadMiddleware);
+
+// session routes
+router.use("/", sessionRoutes);
 
 // send all requests to react app
 router.use((req, res) => {

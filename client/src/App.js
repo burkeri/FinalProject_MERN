@@ -16,6 +16,7 @@ import Details from "./pages/Details";
 import AddGoalCreate from "./pages/AddGoalCreate";
 import SocialFeed from "./pages/SocialFeed";
 import CreatePost from "./pages/CreatePost";
+import Test from "./pages/Test.js";
 
 class App extends Component {
   state = {
@@ -26,13 +27,23 @@ class App extends Component {
       frequency: "",
       description: ""
     },
-    username: "Mangoman42",
-    goals: []
+    username: "user",
+    goals: [],
+    testObj: {}
   };
 
   componentDidMount() {
     this.getGoals(this.state.username);
+    this.setUsername();
   }
+
+  setUsername = () => {
+    API.currentUsername().then(res => {
+      this.setState({
+        username: res
+      });
+    });
+  };
 
   getGoals = username => {
     API.getGoals(username)
@@ -104,6 +115,8 @@ class App extends Component {
                 />
               )}
             />
+            {/* test component*/}
+            <Route exact path="/test" render={() => <Test />} />
             {/* Landing page and 404 */}
             <Route exact path="/" component={Landing} />
             <Route component={NoMatch} />

@@ -8,13 +8,13 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
-  
+
   findById: (req, res) => {
     Goal.findOne(req.params.id)
-        .then(dbGoal => {
-            res.json(dbGoal);
-        })
-        .catch(err => res.status(422).json(err));
+      .then(dbGoal => {
+        res.json(dbGoal);
+      })
+      .catch(err => res.status(422).json(err));
   },
 
   create: (req, res) => {
@@ -29,56 +29,31 @@ module.exports = {
   },
 
   update: (req, res) => {
+    Goal.findOne({ _id: req.params.id })
+      .then(dbGoal => {
+        // Update the goal depending on the input data
+        if (req.body.userID) dbGoal.userID = req.body.userID;
+        if (req.body.category) dbGoal.category = req.body.category;
+        if (req.body.name) dbGoal.name = req.body.name;
+        if (req.body.icon) dbGoal.icon = req.body.icon;
+        if (req.body.frequency) dbGoal.frequency = req.body.frequency;
+        if (req.body.description) dbGoal.description = req.body.description;
+        if (req.body.progress) dbGoal.progress = req.body.progress;
+        if (req.body.note) dbGoal.notes.push({ body: req.body.note });
+        if (req.body.picture) parser.single(req.body.picture);
 
-    Goal.findOne({ _id: req.params.id})
-        .then(dbGoal => {
-
-            // Update the goal depending on the input data
-            if(req.body.userID) dbGoal.userID = req.body.userID;
-            if(req.body.category) dbGoal.category = req.body.category;
-            if(req.body.name) dbGoal.name = req.body.name;
-            if(req.body.icon) dbGoal.icon = req.body.icon;
-            if(req.body.frequency) dbGoal.frequency = req.body.frequency;
-            if(req.body.description) dbGoal.description = req.body.description;
-            if (req.body.progress) dbGoal.progress = req.body.progress;
-            if (req.body.note) dbGoal.notes.push({ body: req.body.note });
-
-            // Save the updated goal to the DB
-            dbGoal.save((err, updatedGoal) => {
-                if (err) return res.status(500).send(err);
-                console.log(`Goal updated.`);
-                return res.json(updatedGoal);
-            });
-        })
-        // Catch any errors in finding the goal
-        .catch(err => res.status(422).json(err));
-
-    // Goal.findByIdAndUpdate(
-    //     {_id: req.params.id}, 
-    //     req.body,
-    //     { new: true }, 
-    //     (err, dbGoal) => {
-    //     if (err) return res.status(500).send(err);
-    //     console.log(`Goal updated.`);
-    //     console.log(dbGoal);
-    //     return res.json(dbGoal);
-    //     }
-    // );
-  },
-
-  updateProgress: (req, res) => {
-    // console.log(`ID to update: ${req.params.id}`);
-    // console.log(`Progress to update: ${req.params.prog}`);
-
-    Goal.findByIdAndUpdate({_id: req.params.id}, {progress: req.params.prog}, (err, dbGoal) => {
-      if (err) return res.status(500).send(err);
-      return res.json(dbGoal);
-    });
+        // Save the updated goal to the DB
+        dbGoal.save((err, updatedGoal) => {
+          if (err) return res.status(500).send(err);
+          console.log(`Goal updated.`);
+          return res.json(updatedGoal);
+        });
+      })
+      // Catch any errors in finding the goal
+      .catch(err => res.status(422).json(err));
   },
 
   remove: (req, res) => {
-    // console.log(`ID to remove: ${req.params.id}`);
-
     Goal.findByIdAndDelete(req.params.id, (err, dbGoal) => {
       if (err) return res.status(500).send(err);
       return res.json(dbGoal);

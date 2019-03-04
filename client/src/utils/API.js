@@ -6,15 +6,10 @@ export default {
   getGoals: username => {
     return axios.get("api/goal/" + username);
   },
-
   // save a goal to the database
   createGoal: goalData => {
     return axios.post("/api/goal", goalData);
   },
-  // update a goal's progress w/ the matching ID
-  // updateProgress: (id, prog) => {
-  //     return axios.put("/api/goal/" + id + "/" + prog);
-  // },
   // update a goal w/ the matching ID
   updateGoal: (id, goalData) => {
     return axios.put("api/goal/" + id, goalData);
@@ -23,13 +18,18 @@ export default {
   deleteGoal: id => {
     return axios.delete("/api/goal/" + id);
   },
-
+  createPost: postData => {
+    console.log(`Hit the API!`);
+    return axios.post("/files", postData);
+  },
   currentUsername: () => {
-    return axios.get("/dashboard").then(res => {
-      return res.data.username;
-    })
-    .then(username => {
+    return axios
+      .get("/dashboard")
+      .then(res => {
+        return res.data.username;
+      })
+      .then(username => {
         return username;
-    });    
+      });
   }
 };

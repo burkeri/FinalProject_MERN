@@ -5,7 +5,7 @@ import API from "./utils/API";
 // style
 import "./App.css";
 
-// components
+// components and pages
 import NoMatch from "./pages/NoMatch";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -14,7 +14,8 @@ import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import Details from "./pages/Details";
 import AddGoalCreate from "./pages/AddGoalCreate";
-
+import SocialFeed from "./pages/SocialFeed";
+import CreatePost from "./pages/CreatePost";
 import Test from "./pages/Test.js";
 
 class App extends Component {
@@ -77,8 +78,9 @@ class App extends Component {
             <Route exact path="/user/login" component={Login} />
             <Route exact path="/user/register" component={Register} />
             <Route exact path="/user/profile" component={Profile} />
+            <Route path="/socialfeed" component={SocialFeed} />
+            <Route path="/createpost" component={CreatePost} />
             <Route
-              exact
               path="/addgoalcreate"
               render={() => (
                 <AddGoalCreate
@@ -113,10 +115,8 @@ class App extends Component {
                 />
               )}
             />
-
             {/* test component*/}
             <Route exact path="/test" render={() => <Test />} />
-
             {/* Landing page and 404 */}
             <Route exact path="/" component={Landing} />
             <Route component={NoMatch} />

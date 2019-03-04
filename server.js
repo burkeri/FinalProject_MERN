@@ -1,4 +1,5 @@
 // dependencies
+require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const mongoose = require("mongoose");
@@ -6,16 +7,17 @@ const MongoStore = require("connect-mongo")(session);
 const passport = require("passport");
 require("./config/passport")(passport);
 const routes = require("./routes");
+
+// MongoDB setup
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/finalProj";
 
-// server port
+// Node server port
 const PORT = process.env.PORT || 3001;
 
 // start express app
 const app = express();
 
 // middleware ------
-
 // serve static assets
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -32,7 +34,7 @@ app.use(
     saveUninitialized: true,
     resave: true,
     cookie: {
-      maxAge: 365*24*60*60*1000
+      maxAge: 365 * 24 * 60 * 60 * 1000
     },
     store: new MongoStore({
       mongooseConnection: mongoose.connection
@@ -43,8 +45,7 @@ app.use(
 // passport
 app.use(passport.initialize());
 app.use(passport.session());
-
-// ------
+// -----------------------------
 
 //routes
 app.use(routes);

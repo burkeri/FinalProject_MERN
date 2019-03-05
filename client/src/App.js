@@ -33,15 +33,18 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.getGoals(this.state.username);
     this.setUsername();
   }
 
   setUsername = () => {
     API.currentUsername().then(res => {
-      this.setState({
-        username: res
-      });
+      if (!res) res = "Mangoman42";
+      this.setState(
+        {
+          username: res
+        },
+        () => this.getGoals(this.state.username)
+      );
     });
   };
 
@@ -53,8 +56,8 @@ class App extends Component {
             goals: res.data
           },
           () => {
-            console.log(`Goals state:`);
-            console.log(this.state.goals);
+            console.log(`State:`);
+            console.log(this.state);
           }
         );
       })
@@ -79,7 +82,10 @@ class App extends Component {
             <Route exact path="/user/register" component={Register} />
             <Route exact path="/user/profile" component={Profile} />
             <Route path="/socialfeed" component={SocialFeed} />
-            <Route path="/createpost" component={CreatePost} />
+            <Route
+              path="/createpost"
+              render={() => <CreatePost username={this.state.username} />}
+            />
             <Route
               path="/addgoalcreate"
               render={() => (

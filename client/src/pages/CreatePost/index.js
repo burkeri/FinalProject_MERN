@@ -15,7 +15,7 @@ import {
 
 class CreatePost extends Component {
   state = {
-    username: "Test User",
+    username: this.props.username || "user",
     textarea: "",
     goal: [],
     imageURL: "https://placeimg.com/320/320/animals",
@@ -29,7 +29,7 @@ class CreatePost extends Component {
 
   handleUploadFile = event => {
     this.setState({ imageURL: event.target.files[0] }, () =>
-      console.log(this.state.imageURL)
+      console.log(`File ready to upload.`)
     );
   };
 
@@ -40,8 +40,8 @@ class CreatePost extends Component {
     // create the form data to send
     const userData = new FormData();
     userData.append("file", this.state.imageURL);
-    userData.append("name", this.state.username);
-    userData.append("description", this.state.textarea);
+    userData.append("userID", this.state.username);
+    userData.append("text", this.state.textarea);
 
     API.createPost(userData);
   };

@@ -11,9 +11,9 @@ function fileUploadMiddleware(req, res) {
         url: `${req.headers.origin}api/post/create`, //API endpoint that needs file URL from CDN
         method: "post",
         data: {
-          url: result.secure_url,
-          name: req.body.name,
-          description: req.body.description
+          picture: result.secure_url,
+          userID: req.body.userID,
+          text: req.body.text
         }
       })
         .then(response => {

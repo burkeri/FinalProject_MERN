@@ -267,13 +267,13 @@ class Dashboard extends Component {
                 onChange={this.handleInputChange}
                 rows={4}
               />
-              <input
+              {/* <input
                 id="goalPic"
                 name="goalPic"
                 type="file"
                 value={this.state.goalPic}
                 onChange={this.handleInputChange}
-              />
+              /> */}
             </Form>
           </ModalBody>
           <ModalFooter>

@@ -3,10 +3,6 @@ const Schema = mongoose.Schema;
 
 // Create the schema
 const postSchema = new Schema({
-  postID: {
-    type: String,
-    required: true
-  },
   userID: {
     type: String,
     required: true
@@ -15,14 +11,15 @@ const postSchema = new Schema({
     type: String
   },
   category: {
+    type: String
+  },
+  picture: {
     type: String,
     required: true
   },
-  picture: {
-    type: String
-  },
   text: {
-    type: String
+    type: String,
+    required: true
   },
   tags: {
     type: String

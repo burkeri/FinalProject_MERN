@@ -67,7 +67,7 @@ class CreatePost extends Component {
     userData.append("goalID", this.state.goalChoice);
     userData.append("text", this.state.textarea);
 
-    API.createPost(userData);
+    API.createPost(userData).then(response => this.props.getPosts());
   };
 
   render() {
@@ -105,7 +105,11 @@ class CreatePost extends Component {
         <ListGroup>
           {goals.map(goal => (
             <ListGroupItem key={goal._id}>
-              <Button onClick={() => this.handleGoalChoice(goal._id)}>
+              <Button
+                onClick={() => this.handleGoalChoice(goal._id)}
+                color="link"
+                block
+              >
                 {goal.name}
               </Button>
             </ListGroupItem>

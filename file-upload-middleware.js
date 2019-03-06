@@ -8,7 +8,7 @@ function fileUploadMiddleware(req, res) {
     .upload_stream(result => {
       // console.log(`${req.headers.origin}/api/post/create`);
       axios({
-        url: `${req.headers.origin}api/post/create`, //API endpoint that needs file URL from CDN
+        url: `${req.headers.origin}api/post`, //API endpoint that needs file URL from CDN
         method: "post",
         data: {
           picture: result.secure_url,

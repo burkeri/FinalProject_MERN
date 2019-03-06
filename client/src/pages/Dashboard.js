@@ -179,7 +179,7 @@ class Dashboard extends Component {
             <p className="text-center">Goals:</p>
             <hr />
             <div className="text-center mb-2">
-              <Link to="/addgoalcreate">
+              <Link to="/creategoal">
                 <Button id="addGoal">Add Goal</Button>
               </Link>
             </div>

@@ -13,7 +13,7 @@ import Profile from "./components/Profile";
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import Details from "./pages/Details";
-import AddGoalCreate from "./pages/AddGoalCreate";
+import CreateGoal from "./pages/CreateGoal";
 import SocialFeed from "./pages/SocialFeed";
 import CreatePost from "./pages/CreatePost";
 
@@ -28,6 +28,7 @@ class App extends Component {
     },
     username: "user",
     goals: [],
+    posts: [],
     testObj: {}
   };
 
@@ -42,7 +43,10 @@ class App extends Component {
         {
           username: res
         },
-        () => this.getGoals(this.state.username)
+        () => {
+          this.getGoals(this.state.username);
+          this.getPosts();
+        }
       );
     });
   };
@@ -55,8 +59,24 @@ class App extends Component {
             goals: res.data
           },
           () => {
-            console.log(`State:`);
-            console.log(this.state);
+            console.log(`Goals:`);
+            console.log(this.state.goals);
+          }
+        );
+      })
+      .catch(err => console.log(err));
+  };
+
+  getPosts = () => {
+    API.getPosts()
+      .then(res => {
+        this.setState(
+          {
+            posts: res.data
+          },
+          () => {
+            console.log(`Posts:`);
+            console.log(this.state.posts);
           }
         );
       })
@@ -80,20 +100,24 @@ class App extends Component {
             <Route exact path="/user/login" component={Login} />
             <Route exact path="/user/register" component={Register} />
             <Route exact path="/user/profile" component={Profile} />
-            <Route path="/socialfeed" component={SocialFeed} />
+            <Route
+              path="/socialfeed"
+              render={() => <SocialFeed posts={this.state.posts} />}
+            />
             <Route
               path="/createpost"
               render={() => (
                 <CreatePost
                   username={this.state.username}
                   goals={this.state.goals}
+                  getPosts={this.getPosts}
                 />
               )}
             />
             <Route
-              path="/addgoalcreate"
+              path="/creategoal"
               render={() => (
-                <AddGoalCreate
+                <CreateGoal
                   userChoiceID={this.state.userChoiceID}
                   username={this.state.username}
                   userChoiceGoal={this.state.userChoiceGoal}

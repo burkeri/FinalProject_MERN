@@ -1,6 +1,14 @@
 const Post = require("../models/Post");
 
 module.exports = {
+  findAll: (req, res) => {
+    Post.find()
+      .then(dbPosts => {
+        res.json(dbPosts);
+      })
+      .catch(err => res.status(422).json(err));
+  },
+
   create: (req, res) => {
     // console.log(req.body);
     const newPost = new Post({

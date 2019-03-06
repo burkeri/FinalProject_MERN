@@ -6,6 +6,10 @@ export default {
   getGoals: username => {
     return axios.get("api/goal/" + username);
   },
+  // get all the posts
+  getPosts: () => {
+    return axios.get("api/post");
+  },
   // save a goal to the database
   createGoal: goalData => {
     return axios.post("/api/goal", goalData);
@@ -18,6 +22,7 @@ export default {
   deleteGoal: id => {
     return axios.delete("/api/goal/" + id);
   },
+  // make a social feed post
   createPost: postData => {
     console.log(`Hit the API!`);
     return axios.post("/files", postData);

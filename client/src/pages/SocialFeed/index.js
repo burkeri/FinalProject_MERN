@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import API from "../../utils/API";
 // import PostCard from "../../components/PostCard";
 // import Navbar from "../../components/Navbar";
 import { Container, Row, Col, Button } from "reactstrap";
 
 class SocialFeed extends Component {
   state = {
-    posts: []
+    //
   };
 
   componentDidUpdate() {

@@ -16,7 +16,9 @@ import Details from "./pages/Details";
 import AddGoalCreate from "./pages/AddGoalCreate";
 import SocialFeed from "./pages/SocialFeed";
 import CreatePost from "./pages/CreatePost";
-import Test from "./pages/Test.js";
+
+// re-design
+import Dashboard_re from "./pages_re/Dashboard_re";
 
 class App extends Component {
   state = {
@@ -121,11 +123,15 @@ class App extends Component {
                 />
               )}
             />
-            {/* test component*/}
-            <Route exact path="/test" render={() => <Test />} />
+
             {/* Landing page and 404 */}
             <Route exact path="/" component={Landing} />
             <Route component={NoMatch} />
+
+              {/* Redesign */}
+              <Route exact path="/dashboard/re" component={Dashboard_re} />
+
+
           </Switch>
         </div>
       </Router>

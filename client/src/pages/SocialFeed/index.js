@@ -6,8 +6,12 @@ import { Container, Row, Col, Button } from "reactstrap";
 
 class SocialFeed extends Component {
   state = {
-    posts: []
+    //
   };
+
+  componentDidUpdate() {
+    //
+  }
 
   render() {
     return (

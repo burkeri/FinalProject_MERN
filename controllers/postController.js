@@ -5,10 +5,11 @@ module.exports = {
     // console.log(req.body);
     const newPost = new Post({
       userID: req.body.userID,
+      goalID: req.body.goalID,
       picture: req.body.picture,
       text: req.body.text
     });
-    // console.log(newPost);
+    console.log(newPost);
     // enter data into the database
     newPost.save((err, dbPost) => {
       if (err) return res.status(500).send(err);

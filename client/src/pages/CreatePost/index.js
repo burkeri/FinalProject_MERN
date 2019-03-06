@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import API from "../../utils/API";
 // import navbar here
 import {
@@ -14,7 +14,9 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  ListGroup,
+  ListGroupItem
 } from "reactstrap";
 
 class CreatePost extends Component {
@@ -23,8 +25,8 @@ class CreatePost extends Component {
     addChoice: "",
     username: this.props.username || "user",
     textarea: "",
-    goal: [],
-    imageURL: "https://placeimg.com/320/320/animals",
+    goalChoice: "",
+    imageURL: "",
     data: ""
   };
 
@@ -39,6 +41,10 @@ class CreatePost extends Component {
     this.setState({ addChoice: add }, () => this.toggleModal());
   };
 
+  handleGoalChoice = goal => {
+    this.setState({ goalChoice: goal }, () => this.toggleModal());
+  };
+
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
@@ -46,7 +52,6 @@ class CreatePost extends Component {
 
   handleUploadFile = event => {
     this.setState({ imageURL: event.target.files[0] }, () =>
-      // console.log(`File ready to upload.`)
       this.toggleModal()
     );
   };
@@ -59,6 +64,7 @@ class CreatePost extends Component {
     const userData = new FormData();
     userData.append("file", this.state.imageURL);
     userData.append("userID", this.state.username);
+    userData.append("goalID", this.state.goalChoice);
     userData.append("text", this.state.textarea);
 
     API.createPost(userData);
@@ -66,8 +72,24 @@ class CreatePost extends Component {
 
   render() {
     const addChoice = this.state.addChoice;
+    let submitButton;
     let content;
 
+    // Conditional render for Create Post button
+    if (this.state.textarea && this.state.goalChoice && this.state.imageURL)
+      submitButton = (
+        <Link to="/socialfeed">
+          <Button onClick={this.handleSubmit}>Create Post</Button>
+        </Link>
+      );
+    else
+      submitButton = (
+        <Button onClick={this.handleSubmit} disabled>
+          Create Post
+        </Button>
+      );
+
+    // Conditional render for Modal
     if (addChoice === "image") {
       content = (
         <Input
@@ -78,7 +100,18 @@ class CreatePost extends Component {
         />
       );
     } else if (addChoice === "goal") {
-      content = <p>GOAL</p>;
+      const goals = this.props.goals;
+      content = (
+        <ListGroup>
+          {goals.map(goal => (
+            <ListGroupItem key={goal._id}>
+              <Button onClick={() => this.handleGoalChoice(goal._id)}>
+                {goal.name}
+              </Button>
+            </ListGroupItem>
+          ))}
+        </ListGroup>
+      );
     }
 
     return (
@@ -124,7 +157,7 @@ class CreatePost extends Component {
               </FormGroup>
             </Col>
           </Row>
-          <Button onClick={this.handleSubmit}>Create Post</Button>
+          {submitButton}
         </Form>
         <br />
 

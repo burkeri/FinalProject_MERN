@@ -10,16 +10,33 @@ import {
   FormGroup,
   Label,
   Input,
-  Button
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
 } from "reactstrap";
 
 class CreatePost extends Component {
   state = {
+    modal: false,
+    addChoice: "",
     username: this.props.username || "user",
     textarea: "",
     goal: [],
     imageURL: "https://placeimg.com/320/320/animals",
     data: ""
+  };
+
+  // Opens the modal
+  toggleModal = () => {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  };
+
+  handleAddChoice = add => {
+    this.setState({ addChoice: add }, () => this.toggleModal());
   };
 
   handleInputChange = event => {
@@ -29,7 +46,8 @@ class CreatePost extends Component {
 
   handleUploadFile = event => {
     this.setState({ imageURL: event.target.files[0] }, () =>
-      console.log(`File ready to upload.`)
+      // console.log(`File ready to upload.`)
+      this.toggleModal()
     );
   };
 
@@ -47,6 +65,22 @@ class CreatePost extends Component {
   };
 
   render() {
+    const addChoice = this.state.addChoice;
+    let content;
+
+    if (addChoice === "image") {
+      content = (
+        <Input
+          type="file"
+          name="image"
+          id="image"
+          onChange={this.handleUploadFile}
+        />
+      );
+    } else if (addChoice === "goal") {
+      content = <p>GOAL</p>;
+    }
+
     return (
       <Container className="bg-light">
         {/* <ReactUploadImage /> */}
@@ -72,18 +106,14 @@ class CreatePost extends Component {
               <FormGroup>
                 <Label for="file">Add Goal</Label>
                 <br />
-                <Button disabled>+</Button>
+                <Button onClick={() => this.handleAddChoice("goal")}>+</Button>
               </FormGroup>
             </Col>
             <Col>
               <FormGroup>
                 <Label for="image">Add Image</Label>
-                <Input
-                  type="file"
-                  name="image"
-                  id="image"
-                  onChange={this.handleUploadFile}
-                />
+                <br />
+                <Button onClick={() => this.handleAddChoice("image")}>+</Button>
               </FormGroup>
             </Col>
             <Col>
@@ -97,6 +127,17 @@ class CreatePost extends Component {
           <Button onClick={this.handleSubmit}>Create Post</Button>
         </Form>
         <br />
+
+        {/* Modal content */}
+        <Modal isOpen={this.state.modal}>
+          <ModalHeader>Add a(n) {addChoice}:</ModalHeader>
+          <ModalBody>{content}</ModalBody>
+          <ModalFooter>
+            <Button color="warning" onClick={this.toggleModal}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </Modal>
       </Container>
     );
   }

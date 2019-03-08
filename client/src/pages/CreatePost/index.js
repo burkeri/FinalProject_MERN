@@ -106,7 +106,7 @@ class CreatePost extends Component {
           {goals.map(goal => (
             <ListGroupItem key={goal._id}>
               <Button
-                onClick={() => this.handleGoalChoice(goal._id)}
+                onClick={() => this.handleGoalChoice(goal.name)}
                 color="link"
                 block
               >

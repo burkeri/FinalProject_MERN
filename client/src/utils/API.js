@@ -24,7 +24,7 @@ export default {
   },
   // make a social feed post
   createPost: postData => {
-    console.log(`Hit the API!`);
+    // console.log(`Hit the API!`);
     return axios.post("/files", postData);
   },
   currentUsername: () => {

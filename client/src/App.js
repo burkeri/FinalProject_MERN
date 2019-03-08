@@ -78,8 +78,14 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+
           <Switch>
+
+              {/* Redesign */}
+              <Route exact path="/dashboard/re" component={Dashboard_re} />
+
+
+
             <Route exact path="/user/login" component={Login} />
             <Route exact path="/user/register" component={Register} />
             <Route exact path="/user/profile" component={Profile} />
@@ -128,12 +134,9 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route component={NoMatch} />
 
-              {/* Redesign */}
-              <Route exact path="/dashboard/re" component={Dashboard_re} />
-
 
           </Switch>
-        </div>
+
       </Router>
     );
   }

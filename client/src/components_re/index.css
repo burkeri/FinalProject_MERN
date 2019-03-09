@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+
+div {
+    font-family: 'Quicksand';
+}
+
+/* dashboard */
+
+.dashboardBackground {
+    background-image: linear-gradient(#E29587, #D66D75);
+    height: 100vh;
+}
+
+.goalContGreeting {
+    font-size: 250%;
+}
+
+.goalContUser {
+    font-size: 350%;
+}
+
+.goalContInst {
+    font-size: 100%;
+    margin-top: 10%;
+}
+
+.goalContainer {
+    backdrop-filter: blur(30px);
+    background-color: rgb(255, 255, 255, .5);
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+    height: 50%;
+    padding-top: 5%;
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+    text-align: center;
+}
+
+.addGoal {
+    background-color: #D66D75;
+    box-shadow: 0 2px 2px 0 rgba(226, 149, 135, 0.50);
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 30px;
+    z-index: 10;
+    text-align: center;
+    outline: none;
+    padding-top: 6px;
+}
+
+.addGoal:focus {
+    outline: none;
+}
+
+.footer {
+    background-color: rgb(238, 240, 244);
+    box-shadow: 0 2px 2px 0 rgba(238, 240, 244, 0.50);
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    border-radius: 20px 20px 0 0;
+    z-index: 5; 
+}
+
+.navButton {
+    width: 50%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    font-size: 13px;
+}
+
+.navButton:focus {
+    outline: none;
+}

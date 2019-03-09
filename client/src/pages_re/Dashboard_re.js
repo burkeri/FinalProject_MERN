@@ -1,9 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import GoalNav from '../components_re/GoalNav';
+import GoalContainer from "../components_re/dashboard_re/GoalContainer";
+import DashNav from "../components_re/dashboard_re/DashNav";
+
+import "../components_re/index.css";
 
 export default function Dashboard_re() {
   return (
-    <GoalNav/>
-  )
+    <div className="dashboardBackground">
+      <img src="https://cdn.iconscout.com/icon/free/png-256/account-profile-avatar-man-circle-round-user-30452.png"/>
+      <GoalContainer />
+      <DashNav />
+    </div>
+  );
 }

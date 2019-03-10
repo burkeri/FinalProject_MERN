@@ -1,15 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Quicksand');
 
-div {
-    font-family: 'Quicksand';
-}
-
-/* dashboard */
+/* background */
 
 .dashboardBackground {
-    background-image: linear-gradient(#E29587, #D66D75);
+    background-image: linear-gradient(to top, #8f94fb, #8f94fb, #4e54c8);
     height: 100vh;
 }
+
+/* goal container */
 
 .goalContGreeting {
     font-size: 250%;
@@ -22,10 +19,11 @@ div {
 .goalContInst {
     font-size: 100%;
     margin-top: 10%;
+    color: rgba(0, 0, 0, .6);
 }
 
 .goalContainer {
-    backdrop-filter: blur(30px);
+    backdrop-filter: blur(10px);
     background-color: rgb(255, 255, 255, .5);
     width: 100%;
     border-radius: 20px 20px 0 0;
@@ -37,9 +35,11 @@ div {
     text-align: center;
 }
 
+/* nav bar */
+
 .addGoal {
-    background-color: #D66D75;
-    box-shadow: 0 2px 2px 0 rgba(226, 149, 135, 0.50);
+    background-color: rgb(78, 84, 200);
+    box-shadow: 0 2px 20px 0 rgba(143, 148, 251, 1);
     height: 80px;
     width: 80px;
     border-radius: 50%;
@@ -61,7 +61,6 @@ div {
 
 .footer {
     background-color: rgb(238, 240, 244);
-    box-shadow: 0 2px 2px 0 rgba(238, 240, 244, 0.50);
     height: 70px;
     width: 100%;
     position: fixed;
@@ -80,4 +79,11 @@ div {
 
 .navButton:focus {
     outline: none;
+}
+
+/* goal card */
+
+.card {
+    width: 90%;
+    background-color: rgb(255, 255, 255, 0);
 }

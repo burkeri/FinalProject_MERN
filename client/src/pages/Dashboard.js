@@ -36,6 +36,11 @@ class Dashboard extends Component {
     goalPic: ""
   };
 
+  componentDidMount(){
+    console.log("goals:");
+    console.log(this.props.goals);
+  }
+
   // Opens the modal
   toggleModal = () => {
     this.setState(prevState => ({

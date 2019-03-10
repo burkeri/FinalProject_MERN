@@ -1,7 +1,7 @@
 import React from "react";
 import MaterialIcons from "material-icons-react";
 
-import "../../components_re/index.css";
+import "../../css/index.css";
 
 export default function GoalNav() {
   return (

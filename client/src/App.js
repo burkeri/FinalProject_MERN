@@ -18,7 +18,7 @@ import SocialFeed from "./pages/SocialFeed";
 import CreatePost from "./pages/CreatePost";
 
 // re-design
-import Dashboard_re from "./pages_re/Dashboard_re";
+import DashboardRe from "./pages_re/Dashboard_re";
 
 class App extends Component {
   state = {
@@ -29,7 +29,7 @@ class App extends Component {
       frequency: "",
       description: ""
     },
-    username: "user",
+    username: "",
     goals: [],
     testObj: {}
   };
@@ -58,8 +58,8 @@ class App extends Component {
             goals: res.data
           },
           () => {
-            console.log(`State:`);
-            console.log(this.state);
+            console.log(`Goals:`);
+            console.log(this.state.goals);
           }
         );
       })
@@ -82,7 +82,18 @@ class App extends Component {
           <Switch>
 
               {/* Redesign */}
-              <Route exact path="/dashboard/re" component={Dashboard_re} />
+              <Route 
+                path="/dashboard" 
+                render={() => (
+                  <DashboardRe
+                    onClick={this.handleUserChoice}
+                    username={this.state.username}
+                    goals={this.state.goals}
+                    getGoals={this.getGoals}
+                    handleUserChoice={this.handleUserChoice}
+                  />
+                )}
+              />
 
 
 
@@ -105,6 +116,8 @@ class App extends Component {
                 />
               )}
             />
+{/* 
+
             <Route
               path="/dashboard"
               render={() => (
@@ -116,7 +129,9 @@ class App extends Component {
                   handleUserChoice={this.handleUserChoice}
                 />
               )}
-            />
+            /> */}
+
+
             <Route
               exact
               path="/details"

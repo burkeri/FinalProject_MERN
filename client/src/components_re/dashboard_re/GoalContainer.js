@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import posed, { PoseGroup } from "react-pose";
 import { easing } from "popmotion";
 
-import "../../components_re/index.css";
+import Goal from "../dashboard_re/Goal";
+
+import "../../css/index.css";
 
 const GoalCont = posed.div({
   full: {
@@ -27,6 +29,7 @@ const ContainerText = posed.h1({
 });
 
 class GoalContainer extends Component {
+  
   state = {
     extended: true
   };
@@ -39,22 +42,38 @@ class GoalContainer extends Component {
         onClick={() => this.setState({ extended: !this.state.extended })}
       >
         <PoseGroup>
+
           {this.state.extended && [
             <ContainerText className="goalContGreeting" key="greeting">
               Hello,
             </ContainerText>,
             <ContainerText className="goalContUser" key="username">
-              username!
+              {this.props.username}!
             </ContainerText>,
             <ContainerText
               className="goalContInst"
               key="inst"
-              pose={this.state.blink ? "enter" : "exit"}
             >
               Tap to view goals
             </ContainerText>
           ]}
         </PoseGroup>
+
+        {!this.state.extended ?
+          this.props.goals.map(goal => (
+            <Goal
+              key={goal._id}
+              name={goal.name}
+              icon={goal.icon}
+              frequency={goal.frequency}
+              description={goal.description}
+              progress={goal.progress}
+            />
+          ))
+        :
+        <br/>
+        }
+
       </GoalCont>
     );
   }

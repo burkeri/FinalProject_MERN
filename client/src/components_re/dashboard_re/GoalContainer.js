@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import posed, { PoseGroup } from "react-pose";
 import { easing } from "popmotion";
+import MaterialIcons from "material-icons-react";
 
 import Goal from "../dashboard_re/Goal";
 
@@ -17,8 +18,10 @@ const GoalCont = posed.div({
   half: {
     height: "50%",
     transition: {
-      duration: 300,
-      ease: easing.cubicBezier(0.84, -0.03, 0.53, 0.98)
+      duration: 50,
+      type: "spring",
+      stiffness: 200,
+      damping: 20
     }
   }
 });
@@ -29,7 +32,6 @@ const ContainerText = posed.h1({
 });
 
 class GoalContainer extends Component {
-  
   state = {
     extended: true
   };
@@ -39,10 +41,9 @@ class GoalContainer extends Component {
       <GoalCont
         className="goalContainer"
         pose={this.state.extended ? "half" : "full"}
-        onClick={() => this.setState({ extended: !this.state.extended })}
+        onClick={() => this.setState({ extended: false })}
       >
         <PoseGroup>
-
           {this.state.extended && [
             <ContainerText className="goalContGreeting" key="greeting">
               Hello,
@@ -50,29 +51,41 @@ class GoalContainer extends Component {
             <ContainerText className="goalContUser" key="username">
               {this.props.username}!
             </ContainerText>,
-            <ContainerText
-              className="goalContInst"
-              key="inst"
-            >
+            <ContainerText className="goalContInst" key="inst">
               Tap to view goals
             </ContainerText>
           ]}
         </PoseGroup>
 
-        {!this.state.extended ?
-          this.props.goals.map(goal => (
-            <Goal
-              key={goal._id}
-              name={goal.name}
-              icon={goal.icon}
-              frequency={goal.frequency}
-              description={goal.description}
-              progress={goal.progress}
-            />
-          ))
-        :
-        <br/>
-        }
+        {/* {this.state.extended && (
+
+        )} */}
+
+          {!this.state.extended && [
+            <button
+            key="close"
+            className="closeButton"
+            onMouseUp={() => 
+              this.setState({ extended: true }, 
+                console.log(this.state)
+              )
+            }
+            >
+              <MaterialIcons icon="close" id="closeIcon" />
+            </button>,
+            <PoseGroup>
+              {this.props.goals.map(goal => (
+                <Goal
+                  key={goal._id}
+                  name={goal.name}
+                  icon={goal.icon}
+                  frequency={goal.frequency}
+                  description={goal.description}
+                  progress={goal.progress}
+                />
+              ))}
+            </PoseGroup>
+          ]}
 
       </GoalCont>
     );

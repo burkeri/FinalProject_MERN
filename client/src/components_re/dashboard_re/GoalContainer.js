@@ -57,36 +57,27 @@ class GoalContainer extends Component {
           ]}
         </PoseGroup>
 
-        {/* {this.state.extended && (
-
-        )} */}
-
-          {!this.state.extended && [
-            <button
+        {!this.state.extended && [
+          <button
             key="close"
             className="closeButton"
-            onMouseUp={() => 
-              this.setState({ extended: true }, 
-                console.log(this.state)
-              )
-            }
-            >
-              <MaterialIcons icon="close" id="closeIcon" />
-            </button>,
-            <PoseGroup>
-              {this.props.goals.map(goal => (
-                <Goal
-                  key={goal._id}
-                  name={goal.name}
-                  icon={goal.icon}
-                  frequency={goal.frequency}
-                  description={goal.description}
-                  progress={goal.progress}
-                />
-              ))}
-            </PoseGroup>
-          ]}
-
+            onMouseUp={() => this.setState({ extended: true })}
+          >
+            <MaterialIcons icon="close" id="closeIcon" />
+          </button>,
+          <PoseGroup>
+            {this.props.goals.map(goal => (
+              <Goal
+                key={goal._id}
+                name={goal.name}
+                icon={goal.icon}
+                frequency={goal.frequency}
+                description={goal.description}
+                progress={goal.progress}
+              />
+            ))}
+          </PoseGroup>
+        ]}
       </GoalCont>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import posed, { PoseGroup } from "react-pose";
+import posed from "react-pose";
 import { Progress } from "reactstrap";
 import MaterialIcons from "material-icons-react";
 

@@ -164,3 +164,8 @@
     color: #4e54c8;
     font-size: 120%;
 }
+
+.goalScroll {
+    height: 77%;
+    overflow: scroll;
+}

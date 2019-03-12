@@ -53,8 +53,6 @@ class Dashboard extends Component {
         goalPic: ""
       },
       () => {
-        console.log(`Dashboard State updated:`);
-        console.log(this.state);
         this.toggleModal();
       }
     );
@@ -75,8 +73,6 @@ class Dashboard extends Component {
         goalProg: prog
       },
       () => {
-        console.log(`Dashboard State updated:`);
-        console.log(this.state);
         this.toggleModal();
       }
     );

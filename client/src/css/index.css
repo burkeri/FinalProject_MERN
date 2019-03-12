@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+
+div {
+    font-family: 'Quicksand';
+}
+
+@import "./dashboard.css";
+@import "./addGoal.css";
+@import "./social.css";

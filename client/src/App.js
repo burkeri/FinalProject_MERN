@@ -6,16 +6,20 @@ import API from "./utils/API";
 import "./App.css";
 
 // components and pages
+
 import NoMatch from "./pages/NoMatch";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Profile from "./components/Profile";
 import Landing from "./pages/Landing";
-import Dashboard from "./pages/Dashboard";
 import Details from "./pages/Details";
-import CreateGoal from "./pages/CreateGoal";
+
 import SocialFeed from "./pages/SocialFeed";
 import CreatePost from "./pages/CreatePost";
+
+// re-design
+import Dashboard from "./pages_re/Dashboard";
+import AddGoal from "./pages_re/AddGoal";
+import Social from "./pages_re/Social";
 
 class App extends Component {
   state = {
@@ -26,7 +30,7 @@ class App extends Component {
       frequency: "",
       description: ""
     },
-    username: "user",
+    username: "",
     goals: [],
     posts: [],
     testObj: {}
@@ -95,11 +99,58 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+
           <Switch>
-            <Route exact path="/user/login" component={Login} />
-            <Route exact path="/user/register" component={Register} />
-            <Route exact path="/user/profile" component={Profile} />
+
+            <Route 
+              exact path="/" 
+              component={Landing} 
+            />
+
+            <Route 
+              exact path="/user/register" 
+              component={Register} 
+            />
+
+            <Route 
+              exact path="/user/login" 
+              component={Login} 
+            />
+
+            {/* Redesign */}
+            
+            <Route 
+              exact path="/dashboard" 
+              render={() => (
+                <Dashboard
+                  onClick={this.handleUserChoice}
+                  username={this.state.username}
+                  goals={this.state.goals}
+                  getGoals={this.getGoals}
+                  handleUserChoice={this.handleUserChoice}
+                />
+              )}
+            />
+
+            <Route 
+              exact path="/creategoal" 
+              render={() => (
+                <AddGoal
+                  userChoiceID={this.state.userChoiceID}
+                  username={this.state.username}
+                  userChoiceGoal={this.state.userChoiceGoal}
+                  getGoals={this.getGoals}
+                />
+              )}
+            />
+
+            <Route
+              path="/social"
+              component={Social}
+            />
+
+            {/* Redesign */}
+
             <Route
               path="/socialfeed"
               render={() => <SocialFeed posts={this.state.posts} />}
@@ -114,29 +165,8 @@ class App extends Component {
                 />
               )}
             />
-            <Route
-              path="/creategoal"
-              render={() => (
-                <CreateGoal
-                  userChoiceID={this.state.userChoiceID}
-                  username={this.state.username}
-                  userChoiceGoal={this.state.userChoiceGoal}
-                  getGoals={this.getGoals}
-                />
-              )}
-            />
-            <Route
-              path="/dashboard"
-              render={() => (
-                <Dashboard
-                  onClick={this.handleUserChoice}
-                  username={this.state.username}
-                  goals={this.state.goals}
-                  getGoals={this.getGoals}
-                  handleUserChoice={this.handleUserChoice}
-                />
-              )}
-            />
+
+
             <Route
               exact
               path="/details"
@@ -149,14 +179,34 @@ class App extends Component {
                 />
               )}
             />
+
             {/* Landing page and 404 */}
-            <Route exact path="/" component={Landing} />
+            
             <Route component={NoMatch} />
           </Switch>
-        </div>
+
       </Router>
     );
   }
 }
 
 export default App;
+
+/*
+
+ToDo:
+
+GOAL DETAILS:
+- redesign
+- make sure goal edit is working
+
+SOCIAl
+- add social nav
+- link social nav to add post, dashboard, profile
+- make sure posts appear
+
+PASSPORT
+- logout
+- protected routes
+
+*/

@@ -146,10 +146,14 @@ class App extends Component {
 
             <Route
               path="/social"
-              component={Social}
+              render={() => (
+                <Social 
+                  posts={this.state.posts}
+                />
+              )}
             />
 
-            {/* Redesign */}
+            {/* Redesign End */}
 
             <Route
               path="/socialfeed"
@@ -199,6 +203,7 @@ ToDo:
 GOAL DETAILS:
 - redesign
 - make sure goal edit is working
+- add notes
 
 SOCIAl
 - add social nav

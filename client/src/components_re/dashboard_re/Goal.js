@@ -28,18 +28,38 @@ export class Goal extends Component {
     this.setState({ [name]: value });
   };
 
+  // opens modal
+  toggleModal = () => {
+    this.setState(prevState => ({
+      openModal: !prevState.modal
+    }));
+  };
+
+  // reset goal choice, closes modal
+  closeModal = () => {
+    this.setState(
+      {
+        goalID: "",
+        goalProg: 0,
+        goalNote: "",
+        goalPic: ""
+      },
+      () => {
+        this.toggleModal();
+      }
+    );
+  };
+
+  // selects goal to update
   handleUpdateChoice = (id, prog) => {
     this.setState(
       {
         goalID: id,
         goalProg: prog
-      },
-      () => {
-        this.setState({ openModal: true })
-      }
-    );
+      });
   };
 
+  // updates goal progress
   handleUpdateProgress = () => {
     const { goalID, goalProg, goalNote, goalPic } = this.state;
 
@@ -71,7 +91,7 @@ export class Goal extends Component {
         <Modal isOpen={this.state.openModal} id="modal">
           <button
             className="closeButton"
-            onMouseUp={() => this.setState({ openModal: false })}
+            onClick={this.closeModal}
           >
             <MaterialIcons icon="close" id="closeIcon" />
           </button>
@@ -108,11 +128,12 @@ export class Goal extends Component {
           >
             <MaterialIcons id="deleteIcon" icon="delete" />
           </button>
-          <h3 className="goalFr">0/{this.props.frequency}</h3>
+          <h3 className="goalFr">{this.props.progress}/{this.props.frequency}</h3>
           <Progress value={this.props.progress} max={this.props.frequency} />
           <button
             className="goalBtn"
-            onClick={this.handleUpdateChoice(this.props.id, this.props.progress)}
+            onClick={() => { this.handleUpdateChoice(this.props.id, this.props.progress)}}
+            onMouseUp={() => {this.toggleModal()}}
           >
             Finish
           </button>

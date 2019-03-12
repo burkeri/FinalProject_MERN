@@ -3,7 +3,7 @@ import posed, { PoseGroup } from "react-pose";
 import { easing } from "popmotion";
 import MaterialIcons from "material-icons-react";
 
-import Goal from "../dashboard_re/Goal";
+import Goal from "../dashboard/Goal";
 
 import "../../css/index.css";
 

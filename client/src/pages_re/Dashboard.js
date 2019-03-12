@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import Avatar from "../components_re/dashboard_re/Avatar";
-import GoalContainer from "../components_re/dashboard_re/GoalContainer";
-import DashNav from "../components_re/dashboard_re/DashNav";
+import Avatar from "../components_re/dashboard/Avatar";
+import GoalContainer from "../components_re/dashboard/GoalContainer";
+import DashNav from "../components_re/dashboard/DashNav";
 
 import "../css/index.css";
 

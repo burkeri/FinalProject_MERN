@@ -18,7 +18,8 @@ import SocialFeed from "./pages/SocialFeed";
 import CreatePost from "./pages/CreatePost";
 
 // re-design
-import DashboardRe from "./pages_re/Dashboard_re";
+import DashboardRe from "./pages_re/Dashboard";
+import AddGoal from "./pages_re/AddGoal";
 
 class App extends Component {
   state = {
@@ -91,6 +92,18 @@ class App extends Component {
                     goals={this.state.goals}
                     getGoals={this.getGoals}
                     handleUserChoice={this.handleUserChoice}
+                  />
+                )}
+              />
+
+              <Route 
+                exact path="/addgoal" 
+                render={() => (
+                  <AddGoal
+                    userChoiceID={this.state.userChoiceID}
+                    username={this.state.username}
+                    userChoiceGoal={this.state.userChoiceGoal}
+                    getGoals={this.getGoals}
                   />
                 )}
               />

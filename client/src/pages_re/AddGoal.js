@@ -1,17 +1,33 @@
 import React, { Component } from "react";
 import posed, { PoseGroup } from "react-pose";
+import { Form, Input } from "reactstrap";
 import FontIconPicker from "@fonticonpicker/react-fonticonpicker";
 import "@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.base-theme.react.css";
 import "@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.material-theme.react.css";
-import "./createGoalForm.css";
 
 import DashNav from "../components_re/dashboard/DashNav";
 
 import API from "../utils/API";
 import "../css/index.css";
+import { tween } from "popmotion";
+import { linear } from "@popmotion/easing";
 
-const AddGoalForm = posed.div({});
-
+const AddGoalPage = posed.div({
+  enter: {
+    y: 0,
+    opacity: 1,
+    delay: 300,
+    transition: {
+      y: { type: 'spring', stiffness: 1000, damping: 15 },
+      default: { duration: 300 }
+    }
+  },
+  exit: {
+    y: 50,
+    opacity: 0,
+    transition: { duration: 150 }
+  }
+});
 export class AddGoal extends Component {
   state = {
     userChoiceID: this.props.userChoiceID || "",
@@ -102,12 +118,19 @@ export class AddGoal extends Component {
     ];
 
     return (
-      <div className="dashboardBackground">
-        <PoseGroup>
-          <AddGoalForm />
+      <AddGoalPage className="dashboardBackground">
+        <PoseGroup >
+          <div key="form">
+            <Form>
+              <h1>Category:</h1>
+              <button></button>
+              <button></button>
+              <button></button>
+            </Form>
+          </div>
         </PoseGroup>
         <DashNav />
-      </div>
+      </AddGoalPage>
     );
   }
 }

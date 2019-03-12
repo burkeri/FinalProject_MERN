@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import posed, { PoseGroup } from "react-pose";
 import { Form, FormGroup, FormText, Label, Input } from "reactstrap";
+import MaterialIcons from "material-icons-react";
 import FontIconPicker from "@fonticonpicker/react-fonticonpicker";
 import "@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.base-theme.react.css";
 import "@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.material-theme.react.css";
@@ -10,9 +12,15 @@ import DashNav from "../components_re/dashboard/DashNav";
 import API from "../utils/API";
 import "../css/index.css";
 
-const CategorySelect = posed.div({});
-const AddGoalForm = posed.div({});
-const CategoryBtn = posed.button({});
+const CategorySelect = posed.div({
+  enter: { opacity: 1 },
+  exit: { opacity: 0 }
+});
+
+const AddGoalForm = posed.div({
+  enter: { opacity: 1 },
+  exit: { opacity: 0 }
+});
 
 export class AddGoal extends Component {
   state = {
@@ -22,7 +30,9 @@ export class AddGoal extends Component {
     name: this.props.userChoiceGoal.name || "",
     icon: this.props.userChoiceGoal.icon || "",
     frequency: this.props.userChoiceGoal.frequency.toString() || "0",
-    description: this.props.userChoiceGoal.description || ""
+    description: this.props.userChoiceGoal.description || "",
+    selectCat: true,
+    showForm: false
   };
 
   // updates the values in the form inputs
@@ -33,9 +43,14 @@ export class AddGoal extends Component {
 
   // updates the choice between mind/spirit/body
   handleChoice = choice => {
-    this.setState({ category: choice });
+    this.setState({
+      category: choice,
+      selectCat: false,
+      showForm: true
+    });
   };
 
+  // select goal icon
   handleIconChange = icon => {
     this.setState({ icon: icon });
   };
@@ -103,43 +118,72 @@ export class AddGoal extends Component {
     return (
       <div className="dashboardBackground">
         <PoseGroup>
-          <CategorySelect key="btn">
-            <h1>Category:</h1>
-            <CategoryBtn />
-            <CategoryBtn />
-            <CategoryBtn />
-          </CategorySelect>
+          {this.state.selectCat && (
+            <CategorySelect key="btn" className="catBtnBackground">
+              <h1 className="catText">Category:</h1>
+              <button
+                className="catBtn"
+                id="spirit"
+                onClick={() => this.handleChoice("Spirit")}
+              >
+                Spirit
+              </button>
+              <button
+                className="catBtn"
+                onClick={() => this.handleChoice("Mind")}
+              >
+                Mind
+              </button>
+              <button
+                className="catBtn"
+                onClick={() => this.handleChoice("Spirit")}
+              >
+                Body
+              </button>
+            </CategorySelect>
+          )}
 
-          <AddGoalForm key="form">
-            <Form action="/dashbaord">
-              <FormGroup>
-                <Label for="name">Name:</Label>
-                <Input
-                  type="text"
-                  name="name"
-                  placeholder="Goal name here..."
-                  value={this.state.name}
-                  onChange={this.handleInputChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="icon">Icon:</Label>
-                <FontIconPicker
-                  icons={iconPack}
-                  theme="red"
-                  renderUsing="class"
-                  onChange={this.handleIconChange}
-                  value={this.state.icon}
-                  closeOnSelect={false}
-                  isMulti={false}
-                />
+          {this.state.showForm && (
+            <AddGoalForm key="form" className="goalForm">
+              <h1 className="formLabel" id="catLabel">
+                {this.state.category}
+              </h1>
+              <Form action="/dashboard">
+                <FormGroup>
+                  <Label for="name" className="formLabel">
+                    Name:
+                  </Label>
+                  <Input
+                    id="formInput"
+                    type="text"
+                    name="name"
+                    placeholder="Goal name here..."
+                    value={this.state.name}
+                    onChange={this.handleInputChange}
+                  />
                 </FormGroup>
                 <FormGroup>
-                  <Label for="frequency">Frequency:</Label>
+                  <Label for="icon" className="formLabel">
+                    Icon:
+                  </Label>
+                  <FontIconPicker
+                    icons={iconPack}
+                    theme="red"
+                    renderUsing="class"
+                    onChange={this.handleIconChange}
+                    value={this.state.icon}
+                    closeOnSelect={false}
+                    isMulti={false}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="frequency" className="formLabel">
+                    Frequency:
+                  </Label>
                   <Input
+                    id="formInput"
                     type="select"
                     name="frequency"
-                    id="frequency"
                     value={this.state.frequency}
                     onChange={this.handleInputChange}
                   >
@@ -152,23 +196,35 @@ export class AddGoal extends Component {
                     <option>6</option>
                     <option>7</option>
                   </Input>
-                  <FormText color="muted">(per week)</FormText>
+                  <FormText color="white">(per week)</FormText>
                 </FormGroup>
 
                 {this.state.userChoiceID.length > 0 && (
                   <FormGroup>
-                    <Label for="description">Details/ Description:</Label>
-                      <Input
-                        type="textarea"
-                        name="description"
-                        id="description"
-                        value={this.state.description}
-                        onChange={this.handleInputChange}
-                      />
+                    <Label for="description" className="formLabel">
+                      Details/ Description:
+                    </Label>
+                    <Input
+                      id="formInput"
+                      type="textarea"
+                      name="description"
+                      id="description"
+                      value={this.state.description}
+                      onChange={this.handleInputChange}
+                    />
                   </FormGroup>
                 )}
-            </Form>
-          </AddGoalForm>
+              </Form>
+              <Link to="/dashboard">
+                <button 
+                  className="createGoalBtn"
+                  onClick={this.handleSubmit}
+                >
+                  Submit
+                </button>
+              </Link>
+            </AddGoalForm>
+          )}
         </PoseGroup>
 
         <DashNav />

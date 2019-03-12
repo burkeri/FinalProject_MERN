@@ -97,7 +97,7 @@ class App extends Component {
               />
 
               <Route 
-                exact path="/addgoal" 
+                exact path="/addgoalcreate" 
                 render={() => (
                   <AddGoal
                     userChoiceID={this.state.userChoiceID}
@@ -118,7 +118,7 @@ class App extends Component {
               path="/createpost"
               render={() => <CreatePost username={this.state.username} />}
             />
-            <Route
+            {/* <Route
               path="/addgoalcreate"
               render={() => (
                 <AddGoalCreate
@@ -128,7 +128,7 @@ class App extends Component {
                   getGoals={this.getGoals}
                 />
               )}
-            />
+            /> */}
 {/* 
 
             <Route

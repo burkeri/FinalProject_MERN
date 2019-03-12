@@ -175,7 +175,7 @@ class Dashboard extends Component {
             <p className="text-center">Goals:</p>
             <hr />
             <div className="text-center mb-2">
-              <Link to="/addgoalcreate">
+              <Link to="/creategoal">
                 <Button id="addGoal">Add Goal</Button>
               </Link>
             </div>
@@ -263,13 +263,6 @@ class Dashboard extends Component {
                 onChange={this.handleInputChange}
                 rows={4}
               />
-              {/* <input
-                id="goalPic"
-                name="goalPic"
-                type="file"
-                value={this.state.goalPic}
-                onChange={this.handleInputChange}
-              /> */}
             </Form>
           </ModalBody>
           <ModalFooter>

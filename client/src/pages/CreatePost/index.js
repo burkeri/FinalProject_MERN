@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import API from "../../utils/API";
 // import navbar here
 import {
@@ -10,16 +10,39 @@ import {
   FormGroup,
   Label,
   Input,
-  Button
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ListGroup,
+  ListGroupItem
 } from "reactstrap";
 
 class CreatePost extends Component {
   state = {
+    modal: false,
+    addChoice: "",
     username: this.props.username || "user",
     textarea: "",
-    goal: [],
-    imageURL: "https://placeimg.com/320/320/animals",
+    goalChoice: "",
+    imageURL: "",
     data: ""
+  };
+
+  // Opens the modal
+  toggleModal = () => {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  };
+
+  handleAddChoice = add => {
+    this.setState({ addChoice: add }, () => this.toggleModal());
+  };
+
+  handleGoalChoice = goal => {
+    this.setState({ goalChoice: goal }, () => this.toggleModal());
   };
 
   handleInputChange = event => {
@@ -29,7 +52,7 @@ class CreatePost extends Component {
 
   handleUploadFile = event => {
     this.setState({ imageURL: event.target.files[0] }, () =>
-      console.log(`File ready to upload.`)
+      this.toggleModal()
     );
   };
 
@@ -41,12 +64,60 @@ class CreatePost extends Component {
     const userData = new FormData();
     userData.append("file", this.state.imageURL);
     userData.append("userID", this.state.username);
+    userData.append("goalID", this.state.goalChoice);
     userData.append("text", this.state.textarea);
 
-    API.createPost(userData);
+    API.createPost(userData).then(response => this.props.getPosts());
   };
 
   render() {
+    const addChoice = this.state.addChoice;
+    let submitButton;
+    let content;
+
+    // Conditional render for Create Post button
+    if (this.state.textarea && this.state.goalChoice && this.state.imageURL)
+      submitButton = (
+        <Link to="/socialfeed">
+          <Button onClick={this.handleSubmit}>Create Post</Button>
+        </Link>
+      );
+    else
+      submitButton = (
+        <Button onClick={this.handleSubmit} disabled>
+          Create Post
+        </Button>
+      );
+
+    // Conditional render for Modal
+    if (addChoice === "image") {
+      content = (
+        <Input
+          type="file"
+          name="image"
+          id="image"
+          onChange={this.handleUploadFile}
+        />
+      );
+    } else if (addChoice === "goal") {
+      const goals = this.props.goals;
+      content = (
+        <ListGroup>
+          {goals.map(goal => (
+            <ListGroupItem key={goal._id}>
+              <Button
+                onClick={() => this.handleGoalChoice(goal.name)}
+                color="link"
+                block
+              >
+                {goal.name}
+              </Button>
+            </ListGroupItem>
+          ))}
+        </ListGroup>
+      );
+    }
+
     return (
       <Container className="bg-light">
         {/* <ReactUploadImage /> */}
@@ -72,18 +143,14 @@ class CreatePost extends Component {
               <FormGroup>
                 <Label for="file">Add Goal</Label>
                 <br />
-                <Button disabled>+</Button>
+                <Button onClick={() => this.handleAddChoice("goal")}>+</Button>
               </FormGroup>
             </Col>
             <Col>
               <FormGroup>
                 <Label for="image">Add Image</Label>
-                <Input
-                  type="file"
-                  name="image"
-                  id="image"
-                  onChange={this.handleUploadFile}
-                />
+                <br />
+                <Button onClick={() => this.handleAddChoice("image")}>+</Button>
               </FormGroup>
             </Col>
             <Col>
@@ -94,9 +161,20 @@ class CreatePost extends Component {
               </FormGroup>
             </Col>
           </Row>
-          <Button onClick={this.handleSubmit}>Create Post</Button>
+          {submitButton}
         </Form>
         <br />
+
+        {/* Modal content */}
+        <Modal isOpen={this.state.modal}>
+          <ModalHeader>Add a(n) {addChoice}:</ModalHeader>
+          <ModalBody>{content}</ModalBody>
+          <ModalFooter>
+            <Button color="warning" onClick={this.toggleModal}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </Modal>
       </Container>
     );
   }

@@ -12,6 +12,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Landing from "./pages/Landing";
 import Details from "./pages/Details";
+
 import SocialFeed from "./pages/SocialFeed";
 import CreatePost from "./pages/CreatePost";
 
@@ -31,6 +32,7 @@ class App extends Component {
     },
     username: "",
     goals: [],
+    posts: [],
     testObj: {}
   };
 
@@ -45,7 +47,10 @@ class App extends Component {
         {
           username: res
         },
-        () => this.getGoals(this.state.username)
+        () => {
+          this.getGoals(this.state.username);
+          this.getPosts();
+        }
       );
     });
   };
@@ -60,6 +65,22 @@ class App extends Component {
           () => {
             console.log(`Goals:`);
             console.log(this.state.goals);
+          }
+        );
+      })
+      .catch(err => console.log(err));
+  };
+
+  getPosts = () => {
+    API.getPosts()
+      .then(res => {
+        this.setState(
+          {
+            posts: res.data
+          },
+          () => {
+            console.log(`Posts:`);
+            console.log(this.state.posts);
           }
         );
       })
@@ -112,7 +133,7 @@ class App extends Component {
             />
 
             <Route 
-              exact path="/addgoalcreate" 
+              exact path="/creategoal" 
               render={() => (
                 <AddGoal
                   userChoiceID={this.state.userChoiceID}
@@ -130,13 +151,21 @@ class App extends Component {
 
             {/* Redesign */}
 
-
-   
-            <Route path="/socialfeed" component={SocialFeed} />
+            <Route
+              path="/socialfeed"
+              render={() => <SocialFeed posts={this.state.posts} />}
+            />
             <Route
               path="/createpost"
-              render={() => <CreatePost username={this.state.username} />}
+              render={() => (
+                <CreatePost
+                  username={this.state.username}
+                  goals={this.state.goals}
+                  getPosts={this.getPosts}
+                />
+              )}
             />
+
 
             <Route
               exact

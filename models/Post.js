@@ -8,7 +8,8 @@ const postSchema = new Schema({
     required: true
   },
   goalID: {
-    type: String
+    type: String,
+    required: true
   },
   category: {
     type: String

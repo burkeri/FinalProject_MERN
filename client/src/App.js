@@ -83,7 +83,7 @@ class App extends Component {
 
               {/* Redesign */}
               <Route 
-                path="/dashboard" 
+                exact path="/dashboard" 
                 render={() => (
                   <DashboardRe
                     onClick={this.handleUserChoice}

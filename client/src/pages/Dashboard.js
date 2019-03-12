@@ -36,11 +36,6 @@ class Dashboard extends Component {
     goalPic: ""
   };
 
-  componentDidMount(){
-    console.log("goals:");
-    console.log(this.props.goals);
-  }
-
   // Opens the modal
   toggleModal = () => {
     this.setState(prevState => ({
@@ -58,8 +53,6 @@ class Dashboard extends Component {
         goalPic: ""
       },
       () => {
-        console.log(`Dashboard State updated:`);
-        console.log(this.state);
         this.toggleModal();
       }
     );
@@ -80,8 +73,6 @@ class Dashboard extends Component {
         goalProg: prog
       },
       () => {
-        console.log(`Dashboard State updated:`);
-        console.log(this.state);
         this.toggleModal();
       }
     );

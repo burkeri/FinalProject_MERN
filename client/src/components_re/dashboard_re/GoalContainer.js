@@ -65,20 +65,21 @@ class GoalContainer extends Component {
           >
             <MaterialIcons icon="close" id="closeIcon" />
           </button>,
-          <PoseGroup key="scroll1">
-            <div className="goalScroll" key="scroll2">
-              {this.props.goals.map(goal => (
-                <Goal
-                  key={goal._id}
-                  name={goal.name}
-                  icon={goal.icon}
-                  frequency={goal.frequency}
-                  description={goal.description}
-                  progress={goal.progress}
-                />
-              ))}
-            </div>
-          </PoseGroup>
+          <div className="goalScroll" key="scroll">
+            {this.props.goals.map(goal => (
+              <Goal
+                key={goal._id}
+                id={goal._id}
+                name={goal.name}
+                icon={goal.icon}
+                frequency={goal.frequency}
+                description={goal.description}
+                progress={goal.progress}
+                username={this.props.username}
+                getGoals={this.props.getGoals}
+              />
+            ))}
+          </div>
         ]}
       </GoalCont>
     );

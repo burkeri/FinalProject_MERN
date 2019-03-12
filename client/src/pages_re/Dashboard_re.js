@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 import Avatar from "../components_re/dashboard_re/Avatar";
 import GoalContainer from "../components_re/dashboard_re/GoalContainer";
@@ -15,10 +15,11 @@ export class Dashboard_re extends Component {
         <GoalContainer
           username={this.props.username}
           goals={this.props.goals}
+          getGoals={this.props.getGoals}
         />
         <DashNav />
       </div>
-    )
+    );
   }
 }
 

@@ -6,7 +6,7 @@ import DashNav from "../components_re/dashboard/DashNav";
 
 import "../css/index.css";
 
-export class Dashboard_re extends Component {
+export class Dashboard extends Component {
 
   render() {
     return (
@@ -23,4 +23,4 @@ export class Dashboard_re extends Component {
   }
 }
 
-export default Dashboard_re;
+export default Dashboard;

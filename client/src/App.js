@@ -6,20 +6,19 @@ import API from "./utils/API";
 import "./App.css";
 
 // components and pages
+
 import NoMatch from "./pages/NoMatch";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Profile from "./components/Profile";
 import Landing from "./pages/Landing";
-import Dashboard from "./pages/Dashboard";
 import Details from "./pages/Details";
-import AddGoalCreate from "./pages/AddGoalCreate";
 import SocialFeed from "./pages/SocialFeed";
 import CreatePost from "./pages/CreatePost";
 
 // re-design
-import DashboardRe from "./pages_re/Dashboard";
+import Dashboard from "./pages_re/Dashboard";
 import AddGoal from "./pages_re/AddGoal";
+import Social from "./pages_re/Social";
 
 class App extends Component {
   state = {
@@ -82,57 +81,25 @@ class App extends Component {
 
           <Switch>
 
-              {/* Redesign */}
-              <Route 
-                exact path="/dashboard" 
-                render={() => (
-                  <DashboardRe
-                    onClick={this.handleUserChoice}
-                    username={this.state.username}
-                    goals={this.state.goals}
-                    getGoals={this.getGoals}
-                    handleUserChoice={this.handleUserChoice}
-                  />
-                )}
-              />
-
-              <Route 
-                exact path="/addgoalcreate" 
-                render={() => (
-                  <AddGoal
-                    userChoiceID={this.state.userChoiceID}
-                    username={this.state.username}
-                    userChoiceGoal={this.state.userChoiceGoal}
-                    getGoals={this.getGoals}
-                  />
-                )}
-              />
-
-
-
-            <Route exact path="/user/login" component={Login} />
-            <Route exact path="/user/register" component={Register} />
-            <Route exact path="/user/profile" component={Profile} />
-            <Route path="/socialfeed" component={SocialFeed} />
-            <Route
-              path="/createpost"
-              render={() => <CreatePost username={this.state.username} />}
+            <Route 
+              exact path="/" 
+              component={Landing} 
             />
-            {/* <Route
-              path="/addgoalcreate"
-              render={() => (
-                <AddGoalCreate
-                  userChoiceID={this.state.userChoiceID}
-                  username={this.state.username}
-                  userChoiceGoal={this.state.userChoiceGoal}
-                  getGoals={this.getGoals}
-                />
-              )}
-            /> */}
-{/* 
 
-            <Route
-              path="/dashboard"
+            <Route 
+              exact path="/user/register" 
+              component={Register} 
+            />
+
+            <Route 
+              exact path="/user/login" 
+              component={Login} 
+            />
+
+            {/* Redesign */}
+            
+            <Route 
+              exact path="/dashboard" 
               render={() => (
                 <Dashboard
                   onClick={this.handleUserChoice}
@@ -142,8 +109,34 @@ class App extends Component {
                   handleUserChoice={this.handleUserChoice}
                 />
               )}
-            /> */}
+            />
 
+            <Route 
+              exact path="/addgoalcreate" 
+              render={() => (
+                <AddGoal
+                  userChoiceID={this.state.userChoiceID}
+                  username={this.state.username}
+                  userChoiceGoal={this.state.userChoiceGoal}
+                  getGoals={this.getGoals}
+                />
+              )}
+            />
+
+            <Route
+              path="/social"
+              component={Social}
+            />
+
+            {/* Redesign */}
+
+
+   
+            <Route path="/socialfeed" component={SocialFeed} />
+            <Route
+              path="/createpost"
+              render={() => <CreatePost username={this.state.username} />}
+            />
 
             <Route
               exact
@@ -159,10 +152,8 @@ class App extends Component {
             />
 
             {/* Landing page and 404 */}
-            <Route exact path="/" component={Landing} />
+            
             <Route component={NoMatch} />
-
-
           </Switch>
 
       </Router>
@@ -171,3 +162,22 @@ class App extends Component {
 }
 
 export default App;
+
+/*
+
+ToDo:
+
+GOAL DETAILS:
+- redesign
+- make sure goal edit is working
+
+SOCIAl
+- add social nav
+- link social nav to add post, dashboard, profile
+- make sure posts appear
+
+PASSPORT
+- logout
+- protected routes
+
+*/

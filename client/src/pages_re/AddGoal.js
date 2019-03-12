@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import posed, { PoseGroup } from "react-pose";
 import { Form, FormGroup, FormText, Label, Input } from "reactstrap";
-import MaterialIcons from "material-icons-react";
 import FontIconPicker from "@fonticonpicker/react-fonticonpicker";
 import "@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.base-theme.react.css";
 import "@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.material-theme.react.css";
@@ -136,7 +135,7 @@ export class AddGoal extends Component {
               </button>
               <button
                 className="catBtn"
-                onClick={() => this.handleChoice("Spirit")}
+                onClick={() => this.handleChoice("Body")}
               >
                 Body
               </button>
@@ -221,6 +220,13 @@ export class AddGoal extends Component {
                   onClick={this.handleSubmit}
                 >
                   Submit
+                </button>
+              </Link>
+              <Link to="/dashboard">
+                <button 
+                  className="createGoalBtn"
+                >
+                  Cancel
                 </button>
               </Link>
             </AddGoalForm>

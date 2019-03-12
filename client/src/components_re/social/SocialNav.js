@@ -4,26 +4,26 @@ import { Link } from "react-router-dom";
 
 import "../../css/index.css";
 
-export default function GoalNav() {
+export default function SocialNav() {
   return (
     <div>
-      <Link to="/addgoalcreate">
+      <Link to="/createpost">
         <button className="addGoal">
-          <MaterialIcons icon="add" size="large" color="white" />
+          <MaterialIcons icon="create" size="large" color="white" />
         </button>
       </Link>
       <div className="footer">
-        <Link to="/socialfeed">
+        <Link to="/dashboard">
           <button className="navButton">
-            <MaterialIcons icon="share" />
+            <MaterialIcons icon="person" />
             <br />
-            Social
+            Dashboard
           </button>
         </Link>
         <button className="navButton">
-          <MaterialIcons icon="pie_chart" />
+          <MaterialIcons icon="apps" />
           <br />
-          Data
+          Profile
         </button>
       </div>
     </div>

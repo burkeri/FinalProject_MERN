@@ -1,0 +1,18 @@
+.editGoalForm {
+    text-align: center;
+    padding-top: 3%;
+}
+
+.goalEditTitle {
+    color: white;
+    font-size: 100%;
+    margin: 4%;
+}
+
+#editCatBtn {
+    background-color: white;
+    color: #4e54c8;
+    border: none;
+    box-shadow: 0 2px 20px 0 rgba(143, 148, 251, 1);
+    margin: 2%;
+}

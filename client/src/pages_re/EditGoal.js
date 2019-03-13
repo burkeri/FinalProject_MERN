@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Form, Input } from "reactstrap";
+import { Form, Input, Button } from "reactstrap";
 import FontIconPicker from "@fonticonpicker/react-fonticonpicker";
 import "@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.base-theme.react.css";
 import "@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.material-theme.react.css";
@@ -97,12 +97,10 @@ export class EditGoal extends Component {
       "fas fa-weight-hanging"
     ];
 
-    let name = this.state.name.toString;
-
     return (
       <div className="dashboardBackground">
-        <Form>
-          <h1>Name:</h1>
+        <Form className="editGoalForm">
+          <h1 className="goalEditTitle">Name:</h1>
           <Input
             id="formInput"
             type="text"
@@ -111,25 +109,28 @@ export class EditGoal extends Component {
             value={this.state.name}
             onChange={this.handleInputChange}
           />
-          <h1>Category:</h1>
+          <h1 className="goalEditTitle">Category: {this.state.category}</h1>
+          <Button id="editCatBtn" onClick={() => this.handleChoice("Spirit")}>Spirit</Button>
+          <Button id="editCatBtn" onClick={() => this.handleChoice("Mind")}>Mind</Button>
+          <Button id="editCatBtn" onClick={() => this.handleChoice("Body")}>Body</Button>
+          <h1 className="goalEditTitle">Frequency:</h1>
           <Input
-          id="formInput"
-          type="text"
-          name="category"
-            placeholder={this.state.vategory}
-            value={this.state.category}
+            id="formInput"
+            type="select"
+            name="frequency"
+            value={this.state.frequency}
             onChange={this.handleInputChange}
-          />
-          <h1>Frequency:</h1>
-          <Input
-          id="formInput"
-          type="select"
-          name="frequency"
-            placeholder={this.state.vategory}
-            value={this.state.category}
-            onChange={this.handleInputChange}
-          />
-          <h1>Icon:</h1>
+          >
+            <option>Select</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+          </Input>
+          <h1 className="goalEditTitle">Icon:</h1>
           <FontIconPicker
             icons={iconPack}
             theme="indigo"
@@ -139,16 +140,14 @@ export class EditGoal extends Component {
             closeOnSelect={false}
             isMulti={false}
           />
-          <h1>Description</h1>
-          {this.state.userChoiceID.length > 0 && (
+            <h1 className="goalEditTitle">Description</h1>
             <Input
               type="textarea"
               name="description"
-              id="description"
+              id="formInput"
               value={this.state.description}
               onChange={this.handleInputChange}
             />
-          )}
           <Link to="/dashboard">
             <button className="createGoalBtn" onClick={this.handleSubmit}>
               Submit

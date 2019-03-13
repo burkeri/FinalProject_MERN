@@ -1,13 +1,7 @@
 import React, { Component } from "react";
 import posed, { PoseGroup } from "react-pose";
 import { Link } from "react-router-dom";
-import {
-  Form,
-  FormGroup,
-  Input,
-  ListGroup,
-  ListGroupItem
-} from "reactstrap";
+import { Form, FormGroup, Input, ListGroup, ListGroupItem, Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
 
 import SocialNav from "../components_re/social/SocialNav";
 
@@ -20,56 +14,55 @@ const AddPostForm = posed.div({
 });
 
 export class AddPost extends Component {
-  state = {
-    modal: false,
-    addChoice: "",
-    username: this.props.username || "user",
-    textarea: "",
-    goalChoice: "",
-    imageURL: "",
-    data: ""
-  };
-
-  // handles form input
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-  };
-
-  // opens modal
-  toggleModal = () => {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
-  };
-
-  handleAddChoice = add => {
-    this.setState({ addChoice: add }, () => this.toggleModal());
-  };
-
-  handleGoalChoice = goal => {
-    this.setState({ goalChoice: goal }, () => this.toggleModal());
-  };
-
-  handleUploadFile = event => {
-    this.setState({ imageURL: event.target.files[0] }, () =>
-      this.toggleModal()
-    );
-  };
-
-  handleSubmit = event => {
-    // console.log(this.state.textarea);
-    // console.log(this.state.imageURL);
-
-    // create the form data to send
-    const userData = new FormData();
-    userData.append("file", this.state.imageURL);
-    userData.append("userID", this.state.username);
-    userData.append("goalID", this.state.goalChoice);
-    userData.append("text", this.state.textarea);
-
-    API.createPost(userData).then(response => this.props.getPosts());
-  };
+    state = {
+        modal: false,
+        addChoice: "",
+        username: this.props.username || "user",
+        textarea: "",
+        goalChoice: "",
+        imageURL: "",
+        data: ""
+      };
+    
+      // Opens the modal
+      toggleModal = () => {
+        this.setState(prevState => ({
+          modal: !prevState.modal
+        }));
+      };
+    
+      handleAddChoice = add => {
+        this.setState({ addChoice: add }, () => this.toggleModal());
+      };
+    
+      handleGoalChoice = goal => {
+        this.setState({ goalChoice: goal }, () => this.toggleModal());
+      };
+    
+      handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
+      };
+    
+      handleUploadFile = event => {
+        this.setState({ imageURL: event.target.files[0] }, () =>
+          this.toggleModal()
+        );
+      };
+    
+      handleSubmit = event => {
+        // console.log(this.state.textarea);
+        // console.log(this.state.imageURL);
+    
+        // create the form data to send
+        const userData = new FormData();
+        userData.append("file", this.state.imageURL);
+        userData.append("userID", this.state.username);
+        userData.append("goalID", this.state.goalChoice);
+        userData.append("text", this.state.textarea);
+    
+        API.createPost(userData).then(response => this.props.getPosts());
+      };
 
   render() {
     const addChoice = this.state.addChoice;
@@ -138,20 +131,31 @@ export class AddPost extends Component {
                 />
                 <div className="postBtns">
                   <FormGroup>
-                    <button className="postBtn" id="postGoal">
+                    <button
+                      className="postBtn"
+                      id="postGoal"
+                      onClick={() => this.handleAddChoice("goal")}
+                    >
                       Add Goal
                     </button>
-                    <h3 className="postInfo">Goal Name</h3>
+                    <h3 className="postInfo">
+                      {"Goal Name" || this.state.addChoice}
+                    </h3>
                   </FormGroup>
                   <FormGroup>
-                    <button className="postBtn" id="postData">
+                    <button className="postBtn" id="postData" disabled>
                       Add Data
                     </button>
                     <h3 className="postInfo">Data</h3>
                   </FormGroup>
                   <FormGroup>
-                    <button className="postBtn">Add Image</button>
-                    <h3>Image</h3>
+                    <button
+                      className="postBtn"
+                      onClick={() => this.handleAddChoice("image")}
+                    >
+                      Add Image
+                    </button>
+                    <img src={this.state.imageURL} />
                   </FormGroup>
                 </div>
               </FormGroup>
@@ -162,6 +166,17 @@ export class AddPost extends Component {
             </Form>
           </AddPostForm>
         </PoseGroup>
+
+        {/* Modal content */}
+        <Modal isOpen={this.state.modal}>
+          <ModalHeader>Add a(n) {addChoice}:</ModalHeader>
+          <ModalBody>{content}</ModalBody>
+          <ModalFooter>
+            <Button color="warning" onClick={this.toggleModal}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </Modal>
         <SocialNav />
       </div>
     );

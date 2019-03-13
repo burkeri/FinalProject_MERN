@@ -30,9 +30,14 @@
     box-shadow: 0 2px 20px 0 rgba(168, 225, 99, 1);
 }
 
-#postGoal, #postData {
+#postGoal {
     float: left;
     margin-left: 15%;
+}
+#postData {
+    float: left;
+    margin-left: 15%;
+    opacity: .5;
 }
 
 .postInfo {

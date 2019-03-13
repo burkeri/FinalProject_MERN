@@ -4,6 +4,10 @@ div {
     font-family: 'Quicksand';
 }
 
+button:focus {
+    outline: none;
+}
+
 @import "./dashboard.css";
 @import "./addGoal.css";
 @import "./social.css";

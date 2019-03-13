@@ -155,7 +155,7 @@ class App extends Component {
             />
 
             <Route
-              path="/addpost"
+              path="/createpost"
               render={() => (
                 <AddPost
                   username={this.state.username}
@@ -167,7 +167,7 @@ class App extends Component {
 
             {/* Redesign End */}
 
-            <Route
+            {/* <Route
               path="/createpost"
               render={() => (
                 <CreatePost
@@ -176,7 +176,7 @@ class App extends Component {
                   getPosts={this.getPosts}
                 />
               )}
-            />
+            /> */}
 
 
             <Route

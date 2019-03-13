@@ -10,7 +10,7 @@ module.exports = {
   registerUser: function(req, res) {
     let { name, username, email, password, password2, dob } = req.body;
     let formErrors = [];
-    let registered = [""];
+    let registered = [];
     let validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
     // all required fields
@@ -50,7 +50,7 @@ module.exports = {
         }
       })
       .then(() => {
-        if (formErrors.length > 1) {
+        if (formErrors.length > 0) {
           res.send(formErrors);
         }
       });
@@ -70,7 +70,7 @@ module.exports = {
         }
       });
 
-    if (formErrors.length === 1) {
+    if (formErrors.length === 0) {
       const newUser = new User({
         name,
         email,
@@ -86,6 +86,7 @@ module.exports = {
           newUser
             .save()
             .then(user => {
+              console.log("registered");
               registered.push({ msg: "You are now registered! Please login." });
               res.send(registered);
             })

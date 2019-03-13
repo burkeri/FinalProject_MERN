@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button
+} from "reactstrap";
 import axios from "axios";
 
 import API from "../utils/API";
@@ -13,15 +22,9 @@ export class Register extends Component {
     password: "",
     password2: "",
     dob: "",
-    formErrors: [],
-    registered: [""]
+    errors: [],
+    registered: []
   };
-
-  componentDidMount() {
-    API.getFormErrors().then(res => {this.setState({ formErrors: res })});
-    console.log("Form errors - front:");
-    console.log(this.state.formErrors);
-  }
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -30,7 +33,7 @@ export class Register extends Component {
 
   handleFormSumbit = event => {
     event.preventDefault();
-    this.setState({ formErrors: [""] });
+    // this.setState({ errors: [""] });
     const newUser = {
       name: this.state.name,
       username: this.state.username,
@@ -39,23 +42,22 @@ export class Register extends Component {
       password2: this.state.password2,
       dob: this.state.dob
     };
-    axios.post("/user/register", newUser).then(({ data }) =>
-      { if (data[1].msg === "You are now registered! Please login.") {
-          this.setState({
-            registered: data
-          });
-      }
-      else {
+
+    axios.post("/user/register", newUser).then(({ data }) => {
+      if (data[0].msg === "You are now registered! Please login.") {
         this.setState({
-          formErrors: data
-        })
+          registered: data
+        });
+      } else {
+        this.setState({
+          errors: data
+        });
       }
     });
   };
 
   render() {
-
-    const { formErrors, registered } = this.state;
+    const { errors, registered } = this.state;
 
     return (
       <Container>
@@ -129,18 +131,17 @@ export class Register extends Component {
                 />
               </FormGroup>
 
-                {/* {formErrors && (
-                  formErrors.map(formError => (
-                    <div
-                      className="alert alert-danger aler-dismissible fade show"
-                      role="alert"
-                    >
-                      {formError.msg}
-                    </div>
-                  ))
-                )} */}
+              {errors.length > 0 &&
+                errors.map(fail => (
+                  <div
+                    className="alert alert-success alert-dismissible fade show"
+                    role="alert"
+                  >
+                    {fail.msg}
+                  </div>
+                ))}
 
-              {registered.length > 1 &&
+              {registered &&
                 registered.map(success => (
                   <div
                     className="alert alert-success alert-dismissible fade show"

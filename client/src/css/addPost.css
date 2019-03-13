@@ -1,0 +1,63 @@
+.postForm {
+    color: white;
+    text-align: center;
+    padding-top: 6%;
+}
+
+.postTitle {
+    padding-bottom: 6%;
+}
+
+#postFormInput {
+    width: 90%;
+    border: none;
+    margin: auto;
+    background-color: rgb(255, 255, 255, .75);
+    box-shadow: 0 2px 20px 0 rgba(168, 225, 99, 1);
+}
+
+.postBtns {
+    padding-top: 10%;
+}
+
+.postBtn {
+    display: inline-block;
+    border: none;
+    background-color: rgb(255, 255, 255, .75);
+    border-radius: 5px;
+    padding: 1%;
+    margin: 2%;
+    box-shadow: 0 2px 20px 0 rgba(168, 225, 99, 1);
+}
+
+#postGoal, #postData {
+    float: left;
+    margin-left: 15%;
+}
+
+.postInfo {
+    display: inline;
+}
+
+.postSubmit {
+    background: white;
+    border: none;
+    border-radius: 10px;
+    width: 30%;
+    color: #56ab2f;;
+    margin: 5%;
+    box-shadow: 0 2px 20px 0 rgba(168, 225, 99, 1);
+}
+
+.postSubmitD {
+    background: rgb(255, 255, 255, .5);
+    border: none;
+    border-radius: 10px;
+    width: 30%;
+    color: #56ab2f;;
+    margin: 5%;
+    box-shadow: 0 2px 20px 0 rgba(168, 225, 99, 1);
+}
+
+
+

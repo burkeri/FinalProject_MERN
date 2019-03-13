@@ -19,6 +19,9 @@ import CreatePost from "./pages/CreatePost";
 // re-design
 import Dashboard from "./pages_re/Dashboard";
 import AddGoal from "./pages_re/AddGoal";
+
+import EditGoal from "./pages_re/EditGoal";
+
 import Social from "./pages_re/Social";
 import AddPost from "./pages_re/AddPost";
 
@@ -179,11 +182,24 @@ class App extends Component {
             /> */}
 
 
-            <Route
+            {/* <Route
               exact
               path="/details"
               render={() => (
                 <Details
+                  userChoiceID={this.state.userChoiceID}
+                  username={this.state.username}
+                  userChoiceGoal={this.state.userChoiceGoal}
+                  getGoals={this.getGoals}
+                />
+              )}
+            /> */}
+
+            <Route
+              exact
+              path="/details"
+              render={() => (
+                <EditGoal
                   userChoiceID={this.state.userChoiceID}
                   username={this.state.username}
                   userChoiceGoal={this.state.userChoiceGoal}

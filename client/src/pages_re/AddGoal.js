@@ -167,7 +167,7 @@ export class AddGoal extends Component {
                   </Label>
                   <FontIconPicker
                     icons={iconPack}
-                    theme="deeppurple"
+                    theme="indigo"
                     onChange={this.handleIconChange}
                     value={this.state.icon}
                   />

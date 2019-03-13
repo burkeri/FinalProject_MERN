@@ -1,4 +1,68 @@
+/* social nav */
+
 .socialBackground {
-    background-image: linear-gradient(to top, #000428,#004e92, #004e92);
+    background-image: linear-gradient(to top, #a8e063,#a8e063, #56ab2f);
     height: 100vh;
+}
+
+#addPost {
+    background-color: #56ab2f;
+    box-shadow: 0 2px 20px 0 rgba(168, 225, 99, 1);
+}
+
+/* post card */
+
+.postCont {
+    padding-top: 5%;
+    height: 86%;
+    overflow: scroll;
+}
+
+.postCard {
+    width: 95%;
+    margin: auto;
+    background-color: rgb(255, 255, 255, .75);
+    box-shadow: 0 2px 20px 0 rgba(168, 225, 99, 1);
+    margin-bottom: 5%;
+    border-radius: 10px;
+    text-align: left;
+    padding: 2%;
+}
+
+.postUser {
+    display: inline;
+    font-size: 100%;
+    margin-left: 5%;
+}
+
+.postBody {
+    width: 90%;
+    margin: auto;
+}
+
+.postPic {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.postCreate {
+    /* display: inline-block; */
+    font-size: 1%;
+    float: right;
+    padding-top: 4%;
+}
+
+.likeCont {
+    padding-top: 8%;
+}
+
+.postLikes {
+    display: inline-block;
+    font-size: 100%;
+}
+
+#likeIcon {
+    display: inline-block;
+    font-size: 150%;
+    padding-left: 3%;
 }

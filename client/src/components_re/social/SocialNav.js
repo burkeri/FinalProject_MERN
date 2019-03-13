@@ -8,7 +8,7 @@ export default function SocialNav() {
   return (
     <div>
       <Link to="/createpost">
-        <button className="addGoal">
+        <button className="addGoal" id="addPost">
           <MaterialIcons icon="create" size="large" color="white" />
         </button>
       </Link>

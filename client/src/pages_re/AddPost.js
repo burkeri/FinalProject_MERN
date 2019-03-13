@@ -1,7 +1,18 @@
 import React, { Component } from "react";
 import posed, { PoseGroup } from "react-pose";
 import { Link } from "react-router-dom";
-import { Form, FormGroup, Input, ListGroup, ListGroupItem, Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
+import {
+  Form,
+  FormGroup,
+  Input,
+  ListGroup,
+  ListGroupItem,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button
+} from "reactstrap";
 
 import SocialNav from "../components_re/social/SocialNav";
 
@@ -14,55 +25,55 @@ const AddPostForm = posed.div({
 });
 
 export class AddPost extends Component {
-    state = {
-        modal: false,
-        addChoice: "",
-        username: this.props.username || "user",
-        textarea: "",
-        goalChoice: "",
-        imageURL: "",
-        data: ""
-      };
-    
-      // Opens the modal
-      toggleModal = () => {
-        this.setState(prevState => ({
-          modal: !prevState.modal
-        }));
-      };
-    
-      handleAddChoice = add => {
-        this.setState({ addChoice: add }, () => this.toggleModal());
-      };
-    
-      handleGoalChoice = goal => {
-        this.setState({ goalChoice: goal }, () => this.toggleModal());
-      };
-    
-      handleInputChange = event => {
-        const { name, value } = event.target;
-        this.setState({ [name]: value });
-      };
-    
-      handleUploadFile = event => {
-        this.setState({ imageURL: event.target.files[0] }, () =>
-          this.toggleModal()
-        );
-      };
-    
-      handleSubmit = event => {
-        // console.log(this.state.textarea);
-        // console.log(this.state.imageURL);
-    
-        // create the form data to send
-        const userData = new FormData();
-        userData.append("file", this.state.imageURL);
-        userData.append("userID", this.state.username);
-        userData.append("goalID", this.state.goalChoice);
-        userData.append("text", this.state.textarea);
-    
-        API.createPost(userData).then(response => this.props.getPosts());
-      };
+  state = {
+    modal: false,
+    addChoice: "",
+    username: this.props.username || "user",
+    textarea: "",
+    goalChoice: "",
+    imageURL: "",
+    data: ""
+  };
+
+  // Opens the modal
+  toggleModal = () => {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  };
+
+  handleAddChoice = add => {
+    this.setState({ addChoice: add }, () => this.toggleModal());
+  };
+
+  handleGoalChoice = goal => {
+    this.setState({ goalChoice: goal }, () => this.toggleModal());
+  };
+
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  };
+
+  handleUploadFile = event => {
+    this.setState({ imageURL: event.target.files[0] }, () =>
+      this.toggleModal()
+    );
+  };
+
+  handleSubmit = event => {
+    // console.log(this.state.textarea);
+    // console.log(this.state.imageURL);
+
+    // create the form data to send
+    const userData = new FormData();
+    userData.append("file", this.state.imageURL);
+    userData.append("userID", this.state.username);
+    userData.append("goalID", this.state.goalChoice);
+    userData.append("text", this.state.textarea);
+
+    API.createPost(userData).then(response => this.props.getPosts());
+  };
 
   render() {
     const addChoice = this.state.addChoice;
@@ -73,16 +84,16 @@ export class AddPost extends Component {
     if (this.state.textarea && this.state.goalChoice && this.state.imageURL)
       submitButton = (
         <Link to="/socialfeed">
-          <button onClick={this.handleSubmit} className="postSubmit">
+          <Button onClick={this.handleSubmit} className="postSubmit">
             Submit
-          </button>
+          </Button>
         </Link>
       );
     else
       submitButton = (
-        <button onClick={this.handleSubmit} disabled className="postSubmitD">
+        <Button onClick={this.handleSubmit} disabled className="postSubmitD">
           Submit
-        </button>
+        </Button>
       );
 
     // Conditional render for Modal
@@ -101,13 +112,13 @@ export class AddPost extends Component {
         <ListGroup>
           {goals.map(goal => (
             <ListGroupItem key={goal._id}>
-              <button
+              <Button
                 onClick={() => this.handleGoalChoice(goal.name)}
                 color="link"
                 block
               >
                 {goal.name}
-              </button>
+              </Button>
             </ListGroupItem>
           ))}
         </ListGroup>
@@ -131,37 +142,37 @@ export class AddPost extends Component {
                 />
                 <div className="postBtns">
                   <FormGroup>
-                    <button
+                    <Button
                       className="postBtn"
                       id="postGoal"
                       onClick={() => this.handleAddChoice("goal")}
                     >
                       Add Goal
-                    </button>
+                    </Button>
                     <h3 className="postInfo">
                       {"Goal Name" || this.state.addChoice}
                     </h3>
                   </FormGroup>
                   <FormGroup>
-                    <button className="postBtn" id="postData" disabled>
+                    <Button className="postBtn" id="postData" disabled>
                       Add Data
-                    </button>
+                    </Button>
                     <h3 className="postInfo">Data</h3>
                   </FormGroup>
                   <FormGroup>
-                    <button
+                    <Button
                       className="postBtn"
                       onClick={() => this.handleAddChoice("image")}
                     >
                       Add Image
-                    </button>
-                    <img src={this.state.imageURL} />
+                    </Button>
+                    {/* <img src={this.state.imageURL} /> */}
                   </FormGroup>
                 </div>
               </FormGroup>
               {submitButton}
               <Link to="/socialfeed">
-                <button className="postSubmit">Cancel</button>
+                <Button className="postSubmit">Cancel</Button>
               </Link>
             </Form>
           </AddPostForm>

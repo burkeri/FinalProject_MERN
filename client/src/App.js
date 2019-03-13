@@ -185,8 +185,8 @@ class App extends Component {
               render={() => (
                 <Details
                   userChoiceID={this.state.userChoiceID}
-                  username={this.state.username}
                   userChoiceGoal={this.state.userChoiceGoal}
+                  username={this.state.username}
                   getGoals={this.getGoals}
                 />
               )}

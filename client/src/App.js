@@ -145,7 +145,7 @@ class App extends Component {
             />
 
             <Route
-              path="/social"
+              path="/socialfeed"
               render={() => (
                 <Social 
                   posts={this.state.posts}
@@ -155,10 +155,10 @@ class App extends Component {
 
             {/* Redesign End */}
 
-            <Route
+            {/* <Route
               path="/socialfeed"
               render={() => <SocialFeed posts={this.state.posts} />}
-            />
+            /> */}
             <Route
               path="/createpost"
               render={() => (

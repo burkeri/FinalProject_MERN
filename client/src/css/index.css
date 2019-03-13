@@ -10,5 +10,6 @@ button:focus {
 
 @import "./dashboard.css";
 @import "./addGoal.css";
+@import "./editGoal.css";
 @import "./social.css";
 @import "./addPost.css";

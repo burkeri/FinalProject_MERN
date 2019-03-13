@@ -84,14 +84,14 @@ export class AddPost extends Component {
     if (this.state.textarea && this.state.goalChoice && this.state.imageURL)
       submitButton = (
         <Link to="/socialfeed">
-          <Button onClick={this.handleSubmit} className="postSubmit">
+          <Button onClick={this.handleSubmit} id="postSubmit">
             Submit
           </Button>
         </Link>
       );
     else
       submitButton = (
-        <Button onClick={this.handleSubmit} disabled className="postSubmitD">
+        <Button onClick={this.handleSubmit} disabled id="postSubmitD">
           Submit
         </Button>
       );
@@ -136,43 +136,37 @@ export class AddPost extends Component {
                   type="textarea"
                   name="textarea"
                   id="postFormInput"
-                  rows={4}
+                  rows={6}
                   value={this.state.textarea}
                   onChange={this.handleInputChange}
                 />
                 <div className="postBtns">
                   <FormGroup>
                     <Button
-                      className="postBtn"
-                      id="postGoal"
+                      id="postBtn"
                       onClick={() => this.handleAddChoice("goal")}
                     >
                       Add Goal
                     </Button>
-                    <h3 className="postInfo">
-                      {"Goal Name" || this.state.addChoice}
-                    </h3>
-                  </FormGroup>
-                  <FormGroup>
-                    <Button className="postBtn" id="postData" disabled>
-                      Add Data
-                    </Button>
-                    <h3 className="postInfo">Data</h3>
                   </FormGroup>
                   <FormGroup>
                     <Button
-                      className="postBtn"
+                      id="postBtn"
                       onClick={() => this.handleAddChoice("image")}
                     >
                       Add Image
                     </Button>
-                    {/* <img src={this.state.imageURL} /> */}
+                  </FormGroup>
+                  <FormGroup>
+                    <Button id="postBtnData" disabled>
+                      Add Data
+                    </Button>
                   </FormGroup>
                 </div>
               </FormGroup>
               {submitButton}
               <Link to="/socialfeed">
-                <Button className="postSubmit">Cancel</Button>
+                <Button id="postSubmit">Cancel</Button>
               </Link>
             </Form>
           </AddPostForm>

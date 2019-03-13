@@ -20,7 +20,7 @@
     padding-top: 10%;
 }
 
-.postBtn {
+#postBtnGoal {
     display: inline-block;
     border: none;
     background-color: rgb(255, 255, 255, .75);
@@ -28,15 +28,28 @@
     padding: 1%;
     margin: 2%;
     box-shadow: 0 2px 20px 0 rgba(168, 225, 99, 1);
+    float: left;
+    margin-left: 15%;
 }
 
-#postGoal {
-    float: left;
-    margin-left: 15%;
+#postBtn {
+    border: none;
+    background-color: rgb(255, 255, 255, .75);
+    border-radius: 5px;
+    padding: 2%;;
+    box-shadow: 0 2px 20px 0 rgba(168, 225, 99, 1);
+    color: #56ab2f;
+    font-size: 120%;
 }
-#postData {
-    float: left;
-    margin-left: 15%;
+
+#postBtnData {
+    border: none;
+    background-color: rgb(255, 255, 255, .75);
+    border-radius: 5px;
+    padding: 2%;;
+    box-shadow: 0 2px 20px 0 rgba(168, 225, 99, 1);
+    color: #56ab2f;
+    font-size: 120%;
     opacity: .5;
 }
 
@@ -44,7 +57,7 @@
     display: inline;
 }
 
-.postSubmit {
+#postSubmit {
     background: white;
     border: none;
     border-radius: 10px;
@@ -54,7 +67,7 @@
     box-shadow: 0 2px 20px 0 rgba(168, 225, 99, 1);
 }
 
-.postSubmitD {
+#postSubmitD {
     background: rgb(255, 255, 255, .5);
     border: none;
     border-radius: 10px;

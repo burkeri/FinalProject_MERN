@@ -13,7 +13,7 @@ function Landing() {
                     <h1 id="title">LifeSet</h1>
                     <MaterialIcon icon="check_circle" id="logoIcon" />
                     <Link to="/user/register">
-                        <Button id="signIn">Sign Up</Button>
+                        <Button id="signIn" disabled>Sign Up</Button>
                     </Link>
                     <Link to="/user/login">
                         <Button id="signUp">Sign In</Button>

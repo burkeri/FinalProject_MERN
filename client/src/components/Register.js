@@ -3,6 +3,8 @@ import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from "reac
 import axios from "axios";
 import "./register.css";
 
+import API from "../utils/API";
+
 export class Register extends Component {
   state = {
     name: "",
@@ -11,9 +13,15 @@ export class Register extends Component {
     password: "",
     password2: "",
     dob: "",
-    formErrors: [""],
+    formErrors: [],
     registered: [""]
   };
+
+  componentDidMount() {
+    API.getFormErrors().then(res => {this.setState({ formErrors: res })});
+    console.log("Form errors - front:");
+    console.log(this.state.formErrors);
+  }
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -121,15 +129,16 @@ export class Register extends Component {
                 />
               </FormGroup>
 
-              {formErrors.length > 1 &&
-                formErrors.map(formError => (
-                  <div
-                    className="alert alert-danger alert-dismissible fade show"
-                    role="alert"
-                  >
-                    {formError.msg}
-                  </div>
-                ))}
+                {/* {formErrors && (
+                  formErrors.map(formError => (
+                    <div
+                      className="alert alert-danger aler-dismissible fade show"
+                      role="alert"
+                    >
+                      {formError.msg}
+                    </div>
+                  ))
+                )} */}
 
               {registered.length > 1 &&
                 registered.map(success => (

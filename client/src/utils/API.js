@@ -27,6 +27,13 @@ export default {
     // console.log(`Hit the API!`);
     return axios.post("/files", postData);
   },
+  getFormErrors: () => {
+    return axios
+      .get("user/register")
+      .then(res => {
+        return res.data;
+      })
+  },
   currentUsername: () => {
     return axios
       .get("/dashboard")

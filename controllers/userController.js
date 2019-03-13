@@ -9,7 +9,7 @@ module.exports = {
   // register/create new user ------
   registerUser: function(req, res) {
     let { name, username, email, password, password2, dob } = req.body;
-    let formErrors = [""];
+    let formErrors = [];
     let registered = [""];
     let validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 

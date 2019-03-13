@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import posed from "react-pose";
-import { Progress, Modal, Form, Input } from "reactstrap";
+import { Progress, Modal, Form, Input, Button } from "reactstrap";
 import MaterialIcons from "material-icons-react";
 
 import API from "../../utils/API";

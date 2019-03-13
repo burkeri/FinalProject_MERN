@@ -2,28 +2,16 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import API from "./utils/API";
 
-// style
-import "./App.css";
-
-// components and pages
-import Landing from "./pages/Landing";
-import Login from "./components/Login";
-import Register from "./components/Register";
-
-import NoMatch from "./pages/NoMatch";
-
-import Details from "./pages/Details";
-
-import CreatePost from "./pages/CreatePost";
-
-// re-design
+// pages
+import Landing from "./pages_re/Landing";
+import Login from "./pages_re/Login";
+import Register from "./pages_re/Register";
 import Dashboard from "./pages_re/Dashboard";
 import AddGoal from "./pages_re/AddGoal";
-
 import EditGoal from "./pages_re/EditGoal";
-
 import Social from "./pages_re/Social";
 import AddPost from "./pages_re/AddPost";
+import NoMatch from "./pages_re/NoMatch";
 
 class App extends Component {
   state = {
@@ -120,8 +108,6 @@ class App extends Component {
               exact path="/user/login" 
               component={Login} 
             />
-
-            {/* Redesign */}
             
             <Route 
               exact path="/dashboard" 
@@ -168,33 +154,6 @@ class App extends Component {
               )}
             />
 
-            {/* Redesign End */}
-
-            {/* <Route
-              path="/createpost"
-              render={() => (
-                <CreatePost
-                  username={this.state.username}
-                  goals={this.state.goals}
-                  getPosts={this.getPosts}
-                />
-              )}
-            /> */}
-
-
-            {/* <Route
-              exact
-              path="/details"
-              render={() => (
-                <Details
-                  userChoiceID={this.state.userChoiceID}
-                  userChoiceGoal={this.state.userChoiceGoal}
-                  username={this.state.username}
-                  getGoals={this.getGoals}
-                />
-              )}
-            /> */}
-
             <Route
               exact
               path="/details"
@@ -207,8 +166,6 @@ class App extends Component {
                 />
               )}
             />
-
-            {/* Landing page and 404 */}
             
             <Route component={NoMatch} />
           </Switch>

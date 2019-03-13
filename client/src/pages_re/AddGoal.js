@@ -23,13 +23,11 @@ const AddGoalForm = posed.div({
 
 export class AddGoal extends Component {
   state = {
-    userChoiceID: this.props.userChoiceID || "",
     username: this.props.username || "",
-    category: this.props.userChoiceGoal.category || "",
-    name: this.props.userChoiceGoal.name || "",
-    icon: this.props.userChoiceGoal.icon || "",
-    frequency: this.props.userChoiceGoal.frequency.toString() || "0",
-    description: this.props.userChoiceGoal.description || "",
+    category: "",
+    name: "",
+    icon: "",
+    frequency: "0",
     selectCat: true,
     showForm: false
   };
@@ -57,7 +55,6 @@ export class AddGoal extends Component {
   // adds new goal or edits existing goal
   handleSubmit = event => {
     const {
-      userChoiceID,
       category,
       name,
       icon,
@@ -75,13 +72,9 @@ export class AddGoal extends Component {
       description: description
     };
 
-    this.state.userChoiceID.length > 0
-      ? API.updateGoal(userChoiceID, goalData)
-          .then(() => this.props.getGoals(this.props.username))
-          .catch(err => console.log(err))
-      : API.createGoal(goalData)
-          .then(() => this.props.getGoals(this.props.username))
-          .catch(err => console.log(err));
+    API.createGoal(goalData)
+      .then(() => this.props.getGoals(this.props.username))
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -195,20 +188,6 @@ export class AddGoal extends Component {
                   <FormText color="white">(per week)</FormText>
                 </FormGroup>
 
-                {this.state.userChoiceID.length > 0 && (
-                  <FormGroup>
-                    <Label for="description" className="formLabel">
-                      Details/ Description:
-                    </Label>
-                    <Input
-                      id="formInput, description"
-                      type="textarea"
-                      name="description"
-                      value={this.state.description}
-                      onChange={this.handleInputChange}
-                    />
-                  </FormGroup>
-                )}
               </Form>
               <Link to="/dashboard">
                 <button className="createGoalBtn" onClick={this.handleSubmit}>

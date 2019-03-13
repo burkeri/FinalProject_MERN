@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from "reactstrap";
-import "./login.css";
+
+import "../css/index.css";
 
 export class Login extends Component {
   render() {

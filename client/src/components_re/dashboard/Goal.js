@@ -52,11 +52,10 @@ export class Goal extends Component {
 
   // selects goal to update
   handleUpdateChoice = (id, prog) => {
-    this.setState(
-      {
-        goalID: id,
-        goalProg: prog
-      });
+    this.setState({
+      goalID: id,
+      goalProg: prog
+    });
   };
 
   // updates goal progress
@@ -73,7 +72,7 @@ export class Goal extends Component {
       // Update the goals state in App and close the modal
       .then(response => {
         this.props.getGoals(this.props.username);
-        this.setState({ openModal: false })
+        this.setState({ openModal: false });
       })
       .catch(err => console.log(err));
   };
@@ -89,10 +88,7 @@ export class Goal extends Component {
     return (
       <div>
         <Modal isOpen={this.state.openModal} id="modal">
-          <button
-            className="closeButton"
-            onClick={this.closeModal}
-          >
+          <button className="closeButton" onClick={this.closeModal}>
             <MaterialIcons icon="close" id="closeIcon" />
           </button>
           <h1 className="modalTitle">Great job!</h1>
@@ -104,17 +100,13 @@ export class Goal extends Component {
             <Input
               type="textarea"
               name="goalNote"
-              type="textarea"
               placeholder="How you feel afterwards? Etc..."
               value={this.state.goalNote}
               onChange={this.handleInputChange}
               rows={4}
             />
           </Form>
-          <button
-            className="finishBtn"
-            onClick={this.handleUpdateProgress}
-          >
+          <button className="finishBtn" onClick={this.handleUpdateProgress}>
             Finish
           </button>
         </Modal>
@@ -128,17 +120,28 @@ export class Goal extends Component {
           >
             <MaterialIcons id="deleteIcon" icon="delete" />
           </button>
-          <h3 className="goalFr">{this.props.progress}/{this.props.frequency}</h3>
+          <h3 className="goalFr">
+            {this.props.progress}/{this.props.frequency}
+          </h3>
           <Progress value={this.props.progress} max={this.props.frequency} />
           <button
             className="goalBtn"
-            onClick={() => { this.handleUpdateChoice(this.props.id, this.props.progress)}}
-            onMouseUp={() => {this.toggleModal()}}
+            onClick={() => {
+              this.handleUpdateChoice(this.props.id, this.props.progress);
+            }}
+            onMouseUp={() => {
+              this.toggleModal();
+            }}
           >
             Finish
           </button>
           <Link to="/details">
-            <button className="goalBtn">Edit</button>
+            <button
+              className="goalBtn"
+              onClick={() => this.props.handleUserChoice(this.props.id)}
+            >
+              Edit
+            </button>
           </Link>
           <div style={{ clear: "both" }} />
         </GoalCard>

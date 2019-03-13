@@ -167,12 +167,9 @@ export class AddGoal extends Component {
                   </Label>
                   <FontIconPicker
                     icons={iconPack}
-                    theme="red"
-                    renderUsing="class"
+                    theme="deeppurple"
                     onChange={this.handleIconChange}
                     value={this.state.icon}
-                    closeOnSelect={false}
-                    isMulti={false}
                   />
                 </FormGroup>
                 <FormGroup>
@@ -204,10 +201,9 @@ export class AddGoal extends Component {
                       Details/ Description:
                     </Label>
                     <Input
-                      id="formInput"
+                      id="formInput, description"
                       type="textarea"
                       name="description"
-                      id="description"
                       value={this.state.description}
                       onChange={this.handleInputChange}
                     />
@@ -215,19 +211,12 @@ export class AddGoal extends Component {
                 )}
               </Form>
               <Link to="/dashboard">
-                <button 
-                  className="createGoalBtn"
-                  onClick={this.handleSubmit}
-                >
+                <button className="createGoalBtn" onClick={this.handleSubmit}>
                   Submit
                 </button>
               </Link>
               <Link to="/dashboard">
-                <button 
-                  className="createGoalBtn"
-                >
-                  Cancel
-                </button>
+                <button className="createGoalBtn">Cancel</button>
               </Link>
             </AddGoalForm>
           )}

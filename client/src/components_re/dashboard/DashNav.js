@@ -7,7 +7,7 @@ import "../../css/index.css";
 export default function GoalNav() {
   return (
     <div>
-      <Link to="/addgoalcreate">
+      <Link to="/creategoal">
         <button className="addGoal">
           <MaterialIcons icon="add" size="large" color="white" />
         </button>

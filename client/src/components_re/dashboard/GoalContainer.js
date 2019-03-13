@@ -77,6 +77,9 @@ class GoalContainer extends Component {
                 progress={goal.progress}
                 username={this.props.username}
                 getGoals={this.props.getGoals}
+                userChoiceID={this.props.userChoiceID}
+                userChoiceGoal={this.props.userChoiceGoal}
+                handleUserChoice={this.props.handleUserChoice}
               />
             ))}
           </div>

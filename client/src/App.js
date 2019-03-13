@@ -6,20 +6,21 @@ import API from "./utils/API";
 import "./App.css";
 
 // components and pages
-
-import NoMatch from "./pages/NoMatch";
+import Landing from "./pages/Landing";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Landing from "./pages/Landing";
+
+import NoMatch from "./pages/NoMatch";
+
 import Details from "./pages/Details";
 
-import SocialFeed from "./pages/SocialFeed";
 import CreatePost from "./pages/CreatePost";
 
 // re-design
 import Dashboard from "./pages_re/Dashboard";
 import AddGoal from "./pages_re/AddGoal";
 import Social from "./pages_re/Social";
+import AddPost from "./pages_re/AddPost";
 
 class App extends Component {
   state = {
@@ -145,17 +146,28 @@ class App extends Component {
             />
 
             <Route
-              path="/social"
-              component={Social}
-            />
-
-            {/* Redesign */}
-
-            <Route
               path="/socialfeed"
-              render={() => <SocialFeed posts={this.state.posts} />}
+              render={() => (
+                <Social 
+                  posts={this.state.posts}
+                />
+              )}
             />
+
             <Route
+              path="/createpost"
+              render={() => (
+                <AddPost
+                  username={this.state.username}
+                  goals={this.state.goals}
+                  getPosts={this.getPosts} 
+                />
+              )}
+            />
+
+            {/* Redesign End */}
+
+            {/* <Route
               path="/createpost"
               render={() => (
                 <CreatePost
@@ -164,7 +176,7 @@ class App extends Component {
                   getPosts={this.getPosts}
                 />
               )}
-            />
+            /> */}
 
 
             <Route
@@ -196,17 +208,17 @@ export default App;
 
 ToDo:
 
-GOAL DETAILS:
-- redesign
-- make sure goal edit is working
-
 SOCIAl
-- add social nav
-- link social nav to add post, dashboard, profile
-- make sure posts appear
+- create posts re-design
+
+GOAL DETAILS:
+- make sure goal edit is working
+- add notes
 
 PASSPORT
 - logout
 - protected routes
+
+bleh
 
 */

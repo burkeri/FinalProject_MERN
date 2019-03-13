@@ -18,7 +18,7 @@ export class Social extends Component {
         <PoseGroup>
           <PostCont className="postCont" key="postCont">
             {this.props.posts.map(post => (
-              <Post 
+              <Post
                 key={post._id}
                 user={post.userID}
                 createdAt={post.createdAt}

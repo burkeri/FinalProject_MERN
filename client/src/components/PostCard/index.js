@@ -1,3 +1,4 @@
+const moment = require("moment");
 import React from "react";
 import {
   Card,
@@ -11,11 +12,12 @@ import {
 function PostCard(props) {
   // save the post from the props
   const post = props.post;
+  const time = moment(post.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss a");
 
   return (
     <div>
       <h2>{post.userID} posted:</h2>
-      <p>(at {post.createdAt})</p>
+      <p>(at {time})</p>
       <Card className="mb-3">
         <CardImg top width="100%" src={post.picture} />
         <CardBody>

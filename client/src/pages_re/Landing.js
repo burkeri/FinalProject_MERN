@@ -2,7 +2,8 @@ import React from "react";
 import { Container, Col, Row, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import MaterialIcon from "material-icons-react";
-import "./landing.css";
+
+import "../css/index.css";
 
 // Landing component
 function Landing() {

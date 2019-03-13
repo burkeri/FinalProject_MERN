@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import axios from "axios";
-import "./register.css";
 
 import API from "../utils/API";
+import "../css/index.css";
 
 export class Register extends Component {
   state = {
